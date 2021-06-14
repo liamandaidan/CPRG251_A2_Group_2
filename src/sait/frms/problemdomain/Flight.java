@@ -1,7 +1,7 @@
 package sait.frms.problemdomain;
 
 /**
- * Todo flight class infrastructure
+ * TODO flight class infrastructure
  * @author 
  *
  */
