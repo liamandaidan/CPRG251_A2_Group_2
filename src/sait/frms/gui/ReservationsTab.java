@@ -26,6 +26,8 @@ public class ReservationsTab extends TabBase {
 	private GridBagConstraints gbc;
 	private final int TEXTFIELD_LENGTH = 120;
 	private final int TEXTFIELD_HEIGHT = 24;
+	
+	//hello!
 
 	/**
 	 * Creates the components for reservations tab.
