@@ -45,6 +45,8 @@ public class ReservationsTab extends TabBase {
 
 		JPanel southPanel = createSouthPanel();
 		panel.add(southPanel, BorderLayout.SOUTH);
+		
+		panel.setVisible(true);
 	}
 
 	/**
