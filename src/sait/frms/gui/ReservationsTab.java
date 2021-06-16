@@ -23,6 +23,7 @@ public class ReservationsTab extends TabBase {
 	private JTextField codeTextField, flightTextField, airlineTextField, costTextField, nameTextField, citzenTextField,
 			statusTextField;
 	private JTextField searchCodeField, searchAirlineField, searchNameField;
+	private GridBagConstraints gbc;
 	private final int TEXTFIELD_LENGTH = 120;
 	private final int TEXTFIELD_HEIGHT = 24;
 
@@ -68,6 +69,58 @@ public class ReservationsTab extends TabBase {
 	 */
 	private JPanel createEastPanel() {
 		JPanel panel = new JPanel();
+		
+		JPanel formatPanel = new JPanel();
+		formatPanel.setLayout(new GridBagLayout());
+		gbc = new GridBagConstraints();
+		reserveHeader = new JLabel("Reserve");
+		codeLabel = new JLabel("Code:");
+		codeTextField = new JTextField();
+		flightLabel = new JLabel("Flight:");
+		flightTextField = new JTextField();
+		airlineLabel = new JLabel("Airline:");
+		airlineTextField = new JTextField();
+		costLabel = new JLabel("Cost:");
+		costTextField = new JTextField();
+		codeTextField.setEditable(false);
+		flightTextField.setEditable(false);
+		airlineTextField.setEditable(false);
+		costTextField.setEditable(false);
+		codeTextField.setPreferredSize(new Dimension(TEXTFIELD_LENGTH, TEXTFIELD_HEIGHT));
+		flightTextField.setPreferredSize(new Dimension(TEXTFIELD_LENGTH, TEXTFIELD_HEIGHT));
+		airlineTextField.setPreferredSize(new Dimension(TEXTFIELD_LENGTH, TEXTFIELD_HEIGHT));
+		costTextField.setPreferredSize(new Dimension(TEXTFIELD_LENGTH, TEXTFIELD_HEIGHT));
+		
+		reserveHeader.setFont(new Font("serif", Font.PLAIN, 24));
+		gbc.gridx = 11;
+		gbc.gridy = 1;
+		formatPanel.add(reserveHeader, gbc);
+		gbc.gridx = 10;
+		gbc.gridy = 2;
+		formatPanel.add(codeLabel, gbc);
+		gbc.gridx = 11;
+		gbc.gridy = 2;
+		formatPanel.add(codeTextField, gbc);
+		gbc.gridx = 10;
+		gbc.gridy = 3;
+		formatPanel.add(flightLabel, gbc);
+		gbc.gridx = 11;
+		gbc.gridy = 3;
+		formatPanel.add(flightTextField, gbc);
+		gbc.gridx = 10;
+		gbc.gridy = 4;
+		formatPanel.add(airlineLabel, gbc);
+		gbc.gridx = 11;
+		gbc.gridy = 4;
+		formatPanel.add(airlineTextField, gbc);
+		gbc.gridx = 10;
+		gbc.gridy = 5;
+		formatPanel.add(costLabel, gbc);
+		gbc.gridx = 11;
+		gbc.gridy = 5;
+		formatPanel.add(costTextField, gbc);
+		panel.add(formatPanel);
+		
 		panel.setPreferredSize(new Dimension(200, 100));
 		panel.setBackground(Color.YELLOW);
 		return panel;
