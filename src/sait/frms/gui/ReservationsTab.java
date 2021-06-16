@@ -17,12 +17,21 @@ public class ReservationsTab extends TabBase {
 
 	private JList<Reservation> reservationsList;
 
+	private JLabel reserveHeader, codeLabel, flightLabel, airlineLabel, costLabel, nameLabel, citzenLabel, statusLabel,
+			title;
+	private JTextArea reserveTextArea;
+	private JTextField codeTextField, flightTextField, airlineTextField, costTextField, nameTextField, citzenTextField,
+			statusTextField;
+	private JTextField searchCodeField, searchAirlineField, searchNameField;
+	private final int TEXTFIELD_LENGTH = 120;
+	private final int TEXTFIELD_HEIGHT = 24;
+
 	/**
 	 * Creates the components for reservations tab.
 	 */
 	public ReservationsTab(ReservationManager reservationManager) {
 		this.reservationManager = reservationManager;
-		panel.setLayout(new BorderLayout(10, 10));
+		panel.setLayout(new BorderLayout());
 		panel.setPreferredSize(new Dimension(700, 500));
 		JPanel northPanel = createNorthPanel();
 		panel.add(northPanel, BorderLayout.NORTH);
@@ -45,6 +54,9 @@ public class ReservationsTab extends TabBase {
 	private JPanel createCenterPanel() {
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(100, 50));
+
+		reserveTextArea = new JTextArea(15, 40);// height width
+		panel.add(reserveTextArea);
 		panel.setBackground(Color.CYAN);
 		return panel;
 	}
@@ -83,7 +95,7 @@ public class ReservationsTab extends TabBase {
 
 		JLabel title = new JLabel("Reservations", SwingConstants.CENTER);
 		title.setFont(new Font("serif", Font.PLAIN, 29));
-		panel.setPreferredSize(new Dimension(100, 60));
+		panel.setPreferredSize(new Dimension(100, 50));
 		panel.setBackground(Color.RED);
 		panel.add(title);
 
