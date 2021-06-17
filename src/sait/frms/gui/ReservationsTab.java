@@ -27,7 +27,6 @@ public class ReservationsTab extends TabBase {
 	private final int TEXTFIELD_LENGTH = 120;
 	private final int TEXTFIELD_HEIGHT = 24;
 	
-	//hello!
 
 	/**
 	 * Creates the components for reservations tab.
@@ -61,7 +60,6 @@ public class ReservationsTab extends TabBase {
 
 		reserveTextArea = new JTextArea(15, 40);// height width
 		panel.add(reserveTextArea);
-		panel.setBackground(Color.CYAN);
 		return panel;
 	}
 
@@ -77,14 +75,14 @@ public class ReservationsTab extends TabBase {
 		formatPanel.setLayout(new GridBagLayout());
 		gbc = new GridBagConstraints();
 		
-		reserveHeader = new JLabel("Reserve");
+		reserveHeader = new JLabel("Reserve ");
 		gbc.ipady = 30;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 2;
 		reserveHeader.setFont(new Font("Times New Roman", Font.PLAIN, 30));
 		formatPanel.add(reserveHeader, gbc);
-		codeLabel = new JLabel("Code:");
+		codeLabel = new JLabel("Code: ");
 		gbc.anchor = GridBagConstraints.LINE_END; //align all text to the right
 		gbc.ipady = 0;
 		gbc.gridwidth = 1;
@@ -97,7 +95,7 @@ public class ReservationsTab extends TabBase {
 		gbc.gridy = 1;
 		formatPanel.add(codeField, gbc);
 		
-		flightLabel = new JLabel("Flight:");
+		flightLabel = new JLabel("Flight: ");
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		formatPanel.add(flightLabel, gbc);
@@ -107,7 +105,7 @@ public class ReservationsTab extends TabBase {
 		gbc.gridy = 2;
 		formatPanel.add(flightField, gbc);
 		
-		airlineLabel = new JLabel("Airline:");
+		airlineLabel = new JLabel("Airline: ");
 		gbc.gridx = 0;
 		gbc.gridy = 3;
 		formatPanel.add(airlineLabel, gbc);
@@ -117,7 +115,7 @@ public class ReservationsTab extends TabBase {
 		gbc.gridy = 3;
 		formatPanel.add(airlineField, gbc);
 		
-		costLabel = new JLabel("Cost:");
+		costLabel = new JLabel("Cost: ");
 		gbc.gridx = 0;
 		gbc.gridy = 4;
 		formatPanel.add(costLabel, gbc);
@@ -127,7 +125,7 @@ public class ReservationsTab extends TabBase {
 		gbc.gridy = 4;
 		formatPanel.add(costField, gbc);
 		
-		nameLabel = new JLabel("Name:");
+		nameLabel = new JLabel("Name: ");
 		gbc.gridx = 0;
 		gbc.gridy = 5;
 		formatPanel.add(nameLabel, gbc);
@@ -137,7 +135,7 @@ public class ReservationsTab extends TabBase {
 		gbc.gridy = 5;
 		formatPanel.add(nameField, gbc);
 		
-		citizenshipLabel = new JLabel("Citizenship:");
+		citizenshipLabel = new JLabel("Citizenship: ");
 		gbc.gridx = 0;
 		gbc.gridy = 6;
 		formatPanel.add(citizenshipLabel, gbc);
@@ -149,7 +147,7 @@ public class ReservationsTab extends TabBase {
 		
 		String[] status = {"Active", "Inactive"};
 		
-		statusLabel = new JLabel("Status:");
+		statusLabel = new JLabel("Status: ");
 		statusBox = new JComboBox(status);
 		statusBox.setPreferredSize(new Dimension(114,23)); //dimensions width, height
 		gbc.gridx = 0;
@@ -159,7 +157,7 @@ public class ReservationsTab extends TabBase {
 		gbc.gridy = 7;
 		formatPanel.add(statusBox, gbc);
 		
-		updateButton = new JButton("Update");
+		updateButton = new JButton("Update ");
 		gbc.gridx = 0;
 		gbc.gridy = 8;
 		gbc.gridwidth = 2; //take up two cells
@@ -169,7 +167,6 @@ public class ReservationsTab extends TabBase {
 		panel.add(formatPanel);
 		
 		panel.setPreferredSize(new Dimension(200, 100));
-		panel.setBackground(Color.YELLOW);
 		return panel;
 	}
 
@@ -187,7 +184,7 @@ public class ReservationsTab extends TabBase {
 		
 		gbc.fill = GridBagConstraints.HORIZONTAL; //fill entire panel 
 		
-		JLabel searchTitle = new JLabel("Search"); 
+		JLabel searchTitle = new JLabel("Search "); 
 		searchTitle.setVerticalAlignment(SwingConstants.CENTER);
 		searchTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		gbc.ipady = 20;
@@ -197,7 +194,7 @@ public class ReservationsTab extends TabBase {
 		//searchTitle.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		bottomPanel.add(searchTitle, gbc);
 		
-		JLabel codeSearch = new JLabel("Code:");
+		JLabel codeSearch = new JLabel("Code: ");
 		codeSearch.setHorizontalAlignment(SwingConstants.RIGHT);
 		gbc.gridwidth = 1;
 		gbc.ipady = 0; //reset
@@ -212,7 +209,7 @@ public class ReservationsTab extends TabBase {
 		//At least one needs to be define or they clump in the middle
 		bottomPanel.add(codeSearchField, gbc);
 		
-		JLabel airlineSearch = new JLabel ("Airline:");
+		JLabel airlineSearch = new JLabel ("Airline: ");
 		airlineSearch.setHorizontalAlignment(SwingConstants.RIGHT);
 		gbc.gridx = 0;
 		gbc.gridy = 2; 
@@ -224,7 +221,7 @@ public class ReservationsTab extends TabBase {
 		gbc.weightx = 0.9;
 		bottomPanel.add(airlineSearchField, gbc);
 		
-		JLabel nameSearch = new JLabel ("Name:");
+		JLabel nameSearch = new JLabel ("Name: ");
 		nameSearch.setHorizontalAlignment(SwingConstants.RIGHT);
 		gbc.gridx = 0;
 		gbc.gridy = 3; 
@@ -245,7 +242,6 @@ public class ReservationsTab extends TabBase {
 		panel.add(bottomPanel);
 		
 		panel.setPreferredSize(new Dimension(700, 150));
-		panel.setBackground(Color.GREEN);
 		return panel;
 	}
 
@@ -260,7 +256,6 @@ public class ReservationsTab extends TabBase {
 		JLabel title = new JLabel("Reservations", SwingConstants.CENTER);
 		title.setFont(new Font("serif", Font.PLAIN, 29));
 		panel.setPreferredSize(new Dimension(100, 50));
-		panel.setBackground(Color.RED);
 		panel.add(title);
 
 		return panel;
