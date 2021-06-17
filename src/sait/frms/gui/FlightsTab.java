@@ -45,14 +45,52 @@ public class FlightsTab extends TabBase
 		this.reservationManager = reservationManager;
 		
 		panel.setLayout(new BorderLayout());
+		panel.setPreferredSize(new Dimension(700, 500));
 		
 		JPanel northPanel = createNorthPanel();
 		panel.add(northPanel, BorderLayout.NORTH);
 		
 		JPanel centerPanel = createCenterPanel();
 		panel.add(centerPanel, BorderLayout.CENTER);
+		
+		JPanel eastPanel = createEastPanel();
+		panel.add(eastPanel, BorderLayout.EAST);
+		
+		JPanel southPanel = createSouthPanel();
+		panel.add(southPanel, BorderLayout.SOUTH);
+		
+//		northPanel.setPreferredSize(new Dimension(0, 50));
+//		eastPanel.setPreferredSize(new Dimension(200, 0));
+//		southPanel.setPreferredSize(new Dimension(0, 100));
 	}
 	
+	private JPanel createEastPanel() {
+		// TODO Auto-generated method stub
+		JPanel panel = new JPanel();
+		
+		panel.setPreferredSize(new Dimension(200, 100));
+		JLabel reserveLabel = new JLabel("Reserve", SwingConstants.CENTER);
+		reserveLabel.setFont(new Font("serif", Font.PLAIN, 29));
+		panel.add(reserveLabel);
+		panel.setBackground(Color.YELLOW);
+		
+		
+		return panel;
+	}
+
+	private JPanel createSouthPanel() {
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(100, 120));
+		JLabel flightFinderLabel = new JLabel("Flight Finder", SwingConstants.CENTER);
+		flightFinderLabel.setFont(new Font("serif", Font.PLAIN, 29));
+		panel.add(flightFinderLabel);
+		
+		
+		panel.setBackground(Color.GREEN);
+		
+		return panel;
+	}
+
 	/**
 	 * Creates the north panel.
 	 * @return JPanel that goes in north.
@@ -60,10 +98,11 @@ public class FlightsTab extends TabBase
 	private JPanel createNorthPanel() 
 	{
 		JPanel panel = new JPanel();
-		
+		panel.setPreferredSize(new Dimension(100, 50));
 		JLabel title = new JLabel("Flights", SwingConstants.CENTER);
 		title.setFont(new Font("serif", Font.PLAIN, 29));
 		panel.add(title);
+		panel.setBackground(Color.RED);
 		
 		return panel;
 	}
@@ -90,7 +129,7 @@ public class FlightsTab extends TabBase
 		flightsList.addListSelectionListener(new MyListSelectionListener());
 		
 		panel.add(scrollPane);
-		
+		panel.setBackground(Color.CYAN);
 		return panel;
 	}
 	
