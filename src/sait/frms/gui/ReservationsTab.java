@@ -17,15 +17,17 @@ public class ReservationsTab extends TabBase {
 
 	private JList<Reservation> reservationsList;
 
-	private JLabel reserveHeader, codeLabel, flightLabel, airlineLabel, costLabel, nameLabel, citzenLabel, statusLabel,
-			title;
+	private JLabel reserveHeader, codeLabel, flightLabel, airlineLabel, costLabel, nameLabel, citizenshipLabel, statusLabel;
+	private JButton updateButton, findReservationButton;
+	private JComboBox statusBox; 
+	private JTextField codeField, flightField, airlineField, costField, nameField, citizenshipField;
+
 	private JTextArea reserveTextArea;
-	private JTextField codeTextField, flightTextField, airlineTextField, costTextField, nameTextField, citzenTextField,
-			statusTextField;
-	private JTextField searchCodeField, searchAirlineField, searchNameField;
 	private GridBagConstraints gbc;
 	private final int TEXTFIELD_LENGTH = 120;
 	private final int TEXTFIELD_HEIGHT = 24;
+	
+	//hello!
 
 	/**
 	 * Creates the components for reservations tab.
@@ -74,52 +76,96 @@ public class ReservationsTab extends TabBase {
 		JPanel formatPanel = new JPanel();
 		formatPanel.setLayout(new GridBagLayout());
 		gbc = new GridBagConstraints();
-		reserveHeader = new JLabel("Reserve");
-		codeLabel = new JLabel("Code:");
-		codeTextField = new JTextField();
-		flightLabel = new JLabel("Flight:");
-		flightTextField = new JTextField();
-		airlineLabel = new JLabel("Airline:");
-		airlineTextField = new JTextField();
-		costLabel = new JLabel("Cost:");
-		costTextField = new JTextField();
-		codeTextField.setEditable(false);
-		flightTextField.setEditable(false);
-		airlineTextField.setEditable(false);
-		costTextField.setEditable(false);
-		codeTextField.setPreferredSize(new Dimension(TEXTFIELD_LENGTH, TEXTFIELD_HEIGHT));
-		flightTextField.setPreferredSize(new Dimension(TEXTFIELD_LENGTH, TEXTFIELD_HEIGHT));
-		airlineTextField.setPreferredSize(new Dimension(TEXTFIELD_LENGTH, TEXTFIELD_HEIGHT));
-		costTextField.setPreferredSize(new Dimension(TEXTFIELD_LENGTH, TEXTFIELD_HEIGHT));
 		
-		reserveHeader.setFont(new Font("serif", Font.PLAIN, 24));
-		gbc.gridx = 11;
-		gbc.gridy = 1;
+		reserveHeader = new JLabel("Reserve");
+		gbc.ipady = 30;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.gridwidth = 2;
+		reserveHeader.setFont(new Font("Times New Roman", Font.PLAIN, 30));
 		formatPanel.add(reserveHeader, gbc);
-		gbc.gridx = 10;
-		gbc.gridy = 2;
+		codeLabel = new JLabel("Code:");
+		gbc.anchor = GridBagConstraints.LINE_END; //align all text to the right
+		gbc.ipady = 0;
+		gbc.gridwidth = 1;
+		gbc.gridx = 0;
+		gbc.gridy = 1;
 		formatPanel.add(codeLabel, gbc);
-		gbc.gridx = 11;
+		codeField = new JTextField(10);
+		codeField.setEditable(false);
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		formatPanel.add(codeField, gbc);
+		
+		flightLabel = new JLabel("Flight:");
+		gbc.gridx = 0;
 		gbc.gridy = 2;
-		formatPanel.add(codeTextField, gbc);
-		gbc.gridx = 10;
-		gbc.gridy = 3;
 		formatPanel.add(flightLabel, gbc);
-		gbc.gridx = 11;
+		flightField = new JTextField(10);
+		flightField.setEditable(false);
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		formatPanel.add(flightField, gbc);
+		
+		airlineLabel = new JLabel("Airline:");
+		gbc.gridx = 0;
 		gbc.gridy = 3;
-		formatPanel.add(flightTextField, gbc);
-		gbc.gridx = 10;
-		gbc.gridy = 4;
 		formatPanel.add(airlineLabel, gbc);
-		gbc.gridx = 11;
+		airlineField = new JTextField(10);
+		airlineField.setEditable(false);
+		gbc.gridx = 1;
+		gbc.gridy = 3;
+		formatPanel.add(airlineField, gbc);
+		
+		costLabel = new JLabel("Cost:");
+		gbc.gridx = 0;
 		gbc.gridy = 4;
-		formatPanel.add(airlineTextField, gbc);
-		gbc.gridx = 10;
-		gbc.gridy = 5;
 		formatPanel.add(costLabel, gbc);
-		gbc.gridx = 11;
+		costField = new JTextField(10);
+		costField.setEditable(false);
+		gbc.gridx = 1;
+		gbc.gridy = 4;
+		formatPanel.add(costField, gbc);
+		
+		nameLabel = new JLabel("Name:");
+		gbc.gridx = 0;
 		gbc.gridy = 5;
-		formatPanel.add(costTextField, gbc);
+		formatPanel.add(nameLabel, gbc);
+		nameField = new JTextField(10);
+		nameField.isEditable();
+		gbc.gridx = 1;
+		gbc.gridy = 5;
+		formatPanel.add(nameField, gbc);
+		
+		citizenshipLabel = new JLabel("Citizenship:");
+		gbc.gridx = 0;
+		gbc.gridy = 6;
+		formatPanel.add(citizenshipLabel, gbc);
+		citizenshipField = new JTextField(10);
+		citizenshipField.isEditable();
+		gbc.gridx = 1;
+		gbc.gridy = 6;
+		formatPanel.add(citizenshipField, gbc);
+		
+		String[] status = {"Active", "Inactive"};
+		
+		statusLabel = new JLabel("Status:");
+		statusBox = new JComboBox(status);
+		statusBox.setPreferredSize(new Dimension(114,23)); //dimensions width, height
+		gbc.gridx = 0;
+		gbc.gridy = 7;
+		formatPanel.add(statusLabel, gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 7;
+		formatPanel.add(statusBox, gbc);
+		
+		updateButton = new JButton("Update");
+		gbc.gridx = 0;
+		gbc.gridy = 8;
+		gbc.gridwidth = 2; //take up two cells
+		gbc.insets = new Insets(20,0,0,0); //set margin (top, left, bottom, right
+		gbc.fill = GridBagConstraints.HORIZONTAL; //fill cells horizontally
+		formatPanel.add(updateButton, gbc);
 		panel.add(formatPanel);
 		
 		panel.setPreferredSize(new Dimension(200, 100));
@@ -134,7 +180,71 @@ public class ReservationsTab extends TabBase {
 	 */
 	private JPanel createSouthPanel() {
 		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(100, 120));
+		
+		JPanel bottomPanel = new JPanel();
+		bottomPanel.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL; //fill entire panel 
+		
+		JLabel searchTitle = new JLabel("Search"); 
+		searchTitle.setVerticalAlignment(SwingConstants.CENTER);
+		searchTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		gbc.ipady = 20;
+		gbc.weightx = 1.0;
+		gbc.gridwidth = 2;
+		searchTitle.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+		//searchTitle.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		bottomPanel.add(searchTitle, gbc);
+		
+		JLabel codeSearch = new JLabel("Code:");
+		codeSearch.setHorizontalAlignment(SwingConstants.RIGHT);
+		gbc.gridwidth = 1;
+		gbc.ipady = 0; //reset
+		gbc.gridx = 0;
+		gbc.gridy = 1; 
+		gbc.weightx = 0.0;
+		bottomPanel.add(codeSearch, gbc);
+		JTextField codeSearchField = new JTextField (59);
+		gbc.gridx = 1;
+		gbc.gridy = 1; 
+		gbc.weightx = 0.9; //think as percentage - how much of the space should it take up. 
+		//At least one needs to be define or they clump in the middle
+		bottomPanel.add(codeSearchField, gbc);
+		
+		JLabel airlineSearch = new JLabel ("Airline:");
+		airlineSearch.setHorizontalAlignment(SwingConstants.RIGHT);
+		gbc.gridx = 0;
+		gbc.gridy = 2; 
+		gbc.weightx = 0.0;
+		bottomPanel.add(airlineSearch, gbc);
+		JTextField airlineSearchField = new JTextField (59);
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		gbc.weightx = 0.9;
+		bottomPanel.add(airlineSearchField, gbc);
+		
+		JLabel nameSearch = new JLabel ("Name:");
+		nameSearch.setHorizontalAlignment(SwingConstants.RIGHT);
+		gbc.gridx = 0;
+		gbc.gridy = 3; 
+		gbc.weightx = 0.0;
+		bottomPanel.add(nameSearch, gbc);
+		JTextField nameSearchField = new JTextField (59);
+		gbc.gridx = 1;
+		gbc.gridy = 3; 
+		gbc.weightx = 0.9;
+		bottomPanel.add(nameSearchField, gbc);
+		
+		findReservationButton = new JButton("Find Reservation");
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		gbc.gridwidth = 2;
+		bottomPanel.add(findReservationButton, gbc);
+		
+		panel.add(bottomPanel);
+		
+		panel.setPreferredSize(new Dimension(700, 150));
 		panel.setBackground(Color.GREEN);
 		return panel;
 	}
