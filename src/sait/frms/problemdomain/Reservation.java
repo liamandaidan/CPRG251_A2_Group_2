@@ -5,7 +5,6 @@ package sait.frms.problemdomain;
  * @author 
  *
  */
-
 public class Reservation {
 
 }
