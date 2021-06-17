@@ -24,8 +24,8 @@ public class ReservationsTab extends TabBase {
 
 	private JTextArea reserveTextArea;
 	private GridBagConstraints gbc;
-	private final int TEXTFIELD_LENGTH = 120;
-	private final int TEXTFIELD_HEIGHT = 24;
+	private final int TEXTFIELD_LENGTH = 11;
+
 	
 
 	/**
@@ -57,9 +57,11 @@ public class ReservationsTab extends TabBase {
 	private JPanel createCenterPanel() {
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(100, 50));
-
+		
 		reserveTextArea = new JTextArea(15, 40);// height width
-		panel.add(reserveTextArea);
+		reserveTextArea.setText("Just a test");
+		panel.add(new JScrollPane(reserveTextArea));
+		
 		return panel;
 	}
 
@@ -89,17 +91,18 @@ public class ReservationsTab extends TabBase {
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		formatPanel.add(codeLabel, gbc);
-		codeField = new JTextField(10);
+		codeField = new JTextField(TEXTFIELD_LENGTH);
 		codeField.setEditable(false);
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		formatPanel.add(codeField, gbc);
+
 		
 		flightLabel = new JLabel("Flight: ");
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		formatPanel.add(flightLabel, gbc);
-		flightField = new JTextField(10);
+		flightField = new JTextField(TEXTFIELD_LENGTH);
 		flightField.setEditable(false);
 		gbc.gridx = 1;
 		gbc.gridy = 2;
@@ -109,7 +112,7 @@ public class ReservationsTab extends TabBase {
 		gbc.gridx = 0;
 		gbc.gridy = 3;
 		formatPanel.add(airlineLabel, gbc);
-		airlineField = new JTextField(10);
+		airlineField = new JTextField(TEXTFIELD_LENGTH);
 		airlineField.setEditable(false);
 		gbc.gridx = 1;
 		gbc.gridy = 3;
@@ -119,7 +122,7 @@ public class ReservationsTab extends TabBase {
 		gbc.gridx = 0;
 		gbc.gridy = 4;
 		formatPanel.add(costLabel, gbc);
-		costField = new JTextField(10);
+		costField = new JTextField(TEXTFIELD_LENGTH);
 		costField.setEditable(false);
 		gbc.gridx = 1;
 		gbc.gridy = 4;
@@ -129,7 +132,7 @@ public class ReservationsTab extends TabBase {
 		gbc.gridx = 0;
 		gbc.gridy = 5;
 		formatPanel.add(nameLabel, gbc);
-		nameField = new JTextField(10);
+		nameField = new JTextField(TEXTFIELD_LENGTH);
 		nameField.isEditable();
 		gbc.gridx = 1;
 		gbc.gridy = 5;
@@ -139,7 +142,7 @@ public class ReservationsTab extends TabBase {
 		gbc.gridx = 0;
 		gbc.gridy = 6;
 		formatPanel.add(citizenshipLabel, gbc);
-		citizenshipField = new JTextField(10);
+		citizenshipField = new JTextField(TEXTFIELD_LENGTH);
 		citizenshipField.isEditable();
 		gbc.gridx = 1;
 		gbc.gridy = 6;
@@ -149,7 +152,7 @@ public class ReservationsTab extends TabBase {
 		
 		statusLabel = new JLabel("Status: ");
 		statusBox = new JComboBox(status);
-		statusBox.setPreferredSize(new Dimension(114,23)); //dimensions width, height
+		statusBox.setPreferredSize(new Dimension(125,23)); //dimensions width, height
 		gbc.gridx = 0;
 		gbc.gridy = 7;
 		formatPanel.add(statusLabel, gbc);
@@ -191,7 +194,7 @@ public class ReservationsTab extends TabBase {
 		gbc.weightx = 1.0;
 		gbc.gridwidth = 2;
 		searchTitle.setFont(new Font("Times New Roman", Font.PLAIN, 30));
-		//searchTitle.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		//searchTitle.	setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		bottomPanel.add(searchTitle, gbc);
 		
 		JLabel codeSearch = new JLabel("Code: ");
