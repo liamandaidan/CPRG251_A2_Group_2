@@ -98,20 +98,15 @@ public class FlightsTab extends TabBase {
 
 		// From label
 		fromLabel.setHorizontalTextPosition(JLabel.RIGHT);
-//		fromLabel.setPreferredSize(new Dimension(10, 10));
-//		c.gridwidth = 1;
-//		c.ipady = 0; //reset
 		c.gridx = 0;
 		c.gridy = 0; 
-//		c.weightx = 0.0;
 		midPanel.add(fromLabel, c);
 
-		// from combo box
+		// from combobox
 		c.fill = GridBagConstraints.HORIZONTAL;
-//		fromComboBox.setPreferredSize(new Dimension(500, 15));
+		fromComboBox.setPreferredSize(new Dimension(760, 25));
 		c.gridx = 1;
 		c.gridy = 0; 
-//		c.weightx = 0.9;
 		midPanel.add(fromComboBox, c);
 
 		// To label
@@ -120,8 +115,9 @@ public class FlightsTab extends TabBase {
 		c.gridy = 1;
 		midPanel.add(toLabel, c);
 
-		// to combo box
+		// to combobox
 		c.fill = GridBagConstraints.HORIZONTAL;
+		toComboBox.setPreferredSize(new Dimension(760, 25));
 		c.gridx = 1;
 		c.gridy = 1;
 		midPanel.add(toComboBox, c);
@@ -134,6 +130,7 @@ public class FlightsTab extends TabBase {
 
 		// Day combo box
 		c.fill = GridBagConstraints.HORIZONTAL;
+		daysComboBox.setPreferredSize(new Dimension(760, 25));
 		c.gridx = 1;
 		c.gridy = 2;
 		midPanel.add(daysComboBox, c);
@@ -144,7 +141,7 @@ public class FlightsTab extends TabBase {
 		// Bottom button
 		panel.add(findReservationButton, BorderLayout.SOUTH);
 		
-		// check with ciolors
+		// check with colors
 //		topPanel.setBackground(Color.blue);
 //		midPanel.setBackground(Color.PINK);
 //		midPanel.setPreferredSize( new Dimension(500,500));
