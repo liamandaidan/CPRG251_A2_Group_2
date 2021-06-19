@@ -98,20 +98,20 @@ public class FlightsTab extends TabBase {
 
 		// From label
 		fromLabel.setHorizontalTextPosition(JLabel.RIGHT);
-		fromLabel.setPreferredSize(new Dimension(10, 10));
-		c.gridwidth = 1;
-		c.ipady = 0; //reset
+//		fromLabel.setPreferredSize(new Dimension(10, 10));
+//		c.gridwidth = 1;
+//		c.ipady = 0; //reset
 		c.gridx = 0;
-		c.gridy = 1; 
-		c.weightx = 0.0;
+		c.gridy = 0; 
+//		c.weightx = 0.0;
 		midPanel.add(fromLabel, c);
 
 		// from combo box
 		c.fill = GridBagConstraints.HORIZONTAL;
-		fromComboBox.setPreferredSize(new Dimension(500, 15));
+//		fromComboBox.setPreferredSize(new Dimension(500, 15));
 		c.gridx = 1;
-		c.gridy = 1; 
-		c.weightx = 0.9;
+		c.gridy = 0; 
+//		c.weightx = 0.9;
 		midPanel.add(fromComboBox, c);
 
 		// To label
