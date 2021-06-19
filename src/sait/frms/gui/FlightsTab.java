@@ -61,18 +61,6 @@ public class FlightsTab extends TabBase {
 		panel.setVisible(true);//should make everything visible
 	}
 
-//	private JPanel createEastPanel() {
-//		// TODO Auto-generated method stub
-//		JPanel panel = new JPanel();
-//
-//		panel.setPreferredSize(new Dimension(200, 100));
-//		JLabel reserveLabel = new JLabel("Reserve", SwingConstants.CENTER);
-//		reserveLabel.setFont(new Font("serif", Font.PLAIN, 29));
-//		panel.add(reserveLabel);
-//		panel.setBackground(Color.YELLOW);
-//
-//		return panel;
-//	}
 
 	private JPanel createSouthPanel() {
 
@@ -180,22 +168,6 @@ public class FlightsTab extends TabBase {
 	}
 	
 	/**
-	 * Creates the south panel.
-	 * This panel is a placeholder for spacing
-	 * @return JPanel that goes in south.
-	 */
-//	private JPanel createSouthPanel() 
-//	{
-//		JPanel panel = new JPanel();
-//		
-//		JLabel title = new JLabel("Flight Finder", SwingConstants.CENTER);
-//		title.setFont(new Font("serif", Font.PLAIN, 29));
-//		panel.add(title);
-//		panel.setPreferredSize(new Dimension(800,150));
-//		return panel;
-//	}
-
-	/**
 	 * @author Ali, Ben, Mike
 	 * Creates the center panel.
 	 * This just contains the list box that will list flights that meet the search criteria
@@ -229,93 +201,6 @@ public class FlightsTab extends TabBase {
 	 * by the user clicking on a flight in the center panel
 	 * @return JPanel for the east segment
 	 */
-	/*private JPanel createEastPanel() 
-	{
-		JPanel panel = new JPanel();
-		panel.setLayout(new BorderLayout());
-		
-		//add title to top of section
-		JLabel title = new JLabel("Reserve", SwingConstants.CENTER);
-		title.setFont(new Font("Times New Roman", Font.BOLD, 24));
-		panel.add(title, BorderLayout.NORTH);
-		
-		//create all the left-side labels and set editable or not. Only the bottom 2 are editable
-		JLabel flightLabel = new JLabel("Flight: ");
-		JTextField flightText = new JTextField(15);
-		flightText.setEditable(false);
-		
-		JLabel airlineLabel = new JLabel("Airline: ");
-		JTextField airlineText = new JTextField(15);
-		airlineText.setEditable(false);
-		
-		JLabel dayLabel = new JLabel("Day: ");
-		JTextField dayText = new JTextField(15);
-		dayText.setEditable(false);
-		
-		JLabel timeLabel = new JLabel("Time: ");
-		JTextField timeText = new JTextField(15);
-		timeText.setEditable(false);
-		
-		JLabel costLabel = new JLabel("Cost: ");
-		JTextField costText = new JTextField(15);
-		costText.setEditable(false);
-		
-		JLabel nameLabel = new JLabel("Name: ");
-		JTextField nameText = new JTextField(15);
-		JLabel citizenshipLabel = new JLabel("Citizenship: ");
-		JTextField citizenshipText = new JTextField(15);
-		
-		//add the stuff to the center section
-		JPanel stuff = new JPanel();
-		stuff.setLayout(new GridBagLayout());
-		GridBagConstraints cons = new GridBagConstraints();
-	    //add labels
-			cons.gridx = 0;
-			cons.gridy = 1;
-			cons.anchor = GridBagConstraints.LINE_END;//determine where horizontally things will be aligned inside the cell
-			cons.fill = GridBagConstraints.NONE;//determine whether or not the element will attempt to fill the cell
-			cons.insets = new Insets(2,2,2,2);
-		stuff.add(flightLabel, cons);
-			cons.gridy = 2;
-		stuff.add(airlineLabel, cons);
-			cons.gridy = 3;
-		stuff.add(dayLabel, cons);
-			cons.gridy = 4;
-		stuff.add(timeLabel, cons);
-			cons.gridy = 5;
-		stuff.add(costLabel, cons);
-			cons.gridy = 6;
-		stuff.add(nameLabel, cons);
-			cons.gridy = 7;
-		stuff.add(citizenshipLabel, cons);
-		
-		//add text boxes
-			cons.gridx = 1;
-			cons.gridy = 1;
-			cons.anchor = GridBagConstraints.LINE_START;
-			cons.fill = GridBagConstraints.HORIZONTAL;
-		stuff.add(flightText, cons);
-			cons.gridy = 2;
-		stuff.add(airlineText, cons);
-			cons.gridy = 3;
-		stuff.add(dayText, cons);
-			cons.gridy = 4;
-		stuff.add(timeText, cons);
-			cons.gridy = 5;
-		stuff.add(costText, cons);
-			cons.gridy = 6;
-		stuff.add(nameText, cons);
-			cons.gridy = 7;
-		stuff.add(citizenshipText, cons);
-		panel.add(stuff, BorderLayout.CENTER);
-		
-		//add button to bottom
-		JButton reserveButton = new JButton("Reserve");
-		panel.add(reserveButton, BorderLayout.SOUTH);
-		
-		return panel;
-	}*/
-	
 	private JPanel createEastPanel() 
 	{
 		JPanel panel = new JPanel();//create a new blank panel
