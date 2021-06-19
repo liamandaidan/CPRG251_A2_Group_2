@@ -61,18 +61,18 @@ public class FlightsTab extends TabBase {
 		panel.setVisible(true);//should make everything visible
 	}
 
-	private JPanel createEastPanel() {
-		// TODO Auto-generated method stub
-		JPanel panel = new JPanel();
-
-		panel.setPreferredSize(new Dimension(200, 100));
-		JLabel reserveLabel = new JLabel("Reserve", SwingConstants.CENTER);
-		reserveLabel.setFont(new Font("serif", Font.PLAIN, 29));
-		panel.add(reserveLabel);
-		panel.setBackground(Color.YELLOW);
-
-		return panel;
-	}
+//	private JPanel createEastPanel() {
+//		// TODO Auto-generated method stub
+//		JPanel panel = new JPanel();
+//
+//		panel.setPreferredSize(new Dimension(200, 100));
+//		JLabel reserveLabel = new JLabel("Reserve", SwingConstants.CENTER);
+//		reserveLabel.setFont(new Font("serif", Font.PLAIN, 29));
+//		panel.add(reserveLabel);
+//		panel.setBackground(Color.YELLOW);
+//
+//		return panel;
+//	}
 
 	private JPanel createSouthPanel() {
 
@@ -184,16 +184,16 @@ public class FlightsTab extends TabBase {
 	 * This panel is a placeholder for spacing
 	 * @return JPanel that goes in south.
 	 */
-	private JPanel createSouthPanel() 
-	{
-		JPanel panel = new JPanel();
-		
-		JLabel title = new JLabel("Flight Finder", SwingConstants.CENTER);
-		title.setFont(new Font("serif", Font.PLAIN, 29));
-		panel.add(title);
-		panel.setPreferredSize(new Dimension(800,150));
-		return panel;
-	}
+//	private JPanel createSouthPanel() 
+//	{
+//		JPanel panel = new JPanel();
+//		
+//		JLabel title = new JLabel("Flight Finder", SwingConstants.CENTER);
+//		title.setFont(new Font("serif", Font.PLAIN, 29));
+//		panel.add(title);
+//		panel.setPreferredSize(new Dimension(800,150));
+//		return panel;
+//	}
 
 	/**
 	 * @author Ali, Ben, Mike
