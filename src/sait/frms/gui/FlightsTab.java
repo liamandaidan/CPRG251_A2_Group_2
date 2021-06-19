@@ -219,7 +219,7 @@ public class FlightsTab extends TabBase {
 		flightsList.addListSelectionListener(new MyListSelectionListener());
 		panel.setBorder(BorderFactory.createEmptyBorder(15,15,55,15));
 		panel.add(scrollPane);
-		panel.setBackground(Color.CYAN);
+//		panel.setBackground(Color.CYAN);
 		return panel;
 	}
 	
