@@ -77,7 +77,7 @@ public class MainWindow extends JFrame
 		
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		setResizable(false); 
 		northPanel = createNorthPanel();
 		add(northPanel, BorderLayout.NORTH);
 		
