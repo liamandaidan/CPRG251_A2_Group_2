@@ -9,7 +9,7 @@ import sait.frms.problemdomain.Reservation;
 /**
  * Holds the components for the reservations tab. todo
  */
-public class ReservationsTab extends TabBase {
+public class ReservationsTab extends TabBase {//this is a test
 	/**
 	 * Instance of reservation manager.
 	 */
