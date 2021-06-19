@@ -81,15 +81,14 @@ public class FlightsTab extends TabBase {
 
 		String[] flightLocations = { "YYC", "YEG", "YYX", "YVR", "YWG" };
 		String[] daysOfWeek = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+
 		JPanel mainPanel = new JPanel();
 		JPanel topPanel = new JPanel();
 		JPanel midPanel = new JPanel();
-		// JPanel bottomPanel = new JPanel(); // add "Find flights button to the bottom
-		// to take up the whole width
 		JLabel flightFinderLabel = new JLabel("Flight Finder", SwingConstants.CENTER);
-		JLabel fromLabel = new JLabel("From:");
-		JLabel toLabel = new JLabel("To:");
-		JLabel dayLabel = new JLabel("Day");
+		JLabel fromLabel = new JLabel("From: ", SwingConstants.RIGHT);
+		JLabel toLabel = new JLabel("To: ", SwingConstants.RIGHT);
+		JLabel dayLabel = new JLabel("Day: ", SwingConstants.RIGHT);
 		JComboBox fromComboBox = new JComboBox(flightLocations);
 		JComboBox toComboBox = new JComboBox(flightLocations);
 		JComboBox daysComboBox = new JComboBox(daysOfWeek);
@@ -114,11 +113,15 @@ public class FlightsTab extends TabBase {
 
 		// From label
 		fromLabel.setHorizontalTextPosition(JLabel.RIGHT);
+		fromLabel.setPreferredSize(new Dimension(10, 10));
+		c.gridwidth= 1;
 		c.gridx = 0;
 		c.gridy = 0;
 		midPanel.add(fromLabel, c);
 
 		// from combo box
+		c.fill = GridBagConstraints.HORIZONTAL;
+		fromComboBox.setPreferredSize(new Dimension(500, 15));
 		c.gridx = 1;
 		c.gridy = 0;
 		midPanel.add(fromComboBox, c);
@@ -130,6 +133,7 @@ public class FlightsTab extends TabBase {
 		midPanel.add(toLabel, c);
 
 		// to combo box
+		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 1;
 		midPanel.add(toComboBox, c);
@@ -141,6 +145,7 @@ public class FlightsTab extends TabBase {
 		midPanel.add(dayLabel, c);
 
 		// Day combo box
+		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 2;
 		midPanel.add(daysComboBox, c);
@@ -184,7 +189,8 @@ public class FlightsTab extends TabBase {
 		JPanel panel = new JPanel();
 
 		panel.setLayout(new BorderLayout());
-
+		panel.setPreferredSize(new Dimension(100,50));
+		
 		flightsModel = new DefaultListModel<>();
 		flightsList = new JList<>(flightsModel);
 
