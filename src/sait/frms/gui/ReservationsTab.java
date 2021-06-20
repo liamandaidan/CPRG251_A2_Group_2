@@ -9,7 +9,7 @@ import sait.frms.problemdomain.Reservation;
 /**
  * Holds the components for the reservations tab. todo
  */
-public class ReservationsTab extends TabBase {//this is a test
+public class ReservationsTab extends TabBase {
 	/**
 	 * Instance of reservation manager.
 	 */
@@ -82,7 +82,7 @@ public class ReservationsTab extends TabBase {//this is a test
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 2;
-		reserveHeader.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+		reserveHeader.setFont(new Font("serif", Font.PLAIN, 25));
 		formatPanel.add(reserveHeader, gbc);
 		codeLabel = new JLabel("Code: ");
 		gbc.anchor = GridBagConstraints.LINE_END; //align all text to the right
@@ -193,7 +193,7 @@ public class ReservationsTab extends TabBase {//this is a test
 		gbc.ipady = 20;
 		gbc.weightx = 1.0;
 		gbc.gridwidth = 2;
-		searchTitle.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+		searchTitle.setFont(new Font("serif", Font.PLAIN, 25));
 		//searchTitle.	setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		bottomPanel.add(searchTitle, gbc);
 		
