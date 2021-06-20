@@ -250,7 +250,7 @@ public class FlightsTab extends TabBase {
 			eastCon.gridy = 8;
 			eastCon.gridwidth = 2;
 			eastCon.fill = GridBagConstraints.HORIZONTAL;
-			eastCon.insets = new Insets(30,5,0,5);
+			eastCon.insets = new Insets(25,5,0,5);
 		panel.add(reserveButton, eastCon);
 		
 		//add labels
