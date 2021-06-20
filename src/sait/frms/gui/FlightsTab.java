@@ -244,7 +244,7 @@ public class FlightsTab extends TabBase {
 			eastCon.gridy = 0; //x and y are arranged left to right, top to bottom
 			eastCon.gridwidth = 2;//how many grid squares do the next object take up horizontally
 			eastCon.weightx = 0.5;//affects horizontal distribution of each cell
-			eastCon.insets = new Insets(0,50,30,50);//top, left, bottom, right spacing between elements
+			eastCon.insets = new Insets(0,30,20,30);//top, left, bottom, right spacing between elements
 		panel.add(label, eastCon);
 			eastCon.gridx = 0;
 			eastCon.gridy = 8;
