@@ -58,9 +58,8 @@ public class ReservationsTab extends TabBase {
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(100, 50));
 		
-		reserveTextArea = new JTextArea(15, 40);// height width
-		panel.add(new JScrollPane(reserveTextArea));
-		
+		reserveTextArea = new JTextArea(16, 42);// height width
+		panel.add(new JScrollPane(reserveTextArea));	
 		return panel;
 	}
 
