@@ -250,7 +250,7 @@ public class FlightsTab extends TabBase {
 			eastCon.gridy = 8;
 			eastCon.gridwidth = 2;
 			eastCon.fill = GridBagConstraints.HORIZONTAL;
-			eastCon.insets = new Insets(30,50,0,50);
+			eastCon.insets = new Insets(30,5,0,5);
 		panel.add(reserveButton, eastCon);
 		
 		//add labels
@@ -259,7 +259,7 @@ public class FlightsTab extends TabBase {
 			eastCon.gridwidth = 1;
 			eastCon.anchor = GridBagConstraints.LINE_END;//determine where horizontally things will be aligned inside the cell
 			eastCon.fill = GridBagConstraints.NONE;//determine whether or not the element will attempt to fill the cell
-			eastCon.insets = new Insets(2,2,2,2);
+			eastCon.insets = new Insets(0,2,0,0);
 		panel.add(flightLabel, eastCon);
 			eastCon.gridy = 2;
 		panel.add(airlineLabel, eastCon);
