@@ -186,7 +186,6 @@ public class FlightsTab extends TabBase {
 		//JScrollPane scrollPane = new JScrollPane(this.flightsList);
 		
 		JTextArea reserveTextArea = new JTextArea(15, 35);// height width
-        reserveTextArea.setText("Just a test");
         panel.add(new JScrollPane(reserveTextArea));
 
 		flightsList.addListSelectionListener(new MyListSelectionListener());

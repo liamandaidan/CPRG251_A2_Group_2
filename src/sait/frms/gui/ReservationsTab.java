@@ -59,7 +59,6 @@ public class ReservationsTab extends TabBase {
 		panel.setPreferredSize(new Dimension(100, 50));
 		
 		reserveTextArea = new JTextArea(15, 40);// height width
-		reserveTextArea.setText("Just a test");
 		panel.add(new JScrollPane(reserveTextArea));
 		
 		return panel;
