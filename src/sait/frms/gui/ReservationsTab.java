@@ -178,7 +178,7 @@ public class ReservationsTab extends TabBase {
 	 * @return JPanel that goes in south.
 	 */
 	private JPanel createSouthPanel() {
-		JPanel panel = new JPanel();
+		JPanel panel = new JPanel(new BorderLayout());
 		
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.setLayout(new GridBagLayout());
@@ -239,7 +239,7 @@ public class ReservationsTab extends TabBase {
 		gbc.gridx = 0;
 		gbc.gridy = 4;
 		gbc.gridwidth = 2;
-		bottomPanel.add(findReservationButton, gbc);
+		panel.add(findReservationButton, BorderLayout.SOUTH);
 		
 		panel.add(bottomPanel);
 		
