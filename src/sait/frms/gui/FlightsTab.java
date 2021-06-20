@@ -190,7 +190,7 @@ public class FlightsTab extends TabBase {
         panel.add(new JScrollPane(reserveTextArea));
 
 		flightsList.addListSelectionListener(new MyListSelectionListener());
-		panel.setBorder(BorderFactory.createEmptyBorder(15,15,30,15));
+		panel.setBorder(BorderFactory.createEmptyBorder(5,15,30,15));
 		//panel.add(scrollPane);
 //		panel.setBackground(Color.CYAN);
 		return panel;
