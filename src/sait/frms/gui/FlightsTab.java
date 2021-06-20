@@ -84,7 +84,7 @@ public class FlightsTab extends TabBase {
 		panel.setPreferredSize(new Dimension(700, 150));
 
 		// Add label to top panel
-		flightFinderLabel.setFont(new Font("serif", Font.PLAIN, 29));
+		flightFinderLabel.setFont(new Font("serif", Font.PLAIN, 25));
 		topPanel.add(flightFinderLabel);
 
 		// add Top panel to main component
@@ -205,7 +205,7 @@ public class FlightsTab extends TabBase {
 	{
 		JPanel panel = new JPanel();//create a new blank panel
 		JLabel label = new JLabel("Reserve");
-		label.setFont(new Font("Times New Roman", Font.BOLD, 24));//change font face and size of label
+		label.setFont(new Font("serif", Font.PLAIN, 25));//change font face and size of label
 		panel.setLayout(new GridBagLayout());//set the layout for the interior of the east panel
 		GridBagConstraints eastCon = new GridBagConstraints();
 
