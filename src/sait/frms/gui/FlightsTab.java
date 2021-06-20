@@ -279,6 +279,7 @@ public class FlightsTab extends TabBase {
 		//add text boxes
 			eastCon.gridx = 1;
 			eastCon.gridy = 1;
+			eastCon.ipadx = 100;
 			eastCon.anchor = GridBagConstraints.LINE_START;
 			eastCon.fill = GridBagConstraints.HORIZONTAL;
 		panel.add(flightText, eastCon);
