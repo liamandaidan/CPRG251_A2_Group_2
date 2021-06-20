@@ -42,7 +42,7 @@ public class FlightsTab extends TabBase {
 		this.reservationManager = reservationManager;
 
 		panel.setLayout(new BorderLayout());
-		
+		panel.setPreferredSize(new Dimension(700, 500));
 		
 		JPanel northPanel = createNorthPanel();
 		panel.add(northPanel, BorderLayout.NORTH);
@@ -81,7 +81,7 @@ public class FlightsTab extends TabBase {
 
 		// Set up main panel
 		panel.setLayout(new BorderLayout());
-		panel.setPreferredSize(new Dimension(100, 200));
+		panel.setPreferredSize(new Dimension(700, 150));
 
 		// Add label to top panel
 		flightFinderLabel.setFont(new Font("serif", Font.PLAIN, 29));
@@ -104,7 +104,7 @@ public class FlightsTab extends TabBase {
 
 		// from combobox
 		c.fill = GridBagConstraints.HORIZONTAL;
-		fromComboBox.setPreferredSize(new Dimension(760, 25));
+		fromComboBox.setPreferredSize(new Dimension(660, 25));
 		c.gridx = 1;
 		c.gridy = 0; 
 		midPanel.add(fromComboBox, c);
@@ -117,7 +117,7 @@ public class FlightsTab extends TabBase {
 
 		// to combobox
 		c.fill = GridBagConstraints.HORIZONTAL;
-		toComboBox.setPreferredSize(new Dimension(760, 25));
+		toComboBox.setPreferredSize(new Dimension(660, 25));
 		c.gridx = 1;
 		c.gridy = 1;
 		midPanel.add(toComboBox, c);
@@ -130,7 +130,7 @@ public class FlightsTab extends TabBase {
 
 		// Day combo box
 		c.fill = GridBagConstraints.HORIZONTAL;
-		daysComboBox.setPreferredSize(new Dimension(760, 25));
+		daysComboBox.setPreferredSize(new Dimension(660, 25));
 		c.gridx = 1;
 		c.gridy = 2;
 		midPanel.add(daysComboBox, c);
@@ -160,7 +160,7 @@ public class FlightsTab extends TabBase {
 		JLabel title = new JLabel("Flights", SwingConstants.CENTER);
 		title.setFont(new Font("serif", Font.PLAIN, 29));
 		panel.add(title);
-		panel.setPreferredSize(new Dimension(800,40));
+		panel.setPreferredSize(new Dimension(100, 50));
 		return panel;
 	}
 	
@@ -183,11 +183,15 @@ public class FlightsTab extends TabBase {
 		flightsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		// Wrap JList in JScrollPane so it is scrollable.
-		JScrollPane scrollPane = new JScrollPane(this.flightsList);
+		//JScrollPane scrollPane = new JScrollPane(this.flightsList);
+		
+		JTextArea reserveTextArea = new JTextArea(15, 35);// height width
+        reserveTextArea.setText("Just a test");
+        panel.add(new JScrollPane(reserveTextArea));
 
 		flightsList.addListSelectionListener(new MyListSelectionListener());
-		panel.setBorder(BorderFactory.createEmptyBorder(15,15,55,15));
-		panel.add(scrollPane);
+		panel.setBorder(BorderFactory.createEmptyBorder(15,15,30,15));
+		//panel.add(scrollPane);
 //		panel.setBackground(Color.CYAN);
 		return panel;
 	}
@@ -292,7 +296,7 @@ public class FlightsTab extends TabBase {
 			eastCon.gridy = 7;
 		panel.add(citizenshipText, eastCon);
 		
-		panel.setPreferredSize(new Dimension(250,300));
+		panel.setPreferredSize(new Dimension(200, 100));
 		return panel;
 	}
 	
