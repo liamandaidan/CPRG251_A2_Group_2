@@ -27,7 +27,8 @@ public class ReservationManager extends Reservation {
 	 * @return the Reservation
 	 */
 	public Reservation makeReservation(Flight flight, String name, String citizenship) {
-		return Reservation;
+		Reservation newReservation = new Reservation(flight, name, citizenship);
+		return newReservation;
 		
 	}
 	
@@ -42,7 +43,8 @@ public class ReservationManager extends Reservation {
 	 * @return the reservation using the code
 	 */
 	public Reservation findReservationByCode(String code) {
-		return Reservation;
+		Reservation reservationByCode = new Reservation(code);
+		return reservationByCode;
 		
 	}
 	
