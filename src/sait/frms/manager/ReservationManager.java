@@ -8,7 +8,7 @@ package sait.frms.manager;
  */
 public class ReservationManager {
 
-	private String code, flightCode, airline, citizenship;
+	private String code, flightCode, name, airline, citizenship;
 	private double cost;
 	private boolean active;
 
@@ -22,10 +22,11 @@ public class ReservationManager {
 	 * @param cost The cost of the reservation.
 	 * @param active Whether the reservation is active or not.
 	 */
-	public ReservationManager(String code, String flightCode, String airline, String citizenship, double cost,
+	public ReservationManager(String code, String flightCode, String name, String airline, String citizenship, double cost,
 			boolean active) {
 		this.code = code;
 		this.flightCode = flightCode;
+		this.name = name;
 		this.airline = airline;
 		this.citizenship = citizenship;
 		this.cost = cost;
@@ -33,7 +34,7 @@ public class ReservationManager {
 	}
 
 	/**
-	 * 
+	 * This method will return a String of the code.
 	 * @return the code
 	 */
 	public String getCode() {
@@ -41,6 +42,7 @@ public class ReservationManager {
 	}
 
 	/**
+	 * This method will return a String with the flightCode.
 	 * @return the flightCode
 	 */
 	public String getFlightCode() {
@@ -48,6 +50,7 @@ public class ReservationManager {
 	}
 
 	/**
+	 * This method will return a String with the airline.
 	 * @return the airline
 	 */
 	public String getAirline() {
@@ -55,20 +58,23 @@ public class ReservationManager {
 	}
 
 	/**
+	 * This method will return a String with the name.
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * This method will return a String of the citizenship.
 	 * @return the citizenship
 	 */
 	public String getCitizenship() {
 		return citizenship;
 	}
 
-	/**
-	 * @param citizenship the citizenship to set
-	 */
-	public void setCitizenship(String citizenship) {
-		this.citizenship = citizenship;
-	}
 
 	/**
+	 * This method will return as a double the cost.
 	 * @return the cost
 	 */
 	public double getCost() {
@@ -76,6 +82,7 @@ public class ReservationManager {
 	}
 
 	/**
+	 * This method will return as a boolean if active.
 	 * @return the active
 	 */
 	public boolean isActive() {
@@ -83,6 +90,22 @@ public class ReservationManager {
 	}
 
 	/**
+	 * This method will set the name.
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	/**
+	 * This method will set the type of Citizenship.
+	 * @param citizenship the citizenship to set
+	 */
+	public void setCitizenship(String citizenship) {
+		this.citizenship = citizenship;
+	}
+	/**
+	 * This method will set active to a boolean.
 	 * @param active the active to set
 	 */
 	public void setActive(boolean active) {
