@@ -1,5 +1,71 @@
 package sait.frms.manager;
+import java.util.*;
+import sait.frms.problemdomain.*;
 
-public class ReservationManager {
+/**
+ * This is the Reservation manager that manages the data from Reservation object
+ * 
+ * @author Robyn Balanag
+ * @version June, 25, 2021
+ */
 
+public class ReservationManager extends Reservation {
+	
+	
+	private ArrayList<Reservation> reservations = new ArrayList<>();
+	
+
+	/**
+	 * 
+	 */
+	public ReservationManager() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	 * @return the Reservation
+	 */
+	public Reservation makeReservation(Flight flight, String name, String citizenship) {
+		return Reservation;
+		
+	}
+	
+	/**
+	 * @return the list of reservations
+	 */
+	public ArrayList<Reservation> findReservations(String code, String airline, String name){
+		return reservations ;
+	}
+		
+	/**
+	 * @return the reservation using the code
+	 */
+	public Reservation findReservationByCode(String code) {
+		return Reservation;
+		
+	}
+	
+	/**
+	 * @return the number of available seats
+	 */
+	private int getAvailableSeats() {
+		return ;
+	}
+	
+	/**
+	 * @return a generated confirmation code
+	 */
+	private String generateReservationCode(Flight flight) {
+		return getCode();
+		
+	}
+	
+	/**
+	 * 
+	 */
+	private void populateFromBinary() {
+		
+	}
+	
 }
