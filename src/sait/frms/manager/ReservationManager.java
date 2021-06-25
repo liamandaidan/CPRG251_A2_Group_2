@@ -47,6 +47,14 @@ public class ReservationManager extends Reservation {
 	}
 	
 	/**
+	 * 
+	 */
+	public void persist() {
+		 
+	}
+	
+	
+	/**
 	 * @return the number of available seats
 	 */
 	private int getAvailableSeats() {
