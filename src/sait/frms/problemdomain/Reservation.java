@@ -20,6 +20,19 @@ public class Reservation {
 		super();
 	}
 	
+	
+	/**
+	 * @param flightCode
+	 * @param name
+	 * @param citizenship
+	 */
+	public Reservation(String flightCode, String name, String citizenship) {
+		this.flightCode = flightCode;
+		this.name = name;
+		this.citizenship = citizenship;
+	}
+
+
 	/**
 	 * Initializes each parameter inside of Reservation without active parameter.
 	 * 

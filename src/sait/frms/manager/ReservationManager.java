@@ -58,7 +58,7 @@ public class ReservationManager extends Reservation {
 	 * @return the number of available seats
 	 */
 	private int getAvailableSeats() {
-		return ;
+		return 0;
 	}
 	
 	/**
