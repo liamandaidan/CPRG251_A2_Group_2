@@ -10,7 +10,7 @@ import sait.frms.problemdomain.*;
 public class FlightManager {
 	
 	public static final String WEEKDAY_ANY = "Any";
-	public static final String wEEKDAY_SUNDAY = "Sunday";
+	public static final String WEEKDAY_SUNDAY = "Sunday";
 	public static final String WEEKDAY_MONDAY = "Monday";
 	public static final String WEEKDAY_TUESDAY = "Tuesday";
 	public static final String WEEKDAY_WEDNESDAY = "Wednesday";
