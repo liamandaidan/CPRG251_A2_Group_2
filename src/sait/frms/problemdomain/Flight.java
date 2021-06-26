@@ -1,14 +1,11 @@
 package sait.frms.problemdomain;
 
 /**
-<<<<<<< Updated upstream
  * TODO flight class infrastructure
  * @author 
 =======
  * TODO
  * @author Ben and Mike
->>>>>>> Stashed changes
- *
  */
 
 public class Flight {
