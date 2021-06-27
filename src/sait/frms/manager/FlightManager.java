@@ -28,11 +28,12 @@ public class FlightManager {
 	private ArrayList<String> airports = new ArrayList<String>();
 
 	/**
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException
 	 * 
 	 */
 	public FlightManager() {
 		populateAirports();
+		populateFlights();
 
 	}
 
@@ -41,7 +42,7 @@ public class FlightManager {
 	 * @return
 	 */
 	public ArrayList<String> getAirports() {
-		
+
 		return null;
 	}
 
@@ -86,8 +87,89 @@ public class FlightManager {
 	 * 
 	 */
 	private void populateFlights() {
+		String[] validFlightCodes = { "OA", "CA", "TB", "VA" };
+		String[] airlineNameList = { "Otto Airlines", "Conned Air", "Try a Bus Airways", "Vertical Airways" };
+		// String codeValidator = "[A-Z]{2}\-[0-9]{4}" //regex pattern to check
+		String airLineName = "";
+		String flightCode;
+		String departingCode;
+		String arrivalCode;
+		String weekday;
+		String time;
+		int seats;
+		double cost;
+		int numbOfFlights = 0;
 		try {
 			Scanner flightsReader = new Scanner(new File(FLIGHTS_TEXT));
+			boolean isValid = false; // validity flag
+			while (flightsReader.hasNext()) {
+
+				// Split the string into an array to save as variables
+				String[] flightsInfo = flightsReader.nextLine().split(",");
+
+				// check code to make sure the format matches
+				if (flightsInfo[0].matches("[A-Z]{2}\\-[0-9]{4}")) {
+
+					for (int i = 0; i < validFlightCodes.length; i++) {
+						if (flightsInfo[0].substring(0, 7).contains(validFlightCodes[i])) {
+							isValid = true;
+							String airlineCode = flightsInfo[0].substring(0, 2).toUpperCase();
+							switch (airlineCode) {
+							case "OA":
+								airLineName = airlineNameList[0];
+								break;
+
+							case "CA":
+								airLineName = airlineNameList[1];
+								break;
+							case "TB":
+								airLineName = airlineNameList[2];
+								break;
+
+							case "VA":
+								airLineName = airlineNameList[3];
+								break;
+							}
+
+							break;
+						} else {
+							isValid = false;
+						}
+					}
+					// assigns the code to the proper value
+					if (isValid) {
+						flightCode = (isValid) ? flightsInfo[0] : null;
+
+						departingCode = flightsInfo[1];
+						arrivalCode = flightsInfo[2];
+						weekday = flightsInfo[3];
+						time = flightsInfo[4];
+						seats = Integer.parseInt(flightsInfo[5]);
+						cost = Double.parseDouble(flightsInfo[6]);
+
+						flights.add(new Flight(flightCode, airLineName, departingCode, arrivalCode, weekday, time,
+								seats, cost));
+						numbOfFlights++;
+					}
+					
+				} else {
+					
+					// this just for testing
+					System.out.println("****************************************");
+					System.out.println("****************************************");
+					System.out.println("****************************************");
+					System.out.println("This line is not printed" + flightsInfo[0]);
+					System.out.println("****************************************");
+				}
+
+			}
+			System.out.println(flights.get(0).toString());
+			for (Flight f : flights) {
+				System.out.println(f.toString());
+
+			}
+			System.out.println(numbOfFlights);
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,14 +178,17 @@ public class FlightManager {
 	}
 
 	/**
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException
 	 * 
 	 */
 	private void populateAirports() {
-//		String airportCode ="";
-//		String airportName="";
-		String airportInfo ="";
-		
+		String airportInfo = "";
+
+		/*
+		 * create add items from the airport csv to airports array as a string that
+		 * includes the airport code AND airport name
+		 */
+
 		try {
 			Scanner airportReader = new Scanner(new File(AIRPORTS_TEXT));
 			while (airportReader.hasNext()) {
@@ -113,14 +198,9 @@ public class FlightManager {
 			airportReader.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
+			System.out.println("Double check the \"airports.csv\" file location");
 			e.printStackTrace();
 		}
-		
-		for (int i = 0;  i < airports.size(); i++) {
-			System.out.println(airports.get(i));
-		}
-		
-		
 
 	}
 }
