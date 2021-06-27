@@ -3,11 +3,7 @@ package sait.frms.problemdomain;
 /**
  * TODO flight class infrastructure
  * @author 
-=======
- * TODO
- * @author Ben and Mike
- */
-
+*/
 public class Flight {
 	private String code;
 	private String airlineName;
