@@ -89,7 +89,6 @@ public class FlightManager {
 	private void populateFlights() {
 		String[] validFlightCodes = { "OA", "CA", "TB", "VA" };
 		String[] airlineNameList = { "Otto Airlines", "Conned Air", "Try a Bus Airways", "Vertical Airways" };
-		// String codeValidator = "[A-Z]{2}\-[0-9]{4}" //regex pattern to check
 		String airLineName = "";
 		String flightCode;
 		String departingCode;
@@ -99,6 +98,8 @@ public class FlightManager {
 		int seats;
 		double cost;
 		int numbOfFlights = 0;
+
+		// Add flights to the list of flights
 		try {
 			Scanner flightsReader = new Scanner(new File(FLIGHTS_TEXT));
 			boolean isValid = false; // validity flag
@@ -110,6 +111,7 @@ public class FlightManager {
 				// check code to make sure the format matches
 				if (flightsInfo[0].matches("[A-Z]{2}\\-[0-9]{4}")) {
 
+					// checks for the correct airline name and saves the value
 					for (int i = 0; i < validFlightCodes.length; i++) {
 						if (flightsInfo[0].substring(0, 7).contains(validFlightCodes[i])) {
 							isValid = true;
@@ -136,6 +138,7 @@ public class FlightManager {
 							isValid = false;
 						}
 					}
+
 					// assigns the code to the proper value
 					if (isValid) {
 						flightCode = (isValid) ? flightsInfo[0] : null;
@@ -147,13 +150,14 @@ public class FlightManager {
 						seats = Integer.parseInt(flightsInfo[5]);
 						cost = Double.parseDouble(flightsInfo[6]);
 
+						// creates and adds the flight to the ArrayList
 						flights.add(new Flight(flightCode, airLineName, departingCode, arrivalCode, weekday, time,
 								seats, cost));
 						numbOfFlights++;
 					}
-					
+
 				} else {
-					
+
 					// this just for testing
 					System.out.println("****************************************");
 					System.out.println("****************************************");
@@ -163,6 +167,7 @@ public class FlightManager {
 				}
 
 			}
+			// for testing -> prints out all of the flights 
 			System.out.println(flights.get(0).toString());
 			for (Flight f : flights) {
 				System.out.println(f.toString());
