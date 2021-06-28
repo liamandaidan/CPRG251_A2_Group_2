@@ -34,7 +34,6 @@ public class FlightManager {
 	public FlightManager() {
 		populateAirports();
 		populateFlights();
-//		System.out.println(findFlightByCode("OA-7540").toString());
 
 	}
 
@@ -61,6 +60,12 @@ public class FlightManager {
 	 * @return
 	 */
 	public String findAirportByCode(String code) {
+		for (int i = 0; i < airports.size(); i++) {
+			if(airports.get(i).substring(0,3).equalsIgnoreCase(code)) {
+				return airports.get(i);
+			}
+		}
+		
 		return null;
 	}
 
