@@ -34,6 +34,7 @@ public class FlightManager {
 	public FlightManager() {
 		populateAirports();
 		populateFlights();
+//		System.out.println(findFlightByCode("OA-7540").toString());
 
 	}
 
@@ -43,7 +44,7 @@ public class FlightManager {
 	 */
 	public ArrayList<String> getAirports() {
 
-		return null;
+		return airports;
 	}
 
 	/**
@@ -51,7 +52,7 @@ public class FlightManager {
 	 * @return
 	 */
 	public ArrayList<Flight> getFlights() {
-		return null;
+		return flights;
 	}
 
 	/**
@@ -69,6 +70,14 @@ public class FlightManager {
 	 * @return
 	 */
 	public Flight findFlightByCode(String code) {
+		for (int i = 0; i< flights.size(); i++ ) {
+			if(flights.get(i).getCode().equals(code)) {
+				return flights.get(i);
+			}else {
+				System.out.println("Flight not found.");
+				return null;
+			}
+		}
 		return null;
 	}
 
@@ -156,7 +165,7 @@ public class FlightManager {
 						numbOfFlights++;
 					}
 
-				} else {
+				}  /*else {
 
 					// this just for testing
 					System.out.println("****************************************");
@@ -164,16 +173,16 @@ public class FlightManager {
 					System.out.println("****************************************");
 					System.out.println("This line is not printed" + flightsInfo[0]);
 					System.out.println("****************************************");
-				}
+				}*/
 
 			}
 			// for testing -> prints out all of the flights 
-			System.out.println(flights.get(0).toString());
-			for (Flight f : flights) {
-				System.out.println(f.toString());
-
-			}
-			System.out.println(numbOfFlights);
+//			System.out.println(flights.get(0).toString());
+//			for (Flight f : flights) {
+//				System.out.println(f.toString());
+//
+//			}
+//			System.out.println(numbOfFlights);
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
