@@ -7,6 +7,8 @@ import sait.frms.problemdomain.*;
  * 
  * @author Robyn Balanag
  * @version June, 25, 2021
+ * 
+ * TODO Refer to GITHub online for issues to complete
  */
 
 public class ReservationManager extends Reservation {
