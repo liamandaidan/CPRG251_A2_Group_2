@@ -1,5 +1,8 @@
 package sait.frms.manager;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.*;
 
 import sait.frms.exception.*;
@@ -17,7 +20,7 @@ import sait.frms.problemdomain.*;
 public class ReservationManager {
 
 	private ArrayList<Reservation> reservations = new ArrayList<>();
-
+	private final String RESERVATIONS_FILEPATH = "res/reservations.txt";
 	/**
 	 * 
 	 */
@@ -75,13 +78,29 @@ public class ReservationManager {
 	}
 
 	/**
-	 * 
+	 * This method will save Reservations to binary file(RESERVATIONS_FILEPATH).
 	 */
 	public void persist() {
+		
+		String formated;
 
+		File saveFile = new File(RESERVATIONS_FILEPATH); 
+		try {
+			PrintWriter output = new PrintWriter(saveFile);
+			for(int i = 0; i < reservations.size();i++) {
+				Reservation tempRes = reservations.get(i);
+				formated = tempRes.toString();
+				output.println(formated);
+			}
+			output.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("File not Found! Check @"+RESERVATIONS_FILEPATH);
+		}
+		
 	}
 
 	/**
+	 * 
 	 * @return the number of available seats
 	 */
 	private int getAvailableSeats(Flight flight) {
