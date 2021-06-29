@@ -21,6 +21,7 @@ public class ReservationManager extends Reservation {
 
 	private ArrayList<Reservation> reservations = new ArrayList<>();
 	private final String RESERVATIONS_FILEPATH = "res/reservations.txt";
+
 	/**
 	 * 
 	 */
@@ -30,10 +31,20 @@ public class ReservationManager extends Reservation {
 	}
 
 	/**
+	 * Will create a reservation object. With these parameters: String code, String
+	 * flightCode, String airline, String name, String citizenship, double cost,
+	 * boolean active
+	 * 
 	 * @return the Reservation
 	 */
 	public Reservation makeReservation(Flight flight, String name, String citizenship) {
-		Reservation newReservation = new Reservation();
+		try {
+			String reservationsCode = generateReservationCode(flight);
+		} catch (InvalidFlightCodeException e) {
+			System.out.println(e.getMessage());
+			System.out.println("Could not generate flight code. Please check to see what is wrong.");
+		}
+		Reservation newReservation = new Reservation(reservationsCode,flight.getCode(),name, citizenship);
 		return newReservation;
 
 	}
@@ -58,22 +69,20 @@ public class ReservationManager extends Reservation {
 	 * This method will save Reservations to binary file(RESERVATIONS_FILEPATH).
 	 */
 	public void persist() {
-		
-		String formated;
 
-		File saveFile = new File(RESERVATIONS_FILEPATH); 
+		String formated;
 		try {
-			PrintWriter output = new PrintWriter(saveFile);
-			for(int i = 0; i < reservations.size();i++) {
+			PrintWriter output = new PrintWriter(new File(RESERVATIONS_FILEPATH));
+			for (int i = 0; i < reservations.size(); i++) {
 				Reservation tempRes = reservations.get(i);
 				formated = tempRes.toString();
 				output.println(formated);
 			}
 			output.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("File not Found! Check @"+RESERVATIONS_FILEPATH);
+			System.out.println("File not Found! Can not save to file. Check @" + RESERVATIONS_FILEPATH);
 		}
-		
+
 	}
 
 	/**
@@ -92,27 +101,51 @@ public class ReservationManager extends Reservation {
 	 * 
 	 * @return a generated confirmation code
 	 */
-	private String generateReservationCode(Flight flight) throws InvalidFlightCodeException{
-		//Potentially Throws error of Having the wrong flight code.
+	private String generateReservationCode(Flight flight) throws InvalidFlightCodeException {
+		// Potentially Throws error of Having the wrong flight code.
 		String code = "";
 		char fromLetter = flight.getFrom().charAt(0);
 		char toLetter = flight.getTo().charAt(0);
-			if (fromLetter == toLetter && fromLetter == 'Y' && Character.isLetter(fromLetter)&&Character.isLetter(toLetter)) //if the first letter at From = first Letter of To AND if one letter starts with Y
-				code += "D";
-			else if(Character.isLetter(fromLetter)&&Character.isLetter(toLetter))//Check to see if both are Letter inputs.
-				code += "I";
-			else
-				throw new InvalidFlightCodeException(flight.getFrom(),flight.getTo());
-			code += (int)(Math.random()*9000+1000); //1000-9999
+		if (fromLetter == toLetter && fromLetter == 'Y' && Character.isLetter(fromLetter)
+				&& Character.isLetter(toLetter)) // if the first letter at From = first Letter of To AND if one letter
+													// starts with Y
+			code += "D";
+		else if (Character.isLetter(fromLetter) && Character.isLetter(toLetter))// Check to see if both are Letter
+																				// inputs.
+			code += "I";
+		else
+			throw new InvalidFlightCodeException(flight.getFrom(), flight.getTo());
+		code += (int) (Math.random() * 9000 + 1000); // 1000-9999
 
 		return code;
 
 	}
 
 	/**
-	 * 
+	 * This method will bring in the reservations from txt file. In the format of:
+	 * this.code, this.flightCode, this.airline, this.name, this.citizenship,
+	 * this.cost, this.active);
 	 */
 	private void populateFromBinary() {
+		Reservation tempRes;// to be loaded into reservations later
+		try {
+			Scanner readIn = new Scanner(new File(RESERVATIONS_FILEPATH));
+
+			while (readIn.hasNextLine()) {
+				String readArr[] = readIn.nextLine().split(",");
+				if (readArr.length == 7) {// check to make sure that our array has 7 items, if not its an error.
+					tempRes = new Reservation(readArr[0], readArr[1], readArr[2], readArr[3], readArr[4],
+							Double.parseDouble(readArr[5]), Boolean.parseBoolean(readArr[6]));
+					reservations.add(tempRes);
+				} else {
+					System.out.println(
+							"readArr is out of bounds. Contains more/less items then requried. Could not add items.");
+				}
+			}
+
+		} catch (FileNotFoundException e) {
+			System.out.println("File is not found! Can't read the save file. Check @" + RESERVATIONS_FILEPATH);
+		}
 
 	}
 
