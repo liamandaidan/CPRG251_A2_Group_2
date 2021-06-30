@@ -1,8 +1,8 @@
 package sait.frms.problemdomain;
 
 /**
- * This is the Reservation object that stores the data of everything
- * inside of the object.
+ * This is the Reservation object that stores the data of everything inside of
+ * the object.
  * 
  * @author Liam McLaughlin
  * @version June, 25, 2021
@@ -19,8 +19,7 @@ public class Reservation {
 	public Reservation() {
 		super();
 	}
-	
-	
+
 	/**
 	 * @param flightCode
 	 * @param name
@@ -31,7 +30,6 @@ public class Reservation {
 		this.name = name;
 		this.citizenship = citizenship;
 	}
-
 
 	/**
 	 * Initializes each parameter inside of Reservation without active parameter.
@@ -44,8 +42,7 @@ public class Reservation {
 	 * @param citizenship The citizenship of the traveler.
 	 * @param cost        The cost of the reservation.
 	 */
-	public Reservation(String code, String flightCode, String airline, String name, String citizenship,
-			double cost) {
+	public Reservation(String code, String flightCode, String airline, String name, String citizenship, double cost) {
 		this.code = code;
 		this.flightCode = flightCode;
 		this.name = name;
@@ -67,8 +64,8 @@ public class Reservation {
 	 * @param cost        The cost of the reservation.
 	 * @param active      Whether the reservation is active or not.
 	 */
-	public Reservation(String code, String flightCode, String airline, String name, String citizenship,
-			double cost, boolean active) {
+	public Reservation(String code, String flightCode, String airline, String name, String citizenship, double cost,
+			boolean active) {
 		this.code = code;
 		this.flightCode = flightCode;
 		this.name = name;
@@ -174,8 +171,10 @@ public class Reservation {
 	 * @Override
 	 */
 	public String toString() {
-		return "ReservationManager [code=" + code + ", flightCode=" + flightCode + ", name=" + name + ", airline="
-				+ airline + ", citizenship=" + citizenship + ", cost=" + cost + ", active=" + active + "]";
+		String formated = String.format("&s, &s, &s, &s, &s, &s, &s", this.code, this.flightCode, this.airline, this.name,
+				 this.citizenship, this.cost, this.active);
+
+		return formated;
 	}
 
 }
