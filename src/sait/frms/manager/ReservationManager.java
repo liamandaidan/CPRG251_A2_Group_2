@@ -37,19 +37,25 @@ public class ReservationManager extends Reservation {
 	 * boolean active
 	 * 
 	 * @return the Reservation
+	 * @throws InvalidNameException
+	 * @throws InvalidCitizenshipException
+	 * @throws InvalidFlightCodeException 
 	 */
-	public Reservation makeReservation(Flight flight, String name, String citizenship) {
+	public Reservation makeReservation(Flight flight, String name, String citizenship)
+			throws InvalidNameException, InvalidCitizenshipException, InvalidFlightCodeException {
 		String reservationsCode;
-		try {
-			reservationsCode = generateReservationCode(flight);
-			Reservation newReservation = new Reservation(reservationsCode, flight.getCode(), flight.getAirlineName(),
-					name, citizenship, RESERVATION_COST, true);
-			return newReservation;
-		} catch (InvalidFlightCodeException e) {
-			System.out.println(e.getMessage());
-			System.out.println("Could not generate flight code. Please check to see what is wrong.");
-			return null;
+
+		if (name.isBlank()) {
+			throw new InvalidNameException();
 		}
+		if (citizenship.isBlank()) {
+			throw new InvalidCitizenshipException();
+		}
+		
+		reservationsCode = generateReservationCode(flight);
+		Reservation newReservation = new Reservation(reservationsCode, flight.getCode(), flight.getAirlineName(), name,
+				citizenship, RESERVATION_COST, true);
+		return newReservation;
 
 	}
 
