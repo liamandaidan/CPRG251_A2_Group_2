@@ -21,6 +21,7 @@ public class ReservationManager extends Reservation {
 
 	private ArrayList<Reservation> reservations = new ArrayList<>();
 	private final String RESERVATIONS_FILEPATH = "res/reservations.txt";
+	private final double RESERVATION_COST = 189.00;
 
 	/**
 	 * 
@@ -38,14 +39,17 @@ public class ReservationManager extends Reservation {
 	 * @return the Reservation
 	 */
 	public Reservation makeReservation(Flight flight, String name, String citizenship) {
+		String reservationsCode;
 		try {
-			String reservationsCode = generateReservationCode(flight);
+			reservationsCode = generateReservationCode(flight);
+			Reservation newReservation = new Reservation(reservationsCode, flight.getCode(), flight.getAirlineName(),
+					name, citizenship, RESERVATION_COST, true);
+			return newReservation;
 		} catch (InvalidFlightCodeException e) {
 			System.out.println(e.getMessage());
 			System.out.println("Could not generate flight code. Please check to see what is wrong.");
+			return null;
 		}
-		Reservation newReservation = new Reservation(reservationsCode,flight.getCode(),name, citizenship);
-		return newReservation;
 
 	}
 
