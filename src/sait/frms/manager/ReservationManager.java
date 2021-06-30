@@ -17,7 +17,7 @@ import sait.frms.problemdomain.*;
  *          TODO Refer to GITHub online for issues to be completed.
  */
 
-public class ReservationManager extends Reservation {
+public class ReservationManager {
 
 	private ArrayList<Reservation> reservations = new ArrayList<>();
 	private final String RESERVATIONS_FILEPATH = "res/reservations.txt";
@@ -27,8 +27,7 @@ public class ReservationManager extends Reservation {
 	 * 
 	 */
 	public ReservationManager() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/**
@@ -41,6 +40,7 @@ public class ReservationManager extends Reservation {
 	 * @throws InvalidCitizenshipException
 	 * @throws InvalidFlightCodeException 
 	 */
+
 	public Reservation makeReservation(Flight flight, String name, String citizenship)
 			throws InvalidNameException, InvalidCitizenshipException, InvalidFlightCodeException {
 		String reservationsCode;
@@ -63,15 +63,38 @@ public class ReservationManager extends Reservation {
 	 * @return the list of reservations
 	 */
 	public ArrayList<Reservation> findReservations(String code, String airline, String name) {
-		return reservations;
+		ArrayList<Reservation> foundReservation = new ArrayList<>();
+
+		for (int i = 0; i < reservations.size(); i++) {
+			if (reservations.get(i).getCode().equals(code) && reservations.get(i).getAirline().equals(airline)
+					&& reservations.get(i).getName().equals(name)) {
+				foundReservation.add(reservations.get(i));
+			}
+			if (foundReservation.size() == 0) {
+				System.out.println("No reservation found.");
+			}
+		}
+
+		return foundReservation;
+
 	}
 
 	/**
 	 * @return the reservation using the code
 	 */
 	public Reservation findReservationByCode(String code) {
-		Reservation reservationByCode = new Reservation();
-		return reservationByCode;
+
+		for (int i = 0; i < reservations.size(); i++) {
+			if (reservations.get(i).getCode().equals(code)) {
+				return reservations.get(i);
+			} else {
+				System.out.println("No reservation found.");
+				return null;
+			}
+
+		}
+
+		return null;
 
 	}
 
@@ -99,8 +122,8 @@ public class ReservationManager extends Reservation {
 	 * 
 	 * @return the number of available seats
 	 */
-	private int getAvailableSeats() {
-		return 0;
+	private int getAvailableSeats(Flight flight) {
+		return flight.getSeats();
 	}
 
 	/**
