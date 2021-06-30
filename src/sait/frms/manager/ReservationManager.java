@@ -27,7 +27,7 @@ public class ReservationManager {
 	 * 
 	 */
 	public ReservationManager() {
-		
+
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class ReservationManager {
 	 * @return the Reservation
 	 * @throws InvalidNameException
 	 * @throws InvalidCitizenshipException
-	 * @throws InvalidFlightCodeException 
+	 * @throws InvalidFlightCodeException
 	 */
 
 	public Reservation makeReservation(Flight flight, String name, String citizenship)
@@ -51,7 +51,7 @@ public class ReservationManager {
 		if (citizenship.isBlank()) {
 			throw new InvalidCitizenshipException();
 		}
-		
+
 		reservationsCode = generateReservationCode(flight);
 		Reservation newReservation = new Reservation(reservationsCode, flight.getCode(), flight.getAirlineName(), name,
 				citizenship, RESERVATION_COST, true);
