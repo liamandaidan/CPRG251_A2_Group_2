@@ -43,28 +43,28 @@ public class FlightsTab extends TabBase {
 
 		panel.setLayout(new BorderLayout());
 		panel.setPreferredSize(new Dimension(700, 500));
-		
+
 		JPanel northPanel = createNorthPanel();
 		panel.add(northPanel, BorderLayout.NORTH);
-		
+
 		JPanel southPanel = createSouthPanel();
 		panel.add(southPanel, BorderLayout.SOUTH);
-		
-		
+
 		JPanel centerPanel = createCenterPanel();
 		panel.add(centerPanel, BorderLayout.CENTER);
-		
-		JPanel eastPanel = createEastPanel();
-		//eastPanel.setBackground(Color.blue);//this is just to identify the area taken up by this panel
-		panel.add(eastPanel, BorderLayout.EAST);
-		
-		panel.setVisible(true);//should make everything visible
-	}
 
+		JPanel eastPanel = createEastPanel();
+		// eastPanel.setBackground(Color.blue);//this is just to identify the area taken
+		// up by this panel
+		panel.add(eastPanel, BorderLayout.EAST);
+
+		panel.setVisible(true);// should make everything visible
+	}
 
 	private JPanel createSouthPanel() {
 
-		String[] flightLocations = { "YYC", "YEG", "YYX", "YVR", "YWG" };
+		String[] flightLocations = { "YYC", "YEG", "YUL", "YOW", "YYZ", "YVR", "YWG", "ATL", "PEK", "DXB", "HKG", "LHR",
+				"HND", "ORD", "PVG", "CDG", "AMS", "DEL", "FRA", "DFW" };
 		String[] daysOfWeek = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
 
 		JPanel panel = new JPanel();
@@ -99,14 +99,14 @@ public class FlightsTab extends TabBase {
 		// From label
 		fromLabel.setHorizontalTextPosition(JLabel.RIGHT);
 		c.gridx = 0;
-		c.gridy = 0; 
+		c.gridy = 0;
 		midPanel.add(fromLabel, c);
 
 		// from combobox
 		c.fill = GridBagConstraints.HORIZONTAL;
 		fromComboBox.setPreferredSize(new Dimension(660, 25));
 		c.gridx = 1;
-		c.gridy = 0; 
+		c.gridy = 0;
 		midPanel.add(fromComboBox, c);
 
 		// To label
@@ -134,13 +134,13 @@ public class FlightsTab extends TabBase {
 		c.gridx = 1;
 		c.gridy = 2;
 		midPanel.add(daysComboBox, c);
-		
+
 		// add mid panel to main
 		panel.add(midPanel, BorderLayout.CENTER);
 
 		// Bottom button
 		panel.add(findReservationButton, BorderLayout.SOUTH);
-		
+
 		// check with colors
 //		topPanel.setBackground(Color.blue);
 //		midPanel.setBackground(Color.PINK);
@@ -150,8 +150,8 @@ public class FlightsTab extends TabBase {
 	}
 
 	/**
-	 * Creates the north panel.
-	 * This panel just holds the word 'FLIGHTS'
+	 * Creates the north panel. This panel just holds the word 'FLIGHTS'
+	 * 
 	 * @return JPanel that goes in north.
 	 */
 	private JPanel createNorthPanel() {
@@ -163,19 +163,18 @@ public class FlightsTab extends TabBase {
 		panel.setPreferredSize(new Dimension(100, 50));
 		return panel;
 	}
-	
+
 	/**
-	 * @author Ali, Ben, Mike
-	 * Creates the center panel.
-	 * This just contains the list box that will list flights that meet the search criteria
+	 * @author Ali, Ben, Mike Creates the center panel. This just contains the list
+	 *         box that will list flights that meet the search criteria
 	 * @return JPanel that goes in center.
 	 */
 	private JPanel createCenterPanel() {
 		JPanel panel = new JPanel();
 
 		panel.setLayout(new BorderLayout());
-		panel.setPreferredSize(new Dimension(100,50));
-		
+		panel.setPreferredSize(new Dimension(100, 50));
+
 		flightsModel = new DefaultListModel<>();
 		flightsList = new JList<>(flightsModel);
 
@@ -183,125 +182,125 @@ public class FlightsTab extends TabBase {
 		flightsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		// Wrap JList in JScrollPane so it is scrollable.
-		//JScrollPane scrollPane = new JScrollPane(this.flightsList);
-		
+		// JScrollPane scrollPane = new JScrollPane(this.flightsList);
+
 		JTextArea reserveTextArea = new JTextArea(15, 35);// height width
-        panel.add(new JScrollPane(reserveTextArea));
+		panel.add(new JScrollPane(reserveTextArea));
 
 		flightsList.addListSelectionListener(new MyListSelectionListener());
-		panel.setBorder(BorderFactory.createEmptyBorder(5,15,30,15));
-		//panel.add(scrollPane);
+		panel.setBorder(BorderFactory.createEmptyBorder(5, 15, 30, 15));
+		// panel.add(scrollPane);
 //		panel.setBackground(Color.CYAN);
 		return panel;
 	}
-	
+
 	/**
-	 * @author Ben
-	 * Contains 3 segments in a borderlayout: a simple title, a button at the bottom, and a set of text boxes which will either be filled by the user, or 
-	 * by the user clicking on a flight in the center panel
+	 * @author Ben Contains 3 segments in a borderlayout: a simple title, a button
+	 *         at the bottom, and a set of text boxes which will either be filled by
+	 *         the user, or by the user clicking on a flight in the center panel
 	 * @return JPanel for the east segment
 	 */
-	private JPanel createEastPanel() 
-	{
-		JPanel panel = new JPanel();//create a new blank panel
+	private JPanel createEastPanel() {
+		JPanel panel = new JPanel();// create a new blank panel
 		JLabel label = new JLabel("Reserve");
-		label.setFont(new Font("serif", Font.PLAIN, 25));//change font face and size of label
-		panel.setLayout(new GridBagLayout());//set the layout for the interior of the east panel
+		label.setFont(new Font("serif", Font.PLAIN, 25));// change font face and size of label
+		panel.setLayout(new GridBagLayout());// set the layout for the interior of the east panel
 		GridBagConstraints eastCon = new GridBagConstraints();
 
-		//create each of the text fields and their accompanying labels. first block should not be editable. 
-		//Its contents will be taken from the selected flight in the center block
+		// create each of the text fields and their accompanying labels. first block
+		// should not be editable.
+		// Its contents will be taken from the selected flight in the center block
 		JLabel flightLabel = new JLabel("Flight: ");
 		JTextField flightText = new JTextField(15);
 		flightText.setEditable(false);
-		
+
 		JLabel airlineLabel = new JLabel("Airline: ");
 		JTextField airlineText = new JTextField(15);
 		airlineText.setEditable(false);
-		
+
 		JLabel dayLabel = new JLabel("Day: ");
 		JTextField dayText = new JTextField(15);
 		dayText.setEditable(false);
-		
+
 		JLabel timeLabel = new JLabel("Time: ");
 		JTextField timeText = new JTextField(15);
 		timeText.setEditable(false);
-		
+
 		JLabel costLabel = new JLabel("Cost: ");
 		JTextField costText = new JTextField(15);
 		costText.setEditable(false);
-		
-		//these  text fields will be used by the operator to complete the reservation
+
+		// these text fields will be used by the operator to complete the reservation
 		JLabel nameLabel = new JLabel("Name: ");
 		JTextField nameText = new JTextField(15);
 		JLabel citizenshipLabel = new JLabel("Citizenship: ");
 		JTextField citizenshipText = new JTextField(15);
-		
-		//create button to make reservation
+
+		// create button to make reservation
 		JButton reserveButton = new JButton("Reserve");
-		//add header label and button, since those ones are different
-			eastCon.gridx = 0; //there's gotta be a way to use a for loop or something to make this shorter
-			eastCon.gridy = 0; //x and y are arranged left to right, top to bottom
-			eastCon.gridwidth = 2;//how many grid squares do the next object take up horizontally
-			eastCon.weightx = 0.5;//affects horizontal distribution of each cell
-			eastCon.insets = new Insets(0,30,20,30);//top, left, bottom, right spacing between elements
+		// add header label and button, since those ones are different
+		eastCon.gridx = 0; // there's gotta be a way to use a for loop or something to make this shorter
+		eastCon.gridy = 0; // x and y are arranged left to right, top to bottom
+		eastCon.gridwidth = 2;// how many grid squares do the next object take up horizontally
+		eastCon.weightx = 0.5;// affects horizontal distribution of each cell
+		eastCon.insets = new Insets(0, 30, 20, 30);// top, left, bottom, right spacing between elements
 		panel.add(label, eastCon);
-			eastCon.gridx = 0;
-			eastCon.gridy = 8;
-			eastCon.gridwidth = 2;
-			eastCon.fill = GridBagConstraints.HORIZONTAL;
-			eastCon.insets = new Insets(25,5,0,5);
+		eastCon.gridx = 0;
+		eastCon.gridy = 8;
+		eastCon.gridwidth = 2;
+		eastCon.fill = GridBagConstraints.HORIZONTAL;
+		eastCon.insets = new Insets(25, 5, 0, 5);
 		panel.add(reserveButton, eastCon);
-		
-		//add labels
-			eastCon.gridx = 0;
-			eastCon.gridy = 1;
-			eastCon.gridwidth = 1;
-			eastCon.anchor = GridBagConstraints.LINE_END;//determine where horizontally things will be aligned inside the cell
-			eastCon.fill = GridBagConstraints.NONE;//determine whether or not the element will attempt to fill the cell
-			eastCon.insets = new Insets(0,2,0,0);
+
+		// add labels
+		eastCon.gridx = 0;
+		eastCon.gridy = 1;
+		eastCon.gridwidth = 1;
+		eastCon.anchor = GridBagConstraints.LINE_END;// determine where horizontally things will be aligned inside the
+														// cell
+		eastCon.fill = GridBagConstraints.NONE;// determine whether or not the element will attempt to fill the cell
+		eastCon.insets = new Insets(0, 2, 0, 0);
 		panel.add(flightLabel, eastCon);
-			eastCon.gridy = 2;
+		eastCon.gridy = 2;
 		panel.add(airlineLabel, eastCon);
-			eastCon.gridy = 3;
+		eastCon.gridy = 3;
 		panel.add(dayLabel, eastCon);
-			eastCon.gridy = 4;
+		eastCon.gridy = 4;
 		panel.add(timeLabel, eastCon);
-			eastCon.gridy = 4;
+		eastCon.gridy = 4;
 		panel.add(timeLabel, eastCon);
-			eastCon.gridy = 5;
+		eastCon.gridy = 5;
 		panel.add(costLabel, eastCon);
-			eastCon.gridy = 6;
+		eastCon.gridy = 6;
 		panel.add(nameLabel, eastCon);
-			eastCon.gridy = 7;
+		eastCon.gridy = 7;
 		panel.add(citizenshipLabel, eastCon);
-		
-		//add text boxes
-			eastCon.gridx = 1;
-			eastCon.gridy = 1;
-			eastCon.ipadx = 100;
-			eastCon.anchor = GridBagConstraints.LINE_START;
-			eastCon.fill = GridBagConstraints.HORIZONTAL;
+
+		// add text boxes
+		eastCon.gridx = 1;
+		eastCon.gridy = 1;
+		eastCon.ipadx = 100;
+		eastCon.anchor = GridBagConstraints.LINE_START;
+		eastCon.fill = GridBagConstraints.HORIZONTAL;
 		panel.add(flightText, eastCon);
-			eastCon.gridy = 2;
+		eastCon.gridy = 2;
 		panel.add(airlineText, eastCon);
-			eastCon.gridy = 3;
+		eastCon.gridy = 3;
 		panel.add(dayText, eastCon);
-			eastCon.gridy = 4;
+		eastCon.gridy = 4;
 		panel.add(timeText, eastCon);
-			eastCon.gridy = 5;
+		eastCon.gridy = 5;
 		panel.add(costText, eastCon);
-			eastCon.gridy = 6;
+		eastCon.gridy = 6;
 		panel.add(nameText, eastCon);
-			eastCon.gridy = 7;
+		eastCon.gridy = 7;
 		panel.add(citizenshipText, eastCon);
-		
+
 		panel.setPreferredSize(new Dimension(200, 100));
 		return panel;
 	}
-	
-	private class MyListSelectionListener implements ListSelectionListener 
-	{
+
+	private class MyListSelectionListener implements ListSelectionListener {
 		/**
 		 * Called when user selects an item in the JList.
 		 */
