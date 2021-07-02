@@ -1,6 +1,9 @@
 package sait.frms.gui;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.event.*;
@@ -140,11 +143,14 @@ public class FlightsTab extends TabBase {
 
 		// Bottom button
 		panel.add(findReservationButton, BorderLayout.SOUTH);
+		// test
+		String chosenName = (String)fromComboBox.getSelectedItem();
+       // System.out.println("Chosen Name: " + chosenName);
+		
+		// add Button event listener
+		findReservationButton.addActionListener(new MyButtonActionListener());
 
-		// check with colors
-//		topPanel.setBackground(Color.blue);
-//		midPanel.setBackground(Color.PINK);
-//		midPanel.setPreferredSize( new Dimension(500,500));
+
 		panel.setPreferredSize(new Dimension(700, 150));
 		return panel;
 	}
@@ -299,7 +305,7 @@ public class FlightsTab extends TabBase {
 		panel.setPreferredSize(new Dimension(200, 100));
 		return panel;
 	}
-
+// This is the list that is clickable on the page in the text areas
 	private class MyListSelectionListener implements ListSelectionListener {
 		/**
 		 * Called when user selects an item in the JList.
@@ -310,4 +316,20 @@ public class FlightsTab extends TabBase {
 		}
 
 	}
+	
+	private class MyButtonActionListener  implements ActionListener  {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			System.out.println("You clicked the find reservation button");
+			System.out.println(flightManager.findFlights("ORD", "YUL", "Monday"));
+	
+		}
+		
+		
+		
+		
+	}
+	 
 }

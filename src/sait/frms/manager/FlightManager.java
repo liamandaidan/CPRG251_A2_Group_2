@@ -99,6 +99,7 @@ public class FlightManager {
 		{
 			if(flights.get(i).getFrom().equals(from) && flights.get(i).getTo().equals(to) && flights.get(i).getWeekday().equals(weekday))
 			{
+			
 				foundFlights.add(flights.get(i));
 			}
 		}
