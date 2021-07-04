@@ -144,26 +144,23 @@ public class FlightsTab extends TabBase {
 		// Bottom button
 		panel.add(findReservationButton, BorderLayout.SOUTH);
 		// test
-		//String to = (String) toComboBox.getSelectedItem();
-		// System.out.println("Chosen Name: " + chosenName);
-		//String from = (String) fromComboBox.getSelectedItem();
-	//	String day = (String) daysComboBox.getSelectedItem();
+		String chosenName = (String)fromComboBox.getSelectedItem();
+       // System.out.println("Chosen Name: " + chosenName);
 		
-
 		// add Button event listener
 		findReservationButton.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
 				
 				
 				String to = (String) toComboBox.getSelectedItem();
-//				 System.out.println("Chosen Name: " + chosenName);
 				String from = (String) fromComboBox.getSelectedItem();
 				String day = (String) daysComboBox.getSelectedItem();
 				
-				
+				//print out flights
 				System.out.println(flightManager.findFlights(to , from , day));
 			}
 		});
+
 
 		panel.setPreferredSize(new Dimension(700, 150));
 		return panel;
@@ -319,7 +316,6 @@ public class FlightsTab extends TabBase {
 		panel.setPreferredSize(new Dimension(200, 100));
 		return panel;
 	}
-
 // This is the list that is clickable on the page in the text areas
 	private class MyListSelectionListener implements ListSelectionListener {
 		/**
@@ -331,24 +327,20 @@ public class FlightsTab extends TabBase {
 		}
 
 	}
-
-//	private class MyButtonActionListener implements ActionListener {
-//		String to;
-//		String from;
-//		String day;
+	
+//	private class MyButtonActionListener  implements ActionListener  {
 //
-//		
 //		@Override
 //		public void actionPerformed(ActionEvent e) {
-//			
 //			// TODO Auto-generated method stub
-//			String acctionCommand = e.getActionCommand();
 //			System.out.println("You clicked the find reservation button");
-//			System.out.println(flightManager.findFlights(to , from , day));
-//
+//			System.out.println(flightManager.findFlights("ORD", "YUL", "Monday"));
+//	
 //		}
 //		
-//
+//		
+//		
+//		
 //	}
-
+	 
 }

@@ -3,6 +3,7 @@ package sait.frms.manager;
 import java.io.*;
 import java.util.*;
 
+import sait.frms.exception.InvalidFlightCodeException;
 import sait.frms.problemdomain.*;
 
 /**
@@ -28,6 +29,7 @@ public class FlightManager {
 	private ArrayList<String> airports = new ArrayList<String>();
 
 	/**
+	 * @throws InvalidFlightCodeException
 	 * @throws FileNotFoundException
 	 * 
 	 */
@@ -61,11 +63,11 @@ public class FlightManager {
 	 */
 	public String findAirportByCode(String code) {
 		for (int i = 0; i < airports.size(); i++) {
-			if(airports.get(i).substring(0,3).equalsIgnoreCase(code)) {
+			if (airports.get(i).substring(0, 3).equalsIgnoreCase(code)) {
 				return airports.get(i);
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -75,10 +77,10 @@ public class FlightManager {
 	 * @return
 	 */
 	public Flight findFlightByCode(String code) {
-		for (int i = 0; i< flights.size(); i++ ) {
-			if(flights.get(i).getCode().equals(code)) {
+		for (int i = 0; i < flights.size(); i++) {
+			if (flights.get(i).getCode().equals(code)) {
 				return flights.get(i);
-			}else {
+			} else {
 				System.out.println("Flight not found.");
 				return null;
 			}
@@ -95,23 +97,23 @@ public class FlightManager {
 	 */
 	public ArrayList<Flight> findFlights(String from, String to, String weekday) {
 		ArrayList<Flight> foundFlights = new ArrayList<Flight>();
-		for(int i = 0; i<flights.size();i++)
-		{
-			if(flights.get(i).getFrom().equals(from) && flights.get(i).getTo().equals(to) && flights.get(i).getWeekday().equals(weekday))
-			{
-			
+		for (int i = 0; i < flights.size(); i++) {
+			if (flights.get(i).getFrom().equals(from) && flights.get(i).getTo().equals(to)
+					&& flights.get(i).getWeekday().equals(weekday)) {
+
 				foundFlights.add(flights.get(i));
 			}
+			
 		}
-		if(foundFlights.size() == 0)
-		{
+		if (foundFlights.size() == 0) {
 			System.out.println("No flights matching the search parameters were found.");
 		}
-		
+
 		return foundFlights;
 	}
 
 	/**
+	 * @throws InvalidFlightCodeException
 	 * 
 	 */
 	private void populateFlights() {
@@ -137,6 +139,7 @@ public class FlightManager {
 				String[] flightsInfo = flightsReader.nextLine().split(",");
 
 				// check code to make sure the format matches
+				
 				if (flightsInfo[0].matches("[A-Z]{2}\\-[0-9]{4}")) {
 
 					// checks for the correct airline name and saves the value
@@ -160,7 +163,6 @@ public class FlightManager {
 								airLineName = airlineNameList[3];
 								break;
 							}
-
 							break;
 						} else {
 							isValid = false;
@@ -182,31 +184,23 @@ public class FlightManager {
 						flights.add(new Flight(flightCode, airLineName, departingCode, arrivalCode, weekday, time,
 								seats, cost));
 						numbOfFlights++;
-					}
+					} 
 
-				}  /*else {
-
-					// this just for testing
-					System.out.println("****************************************");
-					System.out.println("****************************************");
-					System.out.println("****************************************");
-					System.out.println("This line is not printed" + flightsInfo[0]);
-					System.out.println("****************************************");
-				}*/
+				} 
 
 			}
-			// for testing -> prints out all of the flights 
-//			System.out.println(flights.get(0).toString());
-//			for (Flight f : flights) {
-//				System.out.println(f.toString());
-//
-//			}
-//			System.out.println(numbOfFlights);
+
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+//		int count = 0;
+//		for(int i = 0; i < flights.size(); i++) {
+//			System.out.println(flights.get(i).toString());
+//			count++;
+//		}
+//		System.out.println("Count of flights = " + count);
 
 	}
 
