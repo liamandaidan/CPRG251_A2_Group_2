@@ -68,7 +68,7 @@ public class FlightsTab extends TabBase {
 
 		String[] flightLocations = { "YYC", "YEG", "YUL", "YOW", "YYZ", "YVR", "YWG", "ATL", "PEK", "DXB", "HKG", "LHR",
 				"HND", "ORD", "PVG", "CDG", "AMS", "DEL", "FRA", "DFW" };
-		String[] daysOfWeek = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+		String[] daysOfWeek = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Any" };
 
 		JPanel panel = new JPanel();
 		JPanel topPanel = new JPanel();
