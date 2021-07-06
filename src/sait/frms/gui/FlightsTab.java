@@ -155,11 +155,15 @@ public class FlightsTab extends TabBase {
 				String to = (String) toComboBox.getSelectedItem();
 				String from = (String) fromComboBox.getSelectedItem();
 				String day = (String) daysComboBox.getSelectedItem();
-				
+				flightsModel.clear();
 				//print out flights
 				System.out.println(flightManager.findFlights(to , from , day));
-			}
-		});
+				flightsModel.addAll(flightManager.findFlights(to , from , day));
+//				flightsModel.addAll(flightManager.findFlights(to , from , day));
+//				flightsList.setFont(new java.awt.Font("Tahoma", 0, 24));
+				System.out.println(flightsModel);
+				
+			}});
 
 
 		panel.setPreferredSize(new Dimension(700, 150));
@@ -194,19 +198,22 @@ public class FlightsTab extends TabBase {
 
 		flightsModel = new DefaultListModel<>();
 		flightsList = new JList<>(flightsModel);
+	
 
 		// User can only select one item at a time.
 		flightsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 
 		// Wrap JList in JScrollPane so it is scrollable.
-		// JScrollPane scrollPane = new JScrollPane(this.flightsList);
+		JScrollPane scrollPane = new JScrollPane(this.flightsList);
 
 		JTextArea reserveTextArea = new JTextArea(15, 35);// height width
 		panel.add(new JScrollPane(reserveTextArea));
+		//reserveTextArea.add(flightsList);
 
 		flightsList.addListSelectionListener(new MyListSelectionListener());
 		panel.setBorder(BorderFactory.createEmptyBorder(5, 15, 30, 15));
-		// panel.add(scrollPane);
+		panel.add(scrollPane);
 //		panel.setBackground(Color.CYAN);
 		return panel;
 	}
@@ -323,6 +330,7 @@ public class FlightsTab extends TabBase {
 		 */
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
+			System.out.println(e.getSource());
 
 		}
 

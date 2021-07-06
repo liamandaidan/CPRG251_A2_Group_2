@@ -14,6 +14,9 @@ public class Flight {
 	private String time;
 	private int seats;
 	private double costPerSeat;
+	
+	public Flight() {
+	}
 
 	/**
 	 * @param code
@@ -111,6 +114,11 @@ public class Flight {
 	public String toString() {
 		return "Flight [code=" + code + ", airlineName=" + airlineName + ", from=" + from + ", to=" + to + ", weekday="
 				+ weekday + ", time=" + time + ", seats=" + seats + ", costPerSeat=" + costPerSeat + "]";
+	}
+	
+	public String findFlightDisplay() {
+		return code + ", From: " + from + ", Day: " + weekday + ", Cost: " +  costPerSeat ;
+		
 	}
 
 }
