@@ -89,7 +89,7 @@ public class FlightManager {
 	}
 
 	/**
-	 * 
+	 * If user selects a specific day, then search includes a check that the day matches. If any day is selected, and all flight days with matching flights are included
 	 * @param from
 	 * @param to
 	 * @param weekday
@@ -97,13 +97,26 @@ public class FlightManager {
 	 */
 	public ArrayList<Flight> findFlights(String from, String to, String weekday) {
 		ArrayList<Flight> foundFlights = new ArrayList<Flight>();
-		for (int i = 0; i < flights.size(); i++) {
-			if (flights.get(i).getFrom().equals(from) && flights.get(i).getTo().equals(to)
-					&& flights.get(i).getWeekday().equals(weekday)) {
-
-				foundFlights.add(flights.get(i));
+		if(!weekday.equals("Any"))
+		{
+			for (int i = 0; i < flights.size(); i++) {
+				if (flights.get(i).getFrom().equals(from) && flights.get(i).getTo().equals(to)
+						&& flights.get(i).getWeekday().equals(weekday)) {
+	
+					foundFlights.add(flights.get(i));
+				}
+				
 			}
-			
+		} else 
+		{
+			for (int i = 0; i < flights.size(); i++) {
+				if (flights.get(i).getFrom().equals(from) && flights.get(i).getTo().equals(to))
+				{
+	
+					foundFlights.add(flights.get(i));
+				}
+				
+			}
 		}
 		if (foundFlights.size() == 0) {
 			System.out.println("No flights matching the search parameters were found.");
