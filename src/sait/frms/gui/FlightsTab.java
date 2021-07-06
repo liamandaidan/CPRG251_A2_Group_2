@@ -3,6 +3,7 @@ package sait.frms.gui;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -33,6 +34,9 @@ public class FlightsTab extends TabBase {
 	private JList<Flight> flightsList;
 
 	private DefaultListModel<Flight> flightsModel;
+	
+	private Flight selectedFlight = new Flight();
+	ArrayList<JTextField> eastComps = new ArrayList<JTextField>();
 
 	/**
 	 * Creates the components for flights tab.
@@ -155,10 +159,12 @@ public class FlightsTab extends TabBase {
 				String to = (String) toComboBox.getSelectedItem();
 				String from = (String) fromComboBox.getSelectedItem();
 				String day = (String) daysComboBox.getSelectedItem();
-				flightsModel.clear();
+				clearFields();
+				flightsModel.clear();//clear the previous search results
+				
 				//print out flights
-				System.out.println(flightManager.findFlights(to , from , day));
-				flightsModel.addAll(flightManager.findFlights(to , from , day));
+				System.out.println(flightManager.findFlights(to , from , day));//call findFlights in FlightManager
+				flightsModel.addAll(flightManager.findFlights(to , from , day));//same thing but adds them all to the DefaultListModel
 //				flightsModel.addAll(flightManager.findFlights(to , from , day));
 //				flightsList.setFont(new java.awt.Font("Tahoma", 0, 24));
 				System.out.println(flightsModel);
@@ -237,31 +243,39 @@ public class FlightsTab extends TabBase {
 		JLabel flightLabel = new JLabel("Flight: ");
 		JTextField flightText = new JTextField(15);
 		flightText.setEditable(false);
+		eastComps.add(flightText);
 
 		JLabel airlineLabel = new JLabel("Airline: ");
 		JTextField airlineText = new JTextField(15);
 		airlineText.setEditable(false);
+		eastComps.add(airlineText);
 
 		JLabel dayLabel = new JLabel("Day: ");
 		JTextField dayText = new JTextField(15);
 		dayText.setEditable(false);
+		eastComps.add(dayText);
 
 		JLabel timeLabel = new JLabel("Time: ");
 		JTextField timeText = new JTextField(15);
 		timeText.setEditable(false);
+		eastComps.add(timeText);
 
 		JLabel costLabel = new JLabel("Cost: ");
 		JTextField costText = new JTextField(15);
 		costText.setEditable(false);
+		eastComps.add(costText);
 
 		// these text fields will be used by the operator to complete the reservation
 		JLabel nameLabel = new JLabel("Name: ");
 		JTextField nameText = new JTextField(15);
 		JLabel citizenshipLabel = new JLabel("Citizenship: ");
 		JTextField citizenshipText = new JTextField(15);
+		eastComps.add(nameText);
+		eastComps.add(citizenshipText);
 
 		// create button to make reservation
 		JButton reserveButton = new JButton("Reserve");
+		
 		// add header label and button, since those ones are different
 		eastCon.gridx = 0; // there's gotta be a way to use a for loop or something to make this shorter
 		eastCon.gridy = 0; // x and y are arranged left to right, top to bottom
@@ -330,11 +344,32 @@ public class FlightsTab extends TabBase {
 		 */
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
-			System.out.println(e.getSource());
-
+			//System.out.println(e.getSource());
+			if(flightsList.getSelectedValue() != null)
+			{
+				Flight theFlight = flightsList.getSelectedValue();//get the selected flight as a Flight object
+				selectedFlight = theFlight;
+				System.out.println(selectedFlight);
+				eastComps.get(0).setText(selectedFlight.getCode());
+				eastComps.get(1).setText(selectedFlight.getAirlineName());
+				eastComps.get(2).setText(selectedFlight.getWeekday());
+				eastComps.get(3).setText(selectedFlight.getTime());
+				eastComps.get(4).setText(String.valueOf(selectedFlight.getCostPerSeat()));
+			}
 		}
-
+		
 	}
+	
+	public void clearFields()
+	{
+		eastComps.get(0).setText("");
+		eastComps.get(1).setText("");
+		eastComps.get(2).setText("");
+		eastComps.get(3).setText("");
+		eastComps.get(4).setText("");
+		selectedFlight = new Flight();
+	}
+	
 	
 //	private class MyButtonActionListener  implements ActionListener  {
 //
