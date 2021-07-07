@@ -154,6 +154,8 @@ public class MainWindow extends JFrame
 		setVisible(true);
 	}
 	
+
+	
 	/**
 	 * Inner action listener class that listens for a tab button to be clicked.
 	 * 

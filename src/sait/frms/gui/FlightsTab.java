@@ -9,6 +9,10 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.event.*;
 
+import sait.frms.exception.InvalidCitizenshipException;
+import sait.frms.exception.InvalidFlightCodeException;
+import sait.frms.exception.InvalidNameException;
+import sait.frms.exception.NoMoreSeatsException;
 import sait.frms.manager.FlightManager;
 import sait.frms.manager.ReservationManager;
 import sait.frms.problemdomain.Flight;
@@ -35,7 +39,13 @@ public class FlightsTab extends TabBase {
 
 	private DefaultListModel<Flight> flightsModel;
 	
+	/**
+	 * a global Flight object to represent a single selected Flight
+	 * */
 	private Flight selectedFlight = new Flight();
+	/**
+	 * an arraylist of JTextFields from the east panel. This allows flight information to be filled in
+	 * */
 	ArrayList<JTextField> eastComps = new ArrayList<JTextField>();
 
 	/**
@@ -163,13 +173,13 @@ public class FlightsTab extends TabBase {
 				flightsModel.clear();//clear the previous search results
 				
 				//print out flights
-				System.out.println(flightManager.findFlights(to , from , day));//call findFlights in FlightManager
-				flightsModel.addAll(flightManager.findFlights(to , from , day));//same thing but adds them all to the DefaultListModel
-//				flightsModel.addAll(flightManager.findFlights(to , from , day));
-//				flightsList.setFont(new java.awt.Font("Tahoma", 0, 24));
+				System.out.println(flightManager.findFlights(to , from , day));
+				flightsModel.addAll(flightManager.findFlights(to , from , day));
 				System.out.println(flightsModel);
 				
-			}});
+			}
+
+			});
 
 
 		panel.setPreferredSize(new Dimension(700, 150));
@@ -275,6 +285,7 @@ public class FlightsTab extends TabBase {
 
 		// create button to make reservation
 		JButton reserveButton = new JButton("Reserve");
+		reserveButton.addActionListener(new ReserveFlightActionListener());
 		
 		// add header label and button, since those ones are different
 		eastCon.gridx = 0; // there's gotta be a way to use a for loop or something to make this shorter
@@ -354,12 +365,42 @@ public class FlightsTab extends TabBase {
 				eastComps.get(1).setText(selectedFlight.getAirlineName());
 				eastComps.get(2).setText(selectedFlight.getWeekday());
 				eastComps.get(3).setText(selectedFlight.getTime());
-				eastComps.get(4).setText(String.valueOf(selectedFlight.getCostPerSeat()));
+				eastComps.get(4).setText("$" + String.valueOf(selectedFlight.getCostPerSeat()) + "0");
 			}
 		}
 		
 	}
-	
+	/**
+	 * @author Ben
+	 * Action listener for the Reserve button in the east panel. Checks that there is a flight loaded (by code) and that name and citizenship have been filled in
+	 * then passes those values to the reservation manager to create a reservation, and clears the search and flight fields in preparation for the next operation
+	 * */
+	private class ReserveFlightActionListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			if(!eastComps.get(0).getText().isBlank() && !eastComps.get(5).getText().isBlank() && !eastComps.get(6).getText().isBlank())
+			{
+					try
+					{
+						reservationManager.makeReservation(selectedFlight, eastComps.get(5).getText(), eastComps.get(6).getText());
+						clearFields();
+						flightsModel.clear();
+					} catch (InvalidNameException | InvalidCitizenshipException | InvalidFlightCodeException
+							| NoMoreSeatsException e1)
+					{
+						e1.printStackTrace();
+					}
+		}
+		
+		}
+	}
+	/**
+	 * @author Ben
+	 * Method called to clear all fields in the east panel and reset the selectedFlight to a new empty flight
+	 * */
 	public void clearFields()
 	{
 		eastComps.get(0).setText("");
@@ -367,23 +408,9 @@ public class FlightsTab extends TabBase {
 		eastComps.get(2).setText("");
 		eastComps.get(3).setText("");
 		eastComps.get(4).setText("");
+		eastComps.get(5).setText("");
+		eastComps.get(6).setText("");
 		selectedFlight = new Flight();
 	}
-	
-	
-//	private class MyButtonActionListener  implements ActionListener  {
-//
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			// TODO Auto-generated method stub
-//			System.out.println("You clicked the find reservation button");
-//			System.out.println(flightManager.findFlights("ORD", "YUL", "Monday"));
-//	
-//		}
-//		
-//		
-//		
-//		
-//	}
 	 
 }

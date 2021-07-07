@@ -110,10 +110,14 @@ public class Flight {
 
 	}
 
-	@Override
+	/**
+	*@Override
+	*changed from default to be more readable
+	*/
 	public String toString() {
-		return "Flight [code=" + code + ", airlineName=" + airlineName + ", from=" + from + ", to=" + to + ", weekday="
-				+ weekday + ", time=" + time + ", seats=" + seats + ", costPerSeat=" + costPerSeat + "]";
+		//return "Flight [code=" + code + ", airlineName=" + airlineName + ", from=" + from + ", to=" + to + ", weekday="
+				//+ weekday + ", time=" + time + ", seats=" + seats + ", costPerSeat=" + costPerSeat + "]";
+		return airlineName + " [" + code + "] " + from + " to " + to + ", " + weekday + " @" + time + " Avail. Seats: " + seats + " @ $" + costPerSeat + "0 each";
 	}
 	
 	public String findFlightDisplay() {
