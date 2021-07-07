@@ -386,6 +386,7 @@ public class FlightsTab extends TabBase {
 					try
 					{
 						reservationManager.makeReservation(selectedFlight, eastComps.get(5).getText(), eastComps.get(6).getText());
+						//System.out.println("Reservation Made!" + selectedFlight);
 						clearFields();
 						flightsModel.clear();
 					} catch (InvalidNameException | InvalidCitizenshipException | InvalidFlightCodeException
