@@ -1,6 +1,10 @@
 package sait.frms.gui;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 import sait.frms.manager.ReservationManager;
@@ -239,6 +243,25 @@ public class ReservationsTab extends TabBase {
 		gbc.gridy = 4;
 		gbc.gridwidth = 2;
 		panel.add(findReservationButton, BorderLayout.SOUTH);
+		findReservationButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				ReservationManager reservation = new ReservationManager();
+				ArrayList<Reservation> foundReservation;
+				
+				String code = codeSearch.getText();
+				String airline = airlineSearch.getText();
+				String name = nameSearch.getText();
+				
+				foundReservation = reservation.findReservations(code, airline, name);
+				
+				reserveTextArea.setText(foundReservation.get(0).toString());
+				
+			}
+			
+		} );
 		
 		panel.add(bottomPanel);
 		
