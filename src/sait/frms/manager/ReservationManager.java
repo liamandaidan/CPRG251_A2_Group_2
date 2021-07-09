@@ -1,7 +1,9 @@
 package sait.frms.manager;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -123,13 +125,13 @@ public class ReservationManager {
 				outputStream.writeUTF(r.getAirline());
 				outputStream.writeUTF(r.getCitizenship());
 				outputStream.writeDouble(r.getCost());
-				outputStream.writeBoolean(r.isActive());	
+				outputStream.writeBoolean(r.isActive());
 			}
 
 			System.out.println("Done!");
 			outputStream.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("The File cannot be found: "+RESERVATIONS_FILEPATH);
+			System.out.println("The File cannot be found: " + RESERVATIONS_FILEPATH);
 		} catch (IOException e) {
 			System.out.println("You have encountered an IOEXCEPTION. Invalid data in outputStream.");
 			e.getStackTrace();
@@ -177,28 +179,35 @@ public class ReservationManager {
 	 * This method will bring in the reservations from txt file. In the format of:
 	 * this.code, this.flightCode, this.airline, this.name, this.citizenship,
 	 * this.cost, this.active);
+	 * @throws FileNotFoundException 
 	 */
-	private void populateFromBinary() {
-		Reservation tempRes;// to be loaded into reservations later
-		try {
-			Scanner readIn = new Scanner(new File(RESERVATIONS_FILEPATH));
+	private void populateFromBinary() throws FileNotFoundException {
+		Reservation r;
+		FileInputStream fstream = new FileInputStream(RESERVATIONS_FILEPATH);
+		DataInputStream inputStream = new DataInputStream(fstream);
 
-			while (readIn.hasNextLine()) {
-				String readArr[] = readIn.nextLine().split(",");
-				if (readArr.length == 7) {// check to make sure that our array has 7 items, if not its an error.
-					tempRes = new Reservation(readArr[0], readArr[1], readArr[2], readArr[3], readArr[4],
-							Double.parseDouble(readArr[5]), Boolean.parseBoolean(readArr[6]));
-					reservations.add(tempRes);
-				} else {
-					System.out.println(
-							"readArr is out of bounds. Contains more/less items then requried. Could not add items.");
-				}
+		System.out.println("reading from a file");
+
+		boolean endOfFile = false;
+		String code, flightCode, airline, name, citizenship;
+		double cost;
+		boolean active;
+		while (!endOfFile) {
+			try {
+				code = inputStream.readUTF();
+				flightCode = inputStream.readUTF();
+				airline = inputStream.readUTF();
+				name = inputStream.readUTF();
+				citizenship = inputStream.readUTF();
+				cost = inputStream.readDouble();
+				active = inputStream.readBoolean();
+				r = new Reservation(code, flightCode, airline, name, citizenship, cost, active);
+				reservations.add(r);
+			} catch (IOException e) {
+				endOfFile = true;
 			}
-
-		} catch (FileNotFoundException e) {
-			System.out.println("File is not found! Can't read the save file. Check @" + RESERVATIONS_FILEPATH);
 		}
-
+		System.out.println("Done");
+		System.out.println(reservations);
 	}
-
 }
