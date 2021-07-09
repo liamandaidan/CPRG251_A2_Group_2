@@ -29,7 +29,7 @@ public class ReservationManager {
 	private final double RESERVATION_COST = 189.00;
 
 	/**
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException
 	 * 
 	 */
 	public ReservationManager() throws FileNotFoundException {
@@ -62,7 +62,7 @@ public class ReservationManager {
 		}
 
 		reservationsCode = generateReservationCode(flight);
-		Reservation newReservation = new Reservation(reservationsCode, flight.getCode(), flight.getAirlineName(), name,
+		Reservation newReservation = new Reservation(reservationsCode, flight.getCode(), name, flight.getAirlineName(),
 				citizenship, RESERVATION_COST, true);
 		return newReservation;
 
@@ -180,7 +180,8 @@ public class ReservationManager {
 	 * This method will bring in the reservations from txt file. In the format of:
 	 * this.code, this.flightCode, this.airline, this.name, this.citizenship,
 	 * this.cost, this.active);
-	 * @throws FileNotFoundException 
+	 * 
+	 * @throws FileNotFoundException
 	 */
 	private void populateFromBinary() throws FileNotFoundException {
 		Reservation r;
@@ -197,12 +198,12 @@ public class ReservationManager {
 			try {
 				code = inputStream.readUTF();
 				flightCode = inputStream.readUTF();
-				airline = inputStream.readUTF();
 				name = inputStream.readUTF();
+				airline = inputStream.readUTF();
 				citizenship = inputStream.readUTF();
 				cost = inputStream.readDouble();
 				active = inputStream.readBoolean();
-				r = new Reservation(code, flightCode, airline, name, citizenship, cost, active);
+				r = new Reservation(code, flightCode, name, airline, citizenship, cost, active);
 				reservations.add(r);
 			} catch (IOException e) {
 				endOfFile = true;
@@ -211,14 +212,16 @@ public class ReservationManager {
 		System.out.println("Done");
 		System.out.println(reservations);
 	}
-	
+
 	/**
-	 * This will return the populated list. For now this is an extra method might get rid of it later
+	 * This will return the populated list. For now this is an extra method might
+	 * get rid of it later
+	 * 
 	 * @return
 	 */
-	public ArrayList<Reservation> getPopulated(){
-		
+	public ArrayList<Reservation> getPopulated() {
+
 		return reservations;
 	}
-	
+
 }

@@ -70,24 +70,23 @@ public class ReservationsTab extends TabBase {
 		reserveTextArea.setEditable(false);
 		reserveTextArea.addFocusListener(ActionListener());
 		// just for now populate
-
+		try {
+			ArrayList<Reservation> reservations;
+			ReservationManager rm = new ReservationManager();
+			reservations = rm.getPopulated();
+			Reservation r1 = reservations.get(0);// this is all temp
+			// ======================THIS LINE IS NULL WE NEED TO FIX
+			reserveTextArea.setText(r1.getCode());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		panel.add(new JScrollPane(reserveTextArea));
 		return panel;
 	}
 
 	private FocusListener ActionListener() {
-		try {
-			ArrayList<Reservation> reservations;
-			ReservationManager rm = new ReservationManager();
-			reservations = rm.getPopulated();
-			Reservation r1 = reservations.get(0);//this is all temp
-			//======================THIS LINE IS NULL WE NEED TO FIX
-			codeField.setText(r1.getCode());
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		System.out.println("Print");
 		return null;
 	}
 

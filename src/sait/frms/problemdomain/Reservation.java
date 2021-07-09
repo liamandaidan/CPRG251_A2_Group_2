@@ -64,7 +64,7 @@ public class Reservation {
 	 * @param cost        The cost of the reservation.
 	 * @param active      Whether the reservation is active or not.
 	 */
-	public Reservation(String code, String flightCode, String airline, String name, String citizenship, double cost,
+	public Reservation(String code, String flightCode,  String name, String airline, String citizenship, double cost,
 			boolean active) {
 		this.code = code;
 		this.flightCode = flightCode;
