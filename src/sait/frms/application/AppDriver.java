@@ -20,8 +20,14 @@ public class AppDriver {
 	public static void main(String[] args) {
 
 		MainWindow mainWindow;
-		mainWindow = new MainWindow();
-		mainWindow.display();
+		try {
+			mainWindow = new MainWindow();
+			mainWindow.display();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 
 	}
 
