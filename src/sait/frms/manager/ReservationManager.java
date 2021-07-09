@@ -1,7 +1,10 @@
 package sait.frms.manager;
 
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
@@ -20,7 +23,7 @@ import sait.frms.problemdomain.*;
 public class ReservationManager {
 
 	private ArrayList<Reservation> reservations = new ArrayList<>();
-	private final String RESERVATIONS_FILEPATH = "res/reservations.txt";
+	private final String RESERVATIONS_FILEPATH = "res/reservations.dat";
 	private final double RESERVATION_COST = 189.00;
 
 	/**
@@ -51,10 +54,9 @@ public class ReservationManager {
 		if (citizenship.isBlank()) {
 			throw new InvalidCitizenshipException();
 		}
-		if(getAvailableSeats(flight) <= 0) {
+		if (getAvailableSeats(flight) <= 0) {
 			throw new NoMoreSeatsException();
 		}
-		
 
 		reservationsCode = generateReservationCode(flight);
 		Reservation newReservation = new Reservation(reservationsCode, flight.getCode(), flight.getAirlineName(), name,
@@ -107,18 +109,49 @@ public class ReservationManager {
 	 */
 	public void persist() {
 
-		String formated;
+		String words[] = { "Ali", "wasdz", "SAIT", "STUDENTS" };
+
+		/*
+		 * private String code, flightCode, name, airline, citizenship; double cost;
+		 * private boolean active;
+		 */
+		// reservations has all of our reservation items
+
+		FileOutputStream fstream;
 		try {
-			PrintWriter output = new PrintWriter(new File(RESERVATIONS_FILEPATH));
+			fstream = new FileOutputStream(RESERVATIONS_FILEPATH);
+			DataOutputStream outputStream = new DataOutputStream(fstream);
+			System.out.println("Writing the words to a binary file");
+			Reservation r;
 			for (int i = 0; i < reservations.size(); i++) {
-				Reservation tempRes = reservations.get(i);
-				formated = tempRes.toString();
-				output.println(formated);
+				r = reservations.get(i);
+				outputStream.writeUTF(r.getCode());
+				outputStream.writeUTF(r.getFlightCode());
+				outputStream.writeUTF(r.getName());
+				outputStream.writeUTF(r.getAirline());
+				outputStream.writeUTF(r.getCitizenship());
+				outputStream.writeDouble(r.getCost());
+				outputStream.writeBoolean(r.isActive());	
 			}
-			output.close();
+
+			System.out.println("Done!");
+			outputStream.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("File not Found! Can not save to file. Check @" + RESERVATIONS_FILEPATH);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
+		/*
+		 * String formated; try { PrintWriter output = new PrintWriter(new
+		 * File(RESERVATIONS_FILEPATH)); for (int i = 0; i < reservations.size(); i++) {
+		 * Reservation tempRes = reservations.get(i); formated = tempRes.toString();
+		 * output.println(formated); } output.close(); } catch (FileNotFoundException e)
+		 * { System.out.println("File not Found! Can not save to file. Check @" +
+		 * RESERVATIONS_FILEPATH); }
+		 */
 
 	}
 
