@@ -75,8 +75,8 @@ public class ReservationManager {
 		ArrayList<Reservation> foundReservation = new ArrayList<>();
 
 		for (int i = 0; i < reservations.size(); i++) {
-			if (reservations.get(i).getCode().equals(code) && reservations.get(i).getAirline().equals(airline)
-					&& reservations.get(i).getName().equals(name)) {
+			if (reservations.get(i).getCode().equals(code) || reservations.get(i).getAirline().equals(airline)
+					|| reservations.get(i).getName().equals(name)) {
 				foundReservation.add(reservations.get(i));
 			}
 			if (foundReservation.size() == 0) {
