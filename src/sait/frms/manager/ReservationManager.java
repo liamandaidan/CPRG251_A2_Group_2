@@ -109,14 +109,6 @@ public class ReservationManager {
 	 */
 	public void persist() {
 
-		String words[] = { "Ali", "wasdz", "SAIT", "STUDENTS" };
-
-		/*
-		 * private String code, flightCode, name, airline, citizenship; double cost;
-		 * private boolean active;
-		 */
-		// reservations has all of our reservation items
-
 		FileOutputStream fstream;
 		try {
 			fstream = new FileOutputStream(RESERVATIONS_FILEPATH);
@@ -137,21 +129,11 @@ public class ReservationManager {
 			System.out.println("Done!");
 			outputStream.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("The File cannot be found: "+RESERVATIONS_FILEPATH);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("You have encountered an IOEXCEPTION. Invalid data in outputStream.");
+			e.getStackTrace();
 		}
-
-		/*
-		 * String formated; try { PrintWriter output = new PrintWriter(new
-		 * File(RESERVATIONS_FILEPATH)); for (int i = 0; i < reservations.size(); i++) {
-		 * Reservation tempRes = reservations.get(i); formated = tempRes.toString();
-		 * output.println(formated); } output.close(); } catch (FileNotFoundException e)
-		 * { System.out.println("File not Found! Can not save to file. Check @" +
-		 * RESERVATIONS_FILEPATH); }
-		 */
 
 	}
 
