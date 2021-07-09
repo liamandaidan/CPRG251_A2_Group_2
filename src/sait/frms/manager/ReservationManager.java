@@ -20,7 +20,7 @@ import sait.frms.problemdomain.*;
 public class ReservationManager {
 
 	private ArrayList<Reservation> reservations = new ArrayList<>();
-	private final String RESERVATIONS_FILEPATH = "res/reservations.txt";
+	private final String RESERVATIONS_FILEPATH = "res/reservations.dat";
 	private final double RESERVATION_COST = 189.00;
 
 	/**
