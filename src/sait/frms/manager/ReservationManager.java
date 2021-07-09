@@ -32,8 +32,13 @@ public class ReservationManager {
 	 * @throws FileNotFoundException
 	 * 
 	 */
-	public ReservationManager() throws FileNotFoundException {
-		populateFromBinary();
+	public ReservationManager(){
+		try {
+			populateFromBinary();
+		} catch (FileNotFoundException e) {
+			System.out.println("Cant find file");
+			e.printStackTrace();
+		}
 	}
 
 	/**
