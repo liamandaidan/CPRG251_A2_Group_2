@@ -29,10 +29,11 @@ public class ReservationManager {
 	private final double RESERVATION_COST = 189.00;
 
 	/**
+	 * @throws FileNotFoundException 
 	 * 
 	 */
-	public ReservationManager() {
-
+	public ReservationManager() throws FileNotFoundException {
+		populateFromBinary();
 	}
 
 	/**
@@ -210,4 +211,14 @@ public class ReservationManager {
 		System.out.println("Done");
 		System.out.println(reservations);
 	}
+	
+	/**
+	 * This will return the populated list. For now this is an extra method might get rid of it later
+	 * @return
+	 */
+	public ArrayList<Reservation> getPopulated(){
+		
+		return reservations;
+	}
+	
 }

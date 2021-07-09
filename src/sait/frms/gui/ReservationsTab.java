@@ -3,6 +3,8 @@ package sait.frms.gui;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -18,7 +20,7 @@ public class ReservationsTab extends TabBase {
 	 * Instance of reservation manager.
 	 */
 	private ReservationManager reservationManager;
-
+	ArrayList<Reservation> foundReservation;
 	private JList<Reservation> reservationsList;
 
 	private JLabel reserveHeader, codeLabel, flightLabel, airlineLabel, costLabel, nameLabel, citizenshipLabel,
@@ -61,9 +63,32 @@ public class ReservationsTab extends TabBase {
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(100, 50));
 
-		reserveTextArea = new JTextArea(17, 43);// height width
+		// reserveTextArea = new JTextArea(17, 43);// height width
+
+		// I think we need to get rid of textArea and instead use FocusListener
+		JTextArea reserveTextArea = new JTextArea(16, 41);
+		reserveTextArea.setEditable(false);
+		reserveTextArea.addFocusListener(ActionListener());
+		// just for now populate
+
 		panel.add(new JScrollPane(reserveTextArea));
 		return panel;
+	}
+
+	private FocusListener ActionListener() {
+		try {
+			ArrayList<Reservation> reservations;
+			ReservationManager rm = new ReservationManager();
+			reservations = rm.getPopulated();
+			Reservation r1 = reservations.get(0);//this is all temp
+			//======================THIS LINE IS NULL WE NEED TO FIX
+			codeField.setText(r1.getCode());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 	/**
@@ -246,16 +271,20 @@ public class ReservationsTab extends TabBase {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				ReservationManager reservation = new ReservationManager();
-				ArrayList<Reservation> foundReservation;
+				ReservationManager reservation;
+				try {
+					reservation = new ReservationManager();
+					String code = codeSearch.getText();
+					String airline = airlineSearch.getText();
+					String name = nameSearch.getText();
 
-				String code = codeSearch.getText();
-				String airline = airlineSearch.getText();
-				String name = nameSearch.getText();
+					foundReservation = reservation.findReservations(code, airline, name);
 
-				foundReservation = reservation.findReservations(code, airline, name);
-
-				reserveTextArea.setText(foundReservation.get(0).toString());
+					reserveTextArea.setText(foundReservation.get(0).toString());
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 			}
 

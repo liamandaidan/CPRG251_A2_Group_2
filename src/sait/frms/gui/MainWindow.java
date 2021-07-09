@@ -5,6 +5,7 @@ package sait.frms.gui;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 import javax.swing.*;
 
@@ -68,8 +69,9 @@ public class MainWindow extends JFrame
 	
 	/**
 	 * Creates the Main Window and any components inside it.
+	 * @throws FileNotFoundException 
 	 */
-	public MainWindow() {
+	public MainWindow() throws FileNotFoundException {
 		this.flightManager = new FlightManager();
 		this.reservationManager = new ReservationManager();
 		
