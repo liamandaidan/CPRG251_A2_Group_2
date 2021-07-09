@@ -16,6 +16,7 @@ import sait.frms.exception.NoMoreSeatsException;
 import sait.frms.manager.FlightManager;
 import sait.frms.manager.ReservationManager;
 import sait.frms.problemdomain.Flight;
+import sait.frms.problemdomain.Reservation;
 
 /**
  * Holds the components for the flights tab.
@@ -385,7 +386,12 @@ public class FlightsTab extends TabBase {
 			{
 					try
 					{
-						reservationManager.makeReservation(selectedFlight, eastComps.get(5).getText(), eastComps.get(6).getText());
+						//Added save functionality
+						Reservation r = reservationManager.makeReservation(selectedFlight, eastComps.get(5).getText(), eastComps.get(6).getText());
+						ReservationManager rm = new ReservationManager(r);
+						rm.persist();
+						//Liam
+						
 						//System.out.println("Reservation Made!" + selectedFlight);
 						clearFields();
 						flightsModel.clear();
