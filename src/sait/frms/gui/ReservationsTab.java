@@ -28,7 +28,6 @@ public class ReservationsTab extends TabBase {
 	private JButton updateButton, findReservationButton;
 	private JComboBox statusBox;
 	private JTextField codeField, flightField, airlineField, costField, nameField, citizenshipField;
-
 	private JTextArea reserveTextArea;
 	private GridBagConstraints gbc;
 	private final int TEXTFIELD_LENGTH = 11;
@@ -66,15 +65,15 @@ public class ReservationsTab extends TabBase {
 		// reserveTextArea = new JTextArea(17, 43);// height width
 
 		// I think we need to get rid of textArea and instead use FocusListener
-		JTextArea reserveTextArea = new JTextArea(16, 41);
+		reserveTextArea = new JTextArea(16, 41);
 		reserveTextArea.setEditable(false);
 		reserveTextArea.addFocusListener(ActionListener());
 		ArrayList<Reservation> reservations;
 		ReservationManager rm = new ReservationManager();
-		//reservations = rm.getPopulated();
-		//Reservation r1 = reservations.get(0);// this is all temp
+		// reservations = rm.getPopulated();
+		// Reservation r1 = reservations.get(0);// this is all temp
 		// ======================THIS LINE IS NULL WE NEED TO FIX
-		//reserveTextArea.setText(r1.getCode());
+		// reserveTextArea.setText(r1.getCode());
 		panel.add(new JScrollPane(reserveTextArea));
 		return panel;
 	}
@@ -264,15 +263,14 @@ public class ReservationsTab extends TabBase {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				ReservationManager reservation;
-				reservation = new ReservationManager();
 				String code = codeSearch.getText();
 				String airline = airlineSearch.getText();
 				String name = nameSearch.getText();
-
-				foundReservation = reservation.findReservations(code, airline, name);
-
-				reserveTextArea.setText(foundReservation.get(0).toString());
+				ReservationManager rm = new ReservationManager();
+				foundReservation = rm.findReservations(code, airline, name);
+				// D111
+				System.out.println(foundReservation.get(0).getName());
+				reserveTextArea.setText(foundReservation.get(0).getCode());
 
 			}
 

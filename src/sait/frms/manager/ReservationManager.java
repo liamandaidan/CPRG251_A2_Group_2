@@ -33,12 +33,10 @@ public class ReservationManager {
 	 * 
 	 */
 	public ReservationManager(){
-		try {
-			populateFromBinary();
-		} catch (FileNotFoundException e) {
-			System.out.println("Cant find file");
-			e.printStackTrace();
-		}
+		/*
+		 * try { populateFromBinary(); } catch (FileNotFoundException e) {
+		 * System.out.println("Cant find file"); e.printStackTrace(); }
+		 */
 	}
 
 	/**
@@ -77,8 +75,14 @@ public class ReservationManager {
 	 * @return the list of reservations
 	 */
 	public ArrayList<Reservation> findReservations(String code, String airline, String name) {
-		ArrayList<Reservation> foundReservation = new ArrayList<>();
-
+		ArrayList<Reservation> foundReservation = reservations;
+		
+		try {
+			populateFromBinary();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 		for (int i = 0; i < reservations.size(); i++) {
 			if (reservations.get(i).getCode().equals(code) || reservations.get(i).getAirline().equals(airline)
 					|| reservations.get(i).getName().equals(name)) {
@@ -215,7 +219,7 @@ public class ReservationManager {
 			}
 		}
 		System.out.println("Done");
-		System.out.println(reservations);
+		//System.out.println(reservations);
 	}
 
 	/**
