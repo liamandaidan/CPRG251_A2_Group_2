@@ -69,7 +69,7 @@ public class ReservationManager {
 		}
 
 		reservationsCode = generateReservationCode(flight);
-		Reservation newReservation = new Reservation(reservationsCode, flight.getCode(), name, flight.getAirlineName(),
+		Reservation newReservation = new Reservation(reservationsCode, flight.getCode(), name.toLowerCase(), flight.getAirlineName(),
 				citizenship, RESERVATION_COST, true);
 		return newReservation;
 
@@ -77,9 +77,10 @@ public class ReservationManager {
 
 	/**
 	 * @return the list of reservations
+	 * @throws Exception 
 	 */
 	public ArrayList<Reservation> findReservations(String code, String airline, String name) {
-		ArrayList<Reservation> foundReservation = reservations;
+		ArrayList<Reservation> foundReservation = new ArrayList<>();
 
 		try {
 			populateFromBinary();
@@ -89,14 +90,18 @@ public class ReservationManager {
 
 		for (int i = 0; i < reservations.size(); i++) {
 			if (reservations.get(i).getCode().equals(code) || reservations.get(i).getAirline().equals(airline)
-					|| reservations.get(i).getName().equals(name)) {
+					|| reservations.get(i).getName().contains(name.toLowerCase())) {
 				foundReservation.add(reservations.get(i));
-			}
-			if (foundReservation.size() == 0) {
-				System.out.println("No reservation found.");
+			}else {
+				System.out.println("No reservation found.");	
 			}
 		}
-
+			
+		if (foundReservation.size() == 0) {
+			System.out.println("No reservation found.");//need to catch this error 
+	
+		}
+		
 		return foundReservation;
 
 	}
