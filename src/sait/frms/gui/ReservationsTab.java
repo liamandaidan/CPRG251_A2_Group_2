@@ -30,6 +30,7 @@ public class ReservationsTab extends TabBase {
 
 	private JLabel reserveHeader, codeLabel, flightLabel, airlineLabel, costLabel, nameLabel, citizenshipLabel,
 			statusLabel;
+	
 	private JButton updateButton, findReservationButton;
 	private JComboBox statusBox;
 	private JTextField codeField, flightField, airlineField, costField, nameField, citizenshipField;
@@ -69,19 +70,25 @@ public class ReservationsTab extends TabBase {
 	private JPanel createCenterPanel() {
 
 		JPanel panel = new JPanel();
+		panel.setLayout(new BorderLayout());
 		panel.setPreferredSize(new Dimension(100, 50));
-
-		// reserveTextArea = new JTextArea(17, 43);// height width
-		reserveTextArea = new JTextArea(16, 41);
 
 		reservationModel = new DefaultListModel<>();
 		reservationList = new JList<Reservation>(reservationModel);
 
 		reservationList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		reservationList.addListSelectionListener(new MyListSelectionListener());
-
-		reserveTextArea.setEditable(false);
+		
+		// Wrap JList in JScrollPane so it is scrollable.
+		JScrollPane scrollPane = new JScrollPane(this.reservationList);
+		
+		// reserveTextArea = new JTextArea(17, 43);// height width
+		reserveTextArea = new JTextArea(15,35);
 		panel.add(new JScrollPane(reserveTextArea));
+		
+		
+		reservationList.addListSelectionListener(new MyListSelectionListener());
+		panel.setBorder(BorderFactory.createEmptyBorder(5, 15, 30, 15));
+		panel.add(scrollPane);
 		return panel;
 
 	}
@@ -92,26 +99,20 @@ public class ReservationsTab extends TabBase {
 		 */
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
-			// System.out.println(e.getSource());
+			
+
 			if (reservationList.getSelectedValue() != null) {
 				//not sure if the getCode will work but we will see.
 				Reservation r = rm.findReservationByCode(reservationList.getSelectedValue().getCode());
+			
 				//codeField, flightField, airlineField, costField, nameField, citizenshipField;
 				codeField.setText(r.getCode());
 				flightField.setText(r.getFlightCode());
-				//costField.setText(r.getCost());
-				
-				/*
-				 * Flight theFlight = flightsList.getSelectedValue();//get the selected flight
-				 * as a Flight object selectedFlight = theFlight;
-				 * System.out.println(selectedFlight);
-				 * eastComps.get(0).setText(selectedFlight.getCode());
-				 * eastComps.get(1).setText(selectedFlight.getAirlineName());
-				 * eastComps.get(2).setText(selectedFlight.getWeekday());
-				 * eastComps.get(3).setText(selectedFlight.getTime());
-				 * eastComps.get(4).setText("$" +
-				 * String.valueOf(selectedFlight.getCostPerSeat()) + "0");
-				 */
+				airlineField.setText(r.getAirline());
+				costField.setText("$" + r.getCost());
+				nameField.setText(r.getName());
+				citizenshipField.setText(r.getCitizenship());
+
 			}
 		}
 
@@ -245,7 +246,6 @@ public class ReservationsTab extends TabBase {
 		gbc.weightx = 1.0;
 		gbc.gridwidth = 2;
 		searchTitle.setFont(new Font("serif", Font.PLAIN, 25));
-		// searchTitle. setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		bottomPanel.add(searchTitle, gbc);
 
 		JLabel codeSearch = new JLabel("Code: ");
@@ -301,11 +301,10 @@ public class ReservationsTab extends TabBase {
 				String airline = airlineSearchField.getText();
 				String name = nameSearchField.getText();
 				rm = new ReservationManager();
-				foundReservation = rm.findReservations(code, airline, name);
-				// D111
-				System.out.println(foundReservation.get(0).getName());
-				reserveTextArea.setText(foundReservation.get(0).getCode());
-
+				
+				//add found reservation to reservationModel
+				reservationModel.addAll(rm.findReservations(code, airline, name)); 
+				System.out.println(reservationModel);
 			}
 
 		});

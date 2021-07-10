@@ -77,10 +77,10 @@ public class ReservationManager {
 
 	/**
 	 * @return the list of reservations
-	 * @throws Exception 
+	 * 
 	 */
 	public ArrayList<Reservation> findReservations(String code, String airline, String name) {
-		ArrayList<Reservation> foundReservation = new ArrayList<>();
+		ArrayList<Reservation> foundReservation = new ArrayList<Reservation>();
 
 		try {
 			populateFromBinary();
