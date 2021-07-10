@@ -230,11 +230,16 @@ public class ReservationsTab extends TabBase {
 				//Reservation makeReservation(Flight flight, String name, String citizenship)
 				Reservation updatedReservation = new Reservation ();
 				ReservationManager updateManager = new ReservationManager();
-				Flight flight = new Flight();
-				
+				//check 3 things
 				String updatedName = nameField.getText();
 				String updatedCitizenship = citizenshipField.getText();
+				String updatedActive = (String) statusBox.getSelectedItem();
+				System.out.println(updatedActive);
+				//find in the list the updated
 				
+				//cut, and replace with new
+				
+				//save
 				updatedReservation.setName(updatedName);
 				updatedReservation.setCitizenship(updatedCitizenship);
 				System.out.println("IM cool");
