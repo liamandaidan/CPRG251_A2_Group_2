@@ -238,7 +238,6 @@ public class ReservationsTab extends TabBase {
 				Reservation temp = reservationManager.findReservationByCode(code);
 				updatedReservation = new Reservation(code, flight, airline, updatedName, updatedCitizenship, cost,
 						isActive);
-				boolean fieldsNotChanged = true;
 
 				// find reservation that matches now
 				boolean flag = false;
