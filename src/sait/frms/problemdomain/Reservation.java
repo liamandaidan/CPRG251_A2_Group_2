@@ -21,38 +21,6 @@ public class Reservation {
 	}
 
 	/**
-	 * @param flightCode
-	 * @param name
-	 * @param citizenship
-	 */
-	public Reservation(String flightCode, String name, String citizenship) {
-		this.flightCode = flightCode;
-		this.name = name;
-		this.citizenship = citizenship;
-	}
-
-	/**
-	 * Initializes each parameter inside of Reservation without active parameter.
-	 * 
-	 * @param code        The reservation code will be generated when a reservation
-	 *                    is created.
-	 * @param flightCode  The flight code the reservation is for.
-	 * @param airline     The airline who owns and operates the flight.
-	 * @param name        The name of the traveler.
-	 * @param citizenship The citizenship of the traveler.
-	 * @param cost        The cost of the reservation.
-	 */
-	public Reservation(String code, String flightCode, String airline, String name, String citizenship, double cost) {
-		this.code = code;
-		this.flightCode = flightCode;
-		this.name = name;
-		this.airline = airline;
-		this.citizenship = citizenship;
-		this.cost = cost;
-
-	}
-
-	/**
 	 * Initializes each parameter inside of Reservation with active parameter.
 	 * 
 	 * @param code        The reservation code will be generated when a reservation
@@ -64,7 +32,7 @@ public class Reservation {
 	 * @param cost        The cost of the reservation.
 	 * @param active      Whether the reservation is active or not.
 	 */
-	public Reservation(String code, String flightCode,  String name, String airline, String citizenship, double cost,
+	public Reservation(String code, String flightCode, String name, String airline, String citizenship, double cost,
 			boolean active) {
 		this.code = code;
 		this.flightCode = flightCode;
@@ -125,7 +93,7 @@ public class Reservation {
 	 * 
 	 * @return the cost
 	 */
-	public double   getCost() {
+	public double getCost() {
 		return cost;
 	}
 
@@ -175,7 +143,7 @@ public class Reservation {
 //				 this.citizenship, this.cost, this.active);
 
 		String reservationCodeDisplay = this.code;
-		
+
 		return reservationCodeDisplay;
 	}
 

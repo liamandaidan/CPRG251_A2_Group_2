@@ -1,6 +1,5 @@
 package sait.frms.gui;
 
-
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -10,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import sait.frms.manager.*;
 import sait.frms.problemdomain.*;
-
 
 /**
  * Holds the components for the reservations tab. todo
@@ -24,7 +22,7 @@ public class ReservationsTab extends TabBase {
 
 	private JLabel reserveHeader, codeLabel, flightLabel, airlineLabel, costLabel, nameLabel, citizenshipLabel,
 			statusLabel;
-	
+
 	private JButton updateButton, findReservationButton;
 	private JComboBox statusBox;
 	private JTextField codeField, flightField, airlineField, costField, nameField, citizenshipField;
@@ -71,35 +69,34 @@ public class ReservationsTab extends TabBase {
 		reservationList = new JList<Reservation>(reservationModel);
 
 		reservationList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+
 		// Wrap JList in JScrollPane so it is scrollable.
 		JScrollPane scrollPane = new JScrollPane(this.reservationList);
-		
+
 		// reserveTextArea = new JTextArea(17, 43);// height width
-		reserveTextArea = new JTextArea(15,35);
+		reserveTextArea = new JTextArea(15, 35);
 		panel.add(new JScrollPane(reserveTextArea));
-		
-		
+
 		reservationList.addListSelectionListener(new MyListSelectionListener());
 		panel.setBorder(BorderFactory.createEmptyBorder(5, 15, 30, 15));
 		panel.add(scrollPane);
 		return panel;
 
 	}
-	//when the textField is clicked
+
+	// when the textField is clicked
 	private class MyListSelectionListener implements ListSelectionListener {
 		/**
 		 * Called when user selects an item in the JList.
 		 */
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
-			
 
 			if (reservationList.getSelectedValue() != null) {
-				//not sure if the getCode will work but we will see.
+				// not sure if the getCode will work but we will see.
 				Reservation r = reservationManager.findReservationByCode(reservationList.getSelectedValue().getCode());
-			
-				//codeField, flightField, airlineField, costField, nameField, citizenshipField;
+
+				// codeField, flightField, airlineField, costField, nameField, citizenshipField;
 				codeField.setText(r.getCode());
 				flightField.setText(r.getFlightCode());
 				airlineField.setText(r.getAirline());
@@ -213,39 +210,65 @@ public class ReservationsTab extends TabBase {
 		gbc.insets = new Insets(20, 0, 0, 0); // set margin (top, left, bottom, right
 		gbc.fill = GridBagConstraints.HORIZONTAL; // fill cells horizontally
 		formatPanel.add(updateButton, gbc);
-		updateButton.addActionListener(new ActionListener () {
+		updateButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Reservation makeReservation(Flight flight, String name, String citizenship)
-				Reservation updatedReservation = new Reservation ();
-				ReservationManager updateManager = new ReservationManager();
-				//check 3 things
+				// Reservation makeReservation(Flight flight, String name, String citizenship)
+				Reservation updatedReservation;
+				// check 3 things
 				String updatedName = nameField.getText();
 				String updatedCitizenship = citizenshipField.getText();
 				String updatedActive = (String) statusBox.getSelectedItem();
+				boolean isActive;
+
+				if (updatedActive == "Active")
+					isActive = true;
+				else
+					isActive = false;
+
+				// these other fields are for the reservation object
+				String code = codeField.getText();
+				String flight = flightField.getText();
+				String airline = airlineField.getText();
+				double cost = Double.parseDouble(costField.getText());
 				System.out.println(updatedActive);
-				//find in the list the updated
-				
-				//cut, and replace with new
-				
-				//save
+				// find in the list the updated
+				Reservation temp = reservationManager.findReservationByCode(code);// holds the reservation manager we
+																					// are looking to find
+				updatedReservation = new Reservation(code, flight, airline, updatedName, updatedCitizenship, cost,
+						isActive);
+
+				// find reservation that matches now
+				boolean flag = false;
+				int index = 0;
+				while (!flag) {
+					
+					if(temp.getCode()==foundReservation.get(index).getCode()) {
+						System.out.println("Found matching Reservation code at: "+ temp.getCode());
+						//cut and replace
+					}
+					index++;
+				}
+
+				// cut, and replace with new
+
+				// save
 				updatedReservation.setName(updatedName);
 				updatedReservation.setCitizenship(updatedCitizenship);
 				System.out.println("Success has been updated!");
+				System.out.println("Updated Reservation is: " + updatedReservation);
 				codeField.setText("");
 				flightField.setText("");
 				airlineField.setText("");
 				costField.setText("");
 				nameField.setText("");
 				citizenshipField.setText("");
-					
+
 			}
-			
+
 		});
-		
-		
-		
+
 		panel.add(formatPanel);
 
 		panel.setPreferredSize(new Dimension(200, 100));
@@ -328,11 +351,11 @@ public class ReservationsTab extends TabBase {
 				String airline = airlineSearchField.getText();
 				String name = nameSearchField.getText();
 				reservationManager = new ReservationManager();
-				
-				//add found reservation to reservationModel
-				reservationModel.addAll(reservationManager.findReservations(code, airline, name)); 
+
+				// add found reservation to reservationModel
+				reservationModel.addAll(reservationManager.findReservations(code, airline, name));
 				System.out.println(reservationModel);
-				
+
 			}
 
 		});
