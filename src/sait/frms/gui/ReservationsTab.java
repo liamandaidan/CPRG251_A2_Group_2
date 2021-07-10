@@ -1,24 +1,16 @@
 package sait.frms.gui;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusListener;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
+import java.util.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import sait.frms.manager.*;
+import sait.frms.problemdomain.*;
 
-import sait.frms.exception.InvalidCitizenshipException;
-import sait.frms.exception.InvalidFlightCodeException;
-import sait.frms.exception.InvalidNameException;
-import sait.frms.exception.NoMoreSeatsException;
-import sait.frms.gui.FlightsTab.MyListSelectionListener;
-import sait.frms.manager.ReservationManager;
-import sait.frms.problemdomain.Flight;
-import sait.frms.problemdomain.Reservation;
 
 /**
  * Holds the components for the reservations tab. todo
@@ -29,8 +21,6 @@ public class ReservationsTab extends TabBase {
 	 */
 	private ReservationManager reservationManager;
 	ArrayList<Reservation> foundReservation;
-	private JList<Reservation> reservationsList;
-	ReservationManager rm;
 
 	private JLabel reserveHeader, codeLabel, flightLabel, airlineLabel, costLabel, nameLabel, citizenshipLabel,
 			statusLabel;
@@ -107,7 +97,7 @@ public class ReservationsTab extends TabBase {
 
 			if (reservationList.getSelectedValue() != null) {
 				//not sure if the getCode will work but we will see.
-				Reservation r = rm.findReservationByCode(reservationList.getSelectedValue().getCode());
+				Reservation r = reservationManager.findReservationByCode(reservationList.getSelectedValue().getCode());
 			
 				//codeField, flightField, airlineField, costField, nameField, citizenshipField;
 				codeField.setText(r.getCode());
@@ -331,10 +321,10 @@ public class ReservationsTab extends TabBase {
 				String code = codeSearchField.getText();
 				String airline = airlineSearchField.getText();
 				String name = nameSearchField.getText();
-				rm = new ReservationManager();
+				reservationManager = new ReservationManager();
 				
 				//add found reservation to reservationModel
-				reservationModel.addAll(rm.findReservations(code, airline, name)); 
+				reservationModel.addAll(reservationManager.findReservations(code, airline, name)); 
 				System.out.println(reservationModel);
 				
 			}
