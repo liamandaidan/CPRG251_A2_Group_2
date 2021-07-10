@@ -18,7 +18,7 @@ public class ReservationsTab extends TabBase {
 	 * Instance of reservation manager.
 	 */
 	private ReservationManager reservationManager;
-	ArrayList<Reservation> foundReservation;
+	ArrayList<Reservation> foundReservation = new ArrayList<>();
 
 	private JLabel reserveHeader, codeLabel, flightLabel, airlineLabel, costLabel, nameLabel, citizenshipLabel,
 			statusLabel;
@@ -232,46 +232,34 @@ public class ReservationsTab extends TabBase {
 				String flight = flightField.getText();
 				String airline = airlineField.getText();
 				double cost = Double.parseDouble(costField.getText().substring(1));
-				
-				System.out.println(updatedActive);
 				// find in the list the updated
 				Reservation temp = reservationManager.findReservationByCode(code);
-				updatedReservation = new Reservation(code, flight, airline, updatedName, updatedCitizenship, cost,
+				updatedReservation = new Reservation(code, flight, updatedName, airline, updatedCitizenship, cost,
 						isActive);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+				ArrayList<Reservation> inventory = reservationManager.getPopulated();
+				int i = 0;
+				for (i = 0; i < inventory.size(); i++) {
+					if (inventory.get(i).getCode() == temp.getCode()) {
 
-=======
-				boolean fieldsNotChanged = true;
-				//if(updatedName != )
->>>>>>> parent of 61e228a (group stuff)
-=======
-				boolean fieldsNotChanged = true;
-				//if(updatedName != )
->>>>>>> parent of 61e228a (group stuff)
-=======
+						inventory.remove(i);
+						inventory.add(updatedReservation);
+						System.out.println("Success has been updated!");
+						System.out.println("Updated Reservation saved is: " + inventory.get(i).getName());
+						// before it clears we want to make sure that we save all the current search
+						// results
 
->>>>>>> parent of 50a964f (ok)
-				// find reservation that matches now
-				boolean flag = false;
-				int index = 0;
-				while (!flag) {
-					if (temp.getCode() == foundReservation.get(index).getCode()) {
-						System.out.println("Found matching Reservation code at: " + temp.getCode());
-						// cut reservation with matching code from the ArrayList. Then add the new
-						// Reservation in its place.
-						foundReservation.remove(index);
-						foundReservation.add(temp);
-						flag = true;
+						reservationManager.persist();
 					}
-					index++;
+
 				}
-				// save
-				updatedReservation.setName(updatedName);
-				updatedReservation.setCitizenship(updatedCitizenship);
-				System.out.println("Success has been updated!");
-				System.out.println("Updated Reservation is: " + updatedReservation);
+				for (int k = 0; k < reservationModel.size(); k++) {
+					
+						inventory.add(reservationModel.get(k));
+						System.out.println("Reservation Model @" + k + " is: " + inventory.get(k).getName());
+					
+				}
+				reservationModel.clear();
+				reserveTextArea.setText("");
 				codeField.setText("");
 				flightField.setText("");
 				airlineField.setText("");
@@ -360,7 +348,7 @@ public class ReservationsTab extends TabBase {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				reservationModel.clear();
+				// reservationModel.clear();
 				String code = codeSearchField.getText();
 				String airline = airlineSearchField.getText();
 				String name = nameSearchField.getText();
@@ -368,7 +356,14 @@ public class ReservationsTab extends TabBase {
 
 				// add found reservation to reservationModel
 				reservationModel.addAll(reservationManager.findReservations(code, airline, name));
-				System.out.println(reservationModel);
+				System.out.println("RES MODEL IS " + reservationModel);
+				// create temp to add to list for each
+				for (int i = 0; i < reservationModel.size(); i++) {
+					Reservation r = reservationModel.get(0);
+					foundReservation.add(r);
+					System.out.println("r is " + r);
+				}
+				// need to add reservation that was found into our list.
 
 			}
 
