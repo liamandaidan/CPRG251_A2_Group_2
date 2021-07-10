@@ -125,7 +125,7 @@ public class Reservation {
 	 * 
 	 * @return the cost
 	 */
-	public double getCost() {
+	public double   getCost() {
 		return cost;
 	}
 

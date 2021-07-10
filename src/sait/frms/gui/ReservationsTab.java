@@ -8,8 +8,12 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
+import sait.frms.gui.FlightsTab.MyListSelectionListener;
 import sait.frms.manager.ReservationManager;
+import sait.frms.problemdomain.Flight;
 import sait.frms.problemdomain.Reservation;
 
 /**
@@ -22,6 +26,7 @@ public class ReservationsTab extends TabBase {
 	private ReservationManager reservationManager;
 	ArrayList<Reservation> foundReservation;
 	private JList<Reservation> reservationsList;
+	ReservationManager rm;
 
 	private JLabel reserveHeader, codeLabel, flightLabel, airlineLabel, costLabel, nameLabel, citizenshipLabel,
 			statusLabel;
@@ -31,6 +36,9 @@ public class ReservationsTab extends TabBase {
 	private JTextArea reserveTextArea;
 	private GridBagConstraints gbc;
 	private final int TEXTFIELD_LENGTH = 11;
+
+	private JList<Reservation> reservationList;
+	private DefaultListModel<Reservation> reservationModel;
 
 	/**
 	 * Creates the components for reservations tab.
@@ -59,28 +67,54 @@ public class ReservationsTab extends TabBase {
 	 * @return JPanel that goes in the center.
 	 */
 	private JPanel createCenterPanel() {
+
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(100, 50));
 
 		// reserveTextArea = new JTextArea(17, 43);// height width
-
-		// I think we need to get rid of textArea and instead use FocusListener
 		reserveTextArea = new JTextArea(16, 41);
+
+		reservationModel = new DefaultListModel<>();
+		reservationList = new JList<Reservation>(reservationModel);
+
+		reservationList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		reservationList.addListSelectionListener(new MyListSelectionListener());
+
 		reserveTextArea.setEditable(false);
-		reserveTextArea.addFocusListener(ActionListener());
-		ArrayList<Reservation> reservations;
-		ReservationManager rm = new ReservationManager();
-		// reservations = rm.getPopulated();
-		// Reservation r1 = reservations.get(0);// this is all temp
-		// ======================THIS LINE IS NULL WE NEED TO FIX
-		// reserveTextArea.setText(r1.getCode());
 		panel.add(new JScrollPane(reserveTextArea));
 		return panel;
-	}
 
-	private FocusListener ActionListener() {
-		System.out.println("Print");
-		return null;
+	}
+	//when the textField is clicked
+	private class MyListSelectionListener implements ListSelectionListener {
+		/**
+		 * Called when user selects an item in the JList.
+		 */
+		@Override
+		public void valueChanged(ListSelectionEvent e) {
+			// System.out.println(e.getSource());
+			if (reservationList.getSelectedValue() != null) {
+				//not sure if the getCode will work but we will see.
+				Reservation r = rm.findReservationByCode(reservationList.getSelectedValue().getCode());
+				//codeField, flightField, airlineField, costField, nameField, citizenshipField;
+				codeField.setText(r.getCode());
+				flightField.setText(r.getFlightCode());
+				//costField.setText(r.getCost());
+				
+				/*
+				 * Flight theFlight = flightsList.getSelectedValue();//get the selected flight
+				 * as a Flight object selectedFlight = theFlight;
+				 * System.out.println(selectedFlight);
+				 * eastComps.get(0).setText(selectedFlight.getCode());
+				 * eastComps.get(1).setText(selectedFlight.getAirlineName());
+				 * eastComps.get(2).setText(selectedFlight.getWeekday());
+				 * eastComps.get(3).setText(selectedFlight.getTime());
+				 * eastComps.get(4).setText("$" +
+				 * String.valueOf(selectedFlight.getCostPerSeat()) + "0");
+				 */
+			}
+		}
+
 	}
 
 	/**
@@ -266,7 +300,7 @@ public class ReservationsTab extends TabBase {
 				String code = codeSearch.getText();
 				String airline = airlineSearch.getText();
 				String name = nameSearch.getText();
-				ReservationManager rm = new ReservationManager();
+				rm = new ReservationManager();
 				foundReservation = rm.findReservations(code, airline, name);
 				// D111
 				System.out.println(foundReservation.get(0).getName());

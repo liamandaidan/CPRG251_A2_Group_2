@@ -105,17 +105,13 @@ public class ReservationManager {
 	 * @return the reservation using the code
 	 */
 	public Reservation findReservationByCode(String code) {
-
 		for (int i = 0; i < reservations.size(); i++) {
 			if (reservations.get(i).getCode().equals(code)) {
 				return reservations.get(i);
 			} else {
 				System.out.println("No reservation found.");
-				return null;
 			}
-
 		}
-
 		return null;
 
 	}

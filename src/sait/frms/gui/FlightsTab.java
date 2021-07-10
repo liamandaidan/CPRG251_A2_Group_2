@@ -350,7 +350,7 @@ public class FlightsTab extends TabBase {
 		return panel;
 	}
 // This is the list that is clickable on the page in the text areas
-	private class MyListSelectionListener implements ListSelectionListener {
+	public class MyListSelectionListener implements ListSelectionListener {
 		/**
 		 * Called when user selects an item in the JList.
 		 */
