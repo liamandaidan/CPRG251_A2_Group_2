@@ -238,7 +238,12 @@ public class ReservationsTab extends TabBase {
 				updatedReservation = new Reservation(code, flight, airline, updatedName, updatedCitizenship, cost,
 						isActive);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+				boolean fieldsNotChanged = true;
+				//if(updatedName != )
+>>>>>>> parent of 61e228a (group stuff)
 =======
 				boolean fieldsNotChanged = true;
 				//if(updatedName != )
