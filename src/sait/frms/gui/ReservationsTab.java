@@ -100,7 +100,7 @@ public class ReservationsTab extends TabBase {
 				codeField.setText(r.getCode());
 				flightField.setText(r.getFlightCode());
 				airlineField.setText(r.getAirline());
-				costField.setText(String.format("$%.2f", r.getCost()));
+				costField.setText("$" + r.getCost());
 				nameField.setText(r.getName());
 				citizenshipField.setText(r.getCitizenship());
 
@@ -231,27 +231,32 @@ public class ReservationsTab extends TabBase {
 				String code = codeField.getText();
 				String flight = flightField.getText();
 				String airline = airlineField.getText();
-				double cost = Double.parseDouble(costField.getText().substring(1));
-				
+				double cost = Double.parseDouble(costField.getText());
 				System.out.println(updatedActive);
 				// find in the list the updated
 				Reservation temp = reservationManager.findReservationByCode(code);
 				updatedReservation = new Reservation(code, flight, airline, updatedName, updatedCitizenship, cost,
 						isActive);
+<<<<<<< HEAD
 
+=======
+				boolean fieldsNotChanged = true;
+				//if(updatedName != )
+>>>>>>> parent of 61e228a (group stuff)
 				// find reservation that matches now
+				if(!fieldsNotChanged) {
 				boolean flag = false;
 				int index = 0;
 				while (!flag) {
-					if (temp.getCode() == foundReservation.get(index).getCode()) {
-						System.out.println("Found matching Reservation code at: " + temp.getCode());
-						// cut reservation with matching code from the ArrayList. Then add the new
-						// Reservation in its place.
+					if(temp.getCode()==foundReservation.get(index).getCode()) {
+						System.out.println("Found matching Reservation code at: "+ temp.getCode());
+						//cut reservation with matching code from the ArrayList. Then add the new Reservation in its place.
 						foundReservation.remove(index);
 						foundReservation.add(temp);
-						flag = true;
+						flag= true;
 					}
 					index++;
+				}
 				}
 				// save
 				updatedReservation.setName(updatedName);
