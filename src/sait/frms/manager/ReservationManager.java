@@ -132,6 +132,7 @@ public class ReservationManager {
 			DataOutputStream outputStream = new DataOutputStream(fstream);
 			System.out.println("Writing the words to a binary file");
 			Reservation r;
+			String name = "";
 			for (int i = 0; i < reservations.size(); i++) {
 				r = reservations.get(i);
 				outputStream.writeUTF(r.getCode());
@@ -141,9 +142,10 @@ public class ReservationManager {
 				outputStream.writeUTF(r.getCitizenship());
 				outputStream.writeDouble(r.getCost());
 				outputStream.writeBoolean(r.isActive());
+				name += r.getName()+" ";
 			}
 
-			System.out.println("Done!");
+			System.out.println("Done!, "+name+". Has been added to save file.");
 			outputStream.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("The File cannot be found: " + RESERVATIONS_FILEPATH);

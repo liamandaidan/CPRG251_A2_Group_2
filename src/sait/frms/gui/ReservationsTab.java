@@ -237,7 +237,7 @@ public class ReservationsTab extends TabBase {
 				
 				updatedReservation.setName(updatedName);
 				updatedReservation.setCitizenship(updatedCitizenship);
-				
+				System.out.println("IM cool");
 				System.out.println(updateManager.getPopulated());
 			}
 			
@@ -322,7 +322,7 @@ public class ReservationsTab extends TabBase {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				reservationModel.clear();
 				String code = codeSearchField.getText();
 				String airline = airlineSearchField.getText();
 				String name = nameSearchField.getText();
@@ -331,6 +331,7 @@ public class ReservationsTab extends TabBase {
 				//add found reservation to reservationModel
 				reservationModel.addAll(rm.findReservations(code, airline, name)); 
 				System.out.println(reservationModel);
+				
 			}
 
 		});
