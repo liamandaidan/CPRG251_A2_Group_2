@@ -19,7 +19,6 @@ public class ReservationManager {
 
 	private ArrayList<Reservation> reservations = new ArrayList<>();
 	private final String RESERVATIONS_FILEPATH = "res/reservations.dat";
-	private final double RESERVATION_COST = 189.00;
 
 	/**
 	 * @throws FileNotFoundException
@@ -60,10 +59,9 @@ public class ReservationManager {
 		if (getAvailableSeats(flight) <= 0) {
 			throw new NoMoreSeatsException();
 		}
-
 		reservationsCode = generateReservationCode(flight);
 		Reservation newReservation = new Reservation(reservationsCode, flight.getCode(), name, flight.getAirlineName(),
-				citizenship, RESERVATION_COST, true);
+				citizenship,  flight.getCostPerSeat(), true);
 		return newReservation;
 
 	}
@@ -83,18 +81,18 @@ public class ReservationManager {
 
 		for (int i = 0; i < reservations.size(); i++) {
 			if (reservations.get(i).getCode().equals(code) || reservations.get(i).getAirline().equals(airline)
-					|| reservations.get(i).getName().toLowerCase().contains(name.toLowerCase()) ){
+					|| reservations.get(i).getName().toLowerCase().contains(name.toLowerCase())) {
 				foundReservation.add(reservations.get(i));
-			}else {
-				System.out.println("No reservation found.");	
+			} else {
+				System.out.println("No reservation found.");
 			}
 		}
-			
+
 		if (foundReservation.size() == 0) {
-			System.out.println("No reservation found.");//need to catch this error 
-	
+			System.out.println("No reservation found.");// need to catch this error
+
 		}
-		
+
 		return foundReservation;
 
 	}
@@ -135,10 +133,10 @@ public class ReservationManager {
 				outputStream.writeUTF(r.getCitizenship());
 				outputStream.writeDouble(r.getCost());
 				outputStream.writeBoolean(r.isActive());
-				name += r.getName()+" ";
+				name += r.getName() + " ";
 			}
 
-			System.out.println("Done!, "+name+". Has been added to save file.");
+			System.out.println("Done!, " + name + ". Has been added to save file.");
 			outputStream.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("The File cannot be found: " + RESERVATIONS_FILEPATH);
