@@ -238,21 +238,13 @@ public class ReservationsTab extends TabBase {
 				Reservation temp = reservationManager.findReservationByCode(code);
 				updatedReservation = new Reservation(code, flight, airline, updatedName, updatedCitizenship, cost,
 						isActive);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
+
 				boolean fieldsNotChanged = true;
 				//if(updatedName != )
->>>>>>> parent of 61e228a (group stuff)
-=======
-				boolean fieldsNotChanged = true;
-				//if(updatedName != )
->>>>>>> parent of 61e228a (group stuff)
-=======
 
->>>>>>> parent of 50a964f (ok)
+
+
 				// find reservation that matches now
 				boolean flag = false;
 				int index = 0;
