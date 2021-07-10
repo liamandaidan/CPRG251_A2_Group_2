@@ -29,6 +29,7 @@ public class FlightManager {
 	private ArrayList<String> airports = new ArrayList<String>();
 
 	/**
+	 * No Arg Constructor, populates the airports and flights ArrayLists
 	 * @throws InvalidFlightCodeException
 	 * @throws FileNotFoundException
 	 * 
@@ -208,12 +209,6 @@ public class FlightManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		int count = 0;
-//		for(int i = 0; i < flights.size(); i++) {
-//			System.out.println(flights.get(i).toString());
-//			count++;
-//		}
-//		System.out.println("Count of flights = " + count);
 
 	}
 
