@@ -171,10 +171,12 @@ public class Reservation {
 	 * @Override
 	 */
 	public String toString() {
-		String formated = String.format("&s, &s, &s, &s, &s, &s, &s", this.code, this.flightCode, this.airline, this.name,
-				 this.citizenship, this.cost, this.active);
+//		String formated = String.format("&s, &s, &s, &s, &s, &s, &s", this.code, this.flightCode, this.airline, this.name,
+//				 this.citizenship, this.cost, this.active);
 
-		return formated;
+		String reservationCodeDisplay = this.code;
+		
+		return reservationCodeDisplay;
 	}
 
 }

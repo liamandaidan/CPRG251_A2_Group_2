@@ -11,6 +11,10 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import sait.frms.exception.InvalidCitizenshipException;
+import sait.frms.exception.InvalidFlightCodeException;
+import sait.frms.exception.InvalidNameException;
+import sait.frms.exception.NoMoreSeatsException;
 import sait.frms.gui.FlightsTab.MyListSelectionListener;
 import sait.frms.manager.ReservationManager;
 import sait.frms.problemdomain.Flight;
@@ -219,6 +223,28 @@ public class ReservationsTab extends TabBase {
 		gbc.insets = new Insets(20, 0, 0, 0); // set margin (top, left, bottom, right
 		gbc.fill = GridBagConstraints.HORIZONTAL; // fill cells horizontally
 		formatPanel.add(updateButton, gbc);
+		updateButton.addActionListener(new ActionListener () {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Reservation makeReservation(Flight flight, String name, String citizenship)
+				Reservation updatedReservation = new Reservation ();
+				ReservationManager updateManager = new ReservationManager();
+				Flight flight = new Flight();
+				
+				String updatedName = nameField.getText();
+				String updatedCitizenship = citizenshipField.getText();
+				
+				updatedReservation.setName(updatedName);
+				updatedReservation.setCitizenship(updatedCitizenship);
+				
+				System.out.println(updateManager.getPopulated());
+			}
+			
+		});
+		
+		
+		
 		panel.add(formatPanel);
 
 		panel.setPreferredSize(new Dimension(200, 100));
