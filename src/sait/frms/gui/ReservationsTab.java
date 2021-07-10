@@ -232,8 +232,14 @@ public class ReservationsTab extends TabBase {
 				//save
 				updatedReservation.setName(updatedName);
 				updatedReservation.setCitizenship(updatedCitizenship);
-				System.out.println("IM cool");
-				System.out.println(updateManager.getPopulated());
+				System.out.println("Success has been updated!");
+				codeField.setText("");
+				flightField.setText("");
+				airlineField.setText("");
+				costField.setText("");
+				nameField.setText("");
+				citizenshipField.setText("");
+					
 			}
 			
 		});
