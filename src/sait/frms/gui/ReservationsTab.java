@@ -237,27 +237,27 @@ public class ReservationsTab extends TabBase {
 				updatedReservation = new Reservation(code, flight, updatedName, airline, updatedCitizenship, cost,
 						isActive);
 				ArrayList<Reservation> inventory = reservationManager.getPopulated();
+				System.out.println("Found Reservation includes: ");
+				for (int k = 0; k < foundReservation.size(); k++) {
+					System.out.print(foundReservation.get(k).getName()+", ");
+				}
+				System.out.println("\n=======================");
 				int i = 0;
 				for (i = 0; i < inventory.size(); i++) {
 					if (inventory.get(i).getCode() == temp.getCode()) {
-
+						System.out.println("Success has been updated! "+inventory.get(i).getName());
 						inventory.remove(i);
 						inventory.add(updatedReservation);
-						System.out.println("Success has been updated!");
+						
 						System.out.println("Updated Reservation saved is: " + inventory.get(i).getName());
 						// before it clears we want to make sure that we save all the current search
 						// results
 
-						reservationManager.persist();
 					}
 
 				}
-				for (int k = 0; k < reservationModel.size(); k++) {
-					
-						inventory.add(reservationModel.get(k));
-						System.out.println("Reservation Model @" + k + " is: " + inventory.get(k).getName());
-					
-				}
+
+				reservationManager.persist();
 				reservationModel.clear();
 				reserveTextArea.setText("");
 				codeField.setText("");
@@ -361,7 +361,7 @@ public class ReservationsTab extends TabBase {
 				for (int i = 0; i < reservationModel.size(); i++) {
 					Reservation r = reservationModel.get(0);
 					foundReservation.add(r);
-					System.out.println("r is " + r);
+					System.out.println("r is " + r.getName());
 				}
 				// need to add reservation that was found into our list.
 
