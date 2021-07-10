@@ -39,14 +39,15 @@ public class FlightsTab extends TabBase {
 	private JList<Flight> flightsList;
 
 	private DefaultListModel<Flight> flightsModel;
-	
+
 	/**
 	 * a global Flight object to represent a single selected Flight
-	 * */
+	 */
 	private Flight selectedFlight = new Flight();
 	/**
-	 * an arraylist of JTextFields from the east panel. This allows flight information to be filled in
-	 * */
+	 * an arraylist of JTextFields from the east panel. This allows flight
+	 * information to be filled in
+	 */
 	ArrayList<JTextField> eastComps = new ArrayList<JTextField>();
 
 	/**
@@ -159,29 +160,27 @@ public class FlightsTab extends TabBase {
 		// Bottom button
 		panel.add(findReservationButton, BorderLayout.SOUTH);
 		// test
-		String chosenName = (String)fromComboBox.getSelectedItem();
-       // System.out.println("Chosen Name: " + chosenName);
-		
+		String chosenName = (String) fromComboBox.getSelectedItem();
+		// System.out.println("Chosen Name: " + chosenName);
+
 		// add Button event listener
-		findReservationButton.addActionListener(new ActionListener () {
+		findReservationButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
+
 				String to = (String) toComboBox.getSelectedItem();
 				String from = (String) fromComboBox.getSelectedItem();
 				String day = (String) daysComboBox.getSelectedItem();
 				clearFields();
-				flightsModel.clear();//clear the previous search results
-				
-				//print out flights
-				System.out.println(flightManager.findFlights(to , from , day));
-				flightsModel.addAll(flightManager.findFlights(to , from , day));
+				flightsModel.clear();// clear the previous search results
+
+				// print out flights
+				System.out.println(flightManager.findFlights(from, to, day));
+				flightsModel.addAll(flightManager.findFlights(from, to, day));
 				System.out.println(flightsModel);
-				
+
 			}
 
-			});
-
+		});
 
 		panel.setPreferredSize(new Dimension(700, 150));
 		return panel;
@@ -215,18 +214,16 @@ public class FlightsTab extends TabBase {
 
 		flightsModel = new DefaultListModel<>();
 		flightsList = new JList<>(flightsModel);
-	
 
 		// User can only select one item at a time.
 		flightsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
 
 		// Wrap JList in JScrollPane so it is scrollable.
 		JScrollPane scrollPane = new JScrollPane(this.flightsList);
 
 		JTextArea reserveTextArea = new JTextArea(15, 35);// height width
 		panel.add(new JScrollPane(reserveTextArea));
-		//reserveTextArea.add(flightsList);
+		// reserveTextArea.add(flightsList);
 
 		flightsList.addListSelectionListener(new MyListSelectionListener());
 		panel.setBorder(BorderFactory.createEmptyBorder(5, 15, 30, 15));
@@ -287,7 +284,7 @@ public class FlightsTab extends TabBase {
 		// create button to make reservation
 		JButton reserveButton = new JButton("Reserve");
 		reserveButton.addActionListener(new ReserveFlightActionListener());
-		
+
 		// add header label and button, since those ones are different
 		eastCon.gridx = 0; // there's gotta be a way to use a for loop or something to make this shorter
 		eastCon.gridy = 0; // x and y are arranged left to right, top to bottom
@@ -349,6 +346,7 @@ public class FlightsTab extends TabBase {
 		panel.setPreferredSize(new Dimension(200, 100));
 		return panel;
 	}
+
 // This is the list that is clickable on the page in the text areas
 	public class MyListSelectionListener implements ListSelectionListener {
 		/**
@@ -356,10 +354,9 @@ public class FlightsTab extends TabBase {
 		 */
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
-			//System.out.println(e.getSource());
-			if(flightsList.getSelectedValue() != null)
-			{
-				Flight theFlight = flightsList.getSelectedValue();//get the selected flight as a Flight object
+			// System.out.println(e.getSource());
+			if (flightsList.getSelectedValue() != null) {
+				Flight theFlight = flightsList.getSelectedValue();// get the selected flight as a Flight object
 				selectedFlight = theFlight;
 				System.out.println(selectedFlight);
 				eastComps.get(0).setText(selectedFlight.getCode());
@@ -369,47 +366,47 @@ public class FlightsTab extends TabBase {
 				eastComps.get(4).setText("$" + String.valueOf(selectedFlight.getCostPerSeat()) + "0");
 			}
 		}
-		
+
 	}
+
 	/**
-	 * @author Ben
-	 * Action listener for the Reserve button in the east panel. Checks that there is a flight loaded (by code) and that name and citizenship have been filled in
-	 * then passes those values to the reservation manager to create a reservation, and clears the search and flight fields in preparation for the next operation
-	 * */
-	private class ReserveFlightActionListener implements ActionListener
-	{
+	 * @author Ben Action listener for the Reserve button in the east panel. Checks
+	 *         that there is a flight loaded (by code) and that name and citizenship
+	 *         have been filled in then passes those values to the reservation
+	 *         manager to create a reservation, and clears the search and flight
+	 *         fields in preparation for the next operation
+	 */
+	private class ReserveFlightActionListener implements ActionListener {
 
 		@Override
-		public void actionPerformed(ActionEvent e) 
-		{
-			if(!eastComps.get(0).getText().isBlank() && !eastComps.get(5).getText().isBlank() && !eastComps.get(6).getText().isBlank())
-			{
-					try
-					{
-						//Added save functionality
-						Reservation r = reservationManager.makeReservation(selectedFlight, eastComps.get(5).getText(), eastComps.get(6).getText());
-						ReservationManager rm = new ReservationManager(r);
-						rm.persist();
-						//Liam
-						
-						//System.out.println("Reservation Made!" + selectedFlight);
-						clearFields();
-						flightsModel.clear();
-					} catch (InvalidNameException | InvalidCitizenshipException | InvalidFlightCodeException
-							| NoMoreSeatsException e1)
-					{
-						e1.printStackTrace();
-					}
-		}
-		
+		public void actionPerformed(ActionEvent e) {
+			if (!eastComps.get(0).getText().isBlank() && !eastComps.get(5).getText().isBlank()
+					&& !eastComps.get(6).getText().isBlank()) {
+				try {
+					//Save functionality
+					Reservation r = reservationManager.makeReservation(selectedFlight, eastComps.get(5).getText(),
+							eastComps.get(6).getText());
+					reservationManager = new ReservationManager(r);
+					reservationManager.persist();
+
+					JOptionPane.showMessageDialog(null,"Reservation Created. Your code is: " + r.getCode());
+
+					clearFields();
+					flightsModel.clear();
+				} catch (InvalidNameException | InvalidCitizenshipException | InvalidFlightCodeException
+						| NoMoreSeatsException e1) {
+					e1.printStackTrace();
+				}
+			}
+
 		}
 	}
+
 	/**
-	 * @author Ben
-	 * Method called to clear all fields in the east panel and reset the selectedFlight to a new empty flight
-	 * */
-	public void clearFields()
-	{
+	 * @author Ben Method called to clear all fields in the east panel and reset the
+	 *         selectedFlight to a new empty flight
+	 */
+	public void clearFields() {
 		eastComps.get(0).setText("");
 		eastComps.get(1).setText("");
 		eastComps.get(2).setText("");
@@ -419,5 +416,5 @@ public class FlightsTab extends TabBase {
 		eastComps.get(6).setText("");
 		selectedFlight = new Flight();
 	}
-	 
+
 }

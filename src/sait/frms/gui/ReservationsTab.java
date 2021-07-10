@@ -234,25 +234,26 @@ public class ReservationsTab extends TabBase {
 				double cost = Double.parseDouble(costField.getText());
 				System.out.println(updatedActive);
 				// find in the list the updated
-				Reservation temp = reservationManager.findReservationByCode(code);// holds the reservation manager we
-																					// are looking to find
+				Reservation temp = reservationManager.findReservationByCode(code);
 				updatedReservation = new Reservation(code, flight, airline, updatedName, updatedCitizenship, cost,
 						isActive);
-
+				boolean fieldsNotChanged = true;
+				//if(updatedName != )
 				// find reservation that matches now
+				if(!fieldsNotChanged) {
 				boolean flag = false;
 				int index = 0;
 				while (!flag) {
-					
 					if(temp.getCode()==foundReservation.get(index).getCode()) {
 						System.out.println("Found matching Reservation code at: "+ temp.getCode());
-						//cut and replace
+						//cut reservation with matching code from the ArrayList. Then add the new Reservation in its place.
+						foundReservation.remove(index);
+						foundReservation.add(temp);
+						flag= true;
 					}
 					index++;
 				}
-
-				// cut, and replace with new
-
+				}
 				// save
 				updatedReservation.setName(updatedName);
 				updatedReservation.setCitizenship(updatedCitizenship);

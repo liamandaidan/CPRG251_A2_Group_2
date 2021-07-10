@@ -115,9 +115,8 @@ public class Flight {
 	*changed from default to be more readable
 	*/
 	public String toString() {
-		//return "Flight [code=" + code + ", airlineName=" + airlineName + ", from=" + from + ", to=" + to + ", weekday="
-				//+ weekday + ", time=" + time + ", seats=" + seats + ", costPerSeat=" + costPerSeat + "]";
-		return airlineName + " [" + code + "] " + from + " to " + to + ", " + weekday + " @" + time + " Avail. Seats: " + seats + " @ $" + costPerSeat + "0 each";
+		return	String.format("%s, From: %s, To: %s, Day: %s, Cost: $%.2f" , code, from, to, weekday,costPerSeat);
+		  
 	}
 	
 	public String findFlightDisplay() {
