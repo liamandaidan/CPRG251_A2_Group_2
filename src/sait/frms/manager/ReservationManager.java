@@ -69,7 +69,7 @@ public class ReservationManager {
 		}
 
 		reservationsCode = generateReservationCode(flight);
-		Reservation newReservation = new Reservation(reservationsCode, flight.getCode(), name.toLowerCase(), flight.getAirlineName(),
+		Reservation newReservation = new Reservation(reservationsCode, flight.getCode(), name, flight.getAirlineName(),
 				citizenship, RESERVATION_COST, true);
 		return newReservation;
 
@@ -90,7 +90,7 @@ public class ReservationManager {
 
 		for (int i = 0; i < reservations.size(); i++) {
 			if (reservations.get(i).getCode().equals(code) || reservations.get(i).getAirline().equals(airline)
-					|| reservations.get(i).getName().contains(name.toLowerCase())) {
+					|| reservations.get(i).getName().toLowerCase().contains(name.toLowerCase()) ){
 				foundReservation.add(reservations.get(i));
 			}else {
 				System.out.println("No reservation found.");	
