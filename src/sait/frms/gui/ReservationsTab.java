@@ -297,9 +297,9 @@ public class ReservationsTab extends TabBase {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				String code = codeSearch.getText();
-				String airline = airlineSearch.getText();
-				String name = nameSearch.getText();
+				String code = codeSearchField.getText();
+				String airline = airlineSearchField.getText();
+				String name = nameSearchField.getText();
 				rm = new ReservationManager();
 				foundReservation = rm.findReservations(code, airline, name);
 				// D111
