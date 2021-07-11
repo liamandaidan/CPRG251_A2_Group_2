@@ -126,7 +126,6 @@ public class ReservationManager {
 		try {
 			fstream = new FileOutputStream(RESERVATIONS_FILEPATH);
 			DataOutputStream outputStream = new DataOutputStream(fstream);
-			System.out.println("Writing the words to a binary file");
 			Reservation r;
 
 			for (int i = 0; i < reservations.size(); i++) {
@@ -138,7 +137,7 @@ public class ReservationManager {
 				outputStream.writeUTF(r.getCitizenship());
 				outputStream.writeDouble(r.getCost());
 				outputStream.writeBoolean(r.isActive());
-				System.out.println("Is active on line "+i+" is "+ r.isActive());
+				
 			}
 
 			outputStream.close();
