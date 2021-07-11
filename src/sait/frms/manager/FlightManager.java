@@ -14,20 +14,65 @@ import sait.frms.problemdomain.*;
  *
  */
 public class FlightManager {
-
+	
+	/**
+	 * Name for searching the day of week.
+	 */
 	public static final String WEEKDAY_ANY = "Any";
+	
+	/**
+	 * Name for searching the day of week.
+	 */
 	public static final String WEEKDAY_SUNDAY = "Sunday";
+	
+	/**
+	 * Name for searching the day of week. 
+	 */
 	public static final String WEEKDAY_MONDAY = "Monday";
+	
+	/**
+	 * Name for searching the day of week.
+	 */
 	public static final String WEEKDAY_TUESDAY = "Tuesday";
-	public static final String WEEKDAY_WEDNESDAY = "Wednesday";
-	public static final String WEEKDAY_THURSDAY = "Thursday";
+	
+	/**
+	 * Name for searching the day of week.
+	 */
+		public static final String WEEKDAY_WEDNESDAY = "Wednesday";
+		
+	/**
+	 * Name for searching the day of week. 
+	 */
+		public static final String WEEKDAY_THURSDAY = "Thursday";
+		
+	/**
+	 * Name for searching the day of week.
+	 */
 	public static final String WEEKDAY_FRIDAY = "Friday";
+	
+	/**
+	 * Name for searching the day of week.
+	 */
 	public static final String WEEKDAY_SATURDAY = "Saturday";
-
+	
+	/**
+	 * File location for the flights csv.
+	 */
 	public static final String FLIGHTS_TEXT = "res/flights.csv";
+	
+	/**
+	 * File location for the airports csv. 
+	 */
 	public static final String AIRPORTS_TEXT = "res/airports.csv";
-
+	
+	/**
+	 *  A list of all of the flights.
+	 */
 	private ArrayList<Flight> flights = new ArrayList<Flight>();
+	
+	/**
+	 * A list of all of the airports.
+	 */
 	private ArrayList<String> airports = new ArrayList<String>();
 
 	/**
@@ -43,8 +88,8 @@ public class FlightManager {
 	}
 
 	/**
-	 * 
-	 * @return An ArrayLst list of the valid airports
+	 *  The list of all the airports. 
+	 * @return An ArrayLst list of the valid airports.
 	 */
 	public ArrayList<String> getAirports() {
 
@@ -52,7 +97,7 @@ public class FlightManager {
 	}
 
 	/**
-	 * 
+	 * The list of valid flights.
 	 * @return A list of valid flights.
 	 */
 	public ArrayList<Flight> getFlights() {
@@ -60,9 +105,9 @@ public class FlightManager {
 	}
 
 	/**
-	 * 
-	 * @param code The flight code
-	 * @return An airport based on the code
+	 * Looks for the airport by code.
+	 * @param code The flight code.
+	 * @return An airport based on the code.
 	 */
 	public String findAirportByCode(String code) {
 		for (int i = 0; i < airports.size(); i++) {
@@ -75,8 +120,8 @@ public class FlightManager {
 	}
 
 	/**
-	 * 
-	 * @param code The flight code
+	 *  Find the flight by code.
+	 * @param code The flight code.
 	 * @return A flight based on the code.
 	 */
 	public Flight findFlightByCode(String code) {
