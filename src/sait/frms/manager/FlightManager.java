@@ -7,6 +7,8 @@ import sait.frms.exception.InvalidFlightCodeException;
 import sait.frms.problemdomain.*;
 
 /**
+ * Used to manage the flight objects. Loads the flights and airports into arrays 
+ * to store them.
  * 
  * @author Ben and Mike
  *
@@ -42,7 +44,7 @@ public class FlightManager {
 
 	/**
 	 * 
-	 * @return
+	 * @return An ArrayLst list of the valid airports
 	 */
 	public ArrayList<String> getAirports() {
 
@@ -51,7 +53,7 @@ public class FlightManager {
 
 	/**
 	 * 
-	 * @return
+	 * @return A list of valid flights.
 	 */
 	public ArrayList<Flight> getFlights() {
 		return flights;
@@ -59,8 +61,8 @@ public class FlightManager {
 
 	/**
 	 * 
-	 * @param code
-	 * @return
+	 * @param code The flight code
+	 * @return An airport based on the code
 	 */
 	public String findAirportByCode(String code) {
 		for (int i = 0; i < airports.size(); i++) {
@@ -74,8 +76,8 @@ public class FlightManager {
 
 	/**
 	 * 
-	 * @param code
-	 * @return
+	 * @param code The flight code
+	 * @return A flight based on the code.
 	 */
 	public Flight findFlightByCode(String code) {
 		for (int i = 0; i < flights.size(); i++) {
@@ -91,10 +93,10 @@ public class FlightManager {
 
 	/**
 	 * If user selects a specific day, then search includes a check that the day matches. If any day is selected, and all flight days with matching flights are included
-	 * @param from
-	 * @param to
-	 * @param weekday
-	 * @return
+	 * @param from Where the flight is from.
+	 * @param to Where the flight is to. 
+	 * @param weekday The day of the week the flight is. 
+	 * @return An Array List of flights that match the search
 	 */
 	public ArrayList<Flight> findFlights(String from, String to, String weekday) {
 		ArrayList<Flight> foundFlights = new ArrayList<Flight>();
@@ -127,6 +129,7 @@ public class FlightManager {
 	}
 
 	/**
+	 * Populates The array list with all of the flights.
 	 * @throws InvalidFlightCodeException
 	 * 
 	 */
@@ -213,6 +216,8 @@ public class FlightManager {
 	}
 
 	/**
+	 * Populates the array list with all of the valid airports that flights may
+	 * come from.
 	 * @throws FileNotFoundException
 	 * 
 	 */

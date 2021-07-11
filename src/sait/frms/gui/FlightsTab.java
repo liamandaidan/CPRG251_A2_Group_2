@@ -77,7 +77,11 @@ public class FlightsTab extends TabBase {
 
 		panel.setVisible(true);// should make everything visible
 	}
-
+/**
+ *  Creates the south panel  where the user will search for a flight.
+ *  
+ * @return Returns the south panel
+ */
 	private JPanel createSouthPanel() {
 
 		String[] flightLocations = { "YYC", "YEG", "YUL", "YOW", "YYZ", "YVR", "YWG", "ATL", "PEK", "DXB", "HKG", "LHR",
@@ -171,10 +175,10 @@ public class FlightsTab extends TabBase {
 				flightsModel.clear();// clear the previous search results
 
 				// print out flights
-				/*System.out.println(flightManager.findFlights(from, to, day));
+				/*System.out.println(flightManager.findFlights(from, to, day));*/
 				flightsModel.addAll(flightManager.findFlights(from, to, day));
-				System.out.println(flightsModel);
-				*/
+//				System.out.println(flightsModel);
+				
 
 			}
 
