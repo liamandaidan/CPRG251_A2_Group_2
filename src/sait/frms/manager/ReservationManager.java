@@ -221,8 +221,7 @@ public class ReservationManager {
 	}
 
 	/**
-	 * This will return the populated list. For now this is an extra method might
-	 * get rid of it later
+	 * This will return the populated Arraylist with all the items.
 	 * 
 	 * @return
 	 */
