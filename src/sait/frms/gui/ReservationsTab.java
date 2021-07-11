@@ -465,9 +465,7 @@ public class ReservationsTab extends TabBase {
 				// add found reservation to reservationModel
 				reservationModel.addAll(reservationManager.findReservations(code, airline, name));
 				inventory = reservationManager.getPopulated();
-				for (int i = 0; i < inventory.size(); i++) {
-					System.out.println(inventory.get(i).getName());
-				}
+
 				// create temp to add to list for each
 				for (int i = 0; i < reservationModel.size(); i++) {
 					Reservation r = reservationModel.get(0);
