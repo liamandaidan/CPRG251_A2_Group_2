@@ -77,11 +77,12 @@ public class FlightsTab extends TabBase {
 
 		panel.setVisible(true);// should make everything visible
 	}
-/**
- *  Creates the south panel  where the user will search for a flight.
- *  
- * @return Returns the south panel
- */
+
+	/**
+	 * Creates the south panel where the user will search for a flight.
+	 * 
+	 * @return Returns the south panel
+	 */
 	private JPanel createSouthPanel() {
 
 		String[] flightLocations = { "YYC", "YEG", "YUL", "YOW", "YYZ", "YVR", "YWG", "ATL", "PEK", "DXB", "HKG", "LHR",
@@ -162,7 +163,6 @@ public class FlightsTab extends TabBase {
 		// Bottom button
 		panel.add(findReservationButton, BorderLayout.SOUTH);
 		String chosenName = (String) fromComboBox.getSelectedItem();
-		
 
 		// add Button event listener
 		findReservationButton.addActionListener(new ActionListener() {
@@ -175,10 +175,9 @@ public class FlightsTab extends TabBase {
 				flightsModel.clear();// clear the previous search results
 
 				// print out flights
-				/*System.out.println(flightManager.findFlights(from, to, day));*/
+				/* System.out.println(flightManager.findFlights(from, to, day)); */
 				flightsModel.addAll(flightManager.findFlights(from, to, day));
 //				System.out.println(flightsModel);
-				
 
 			}
 
@@ -380,23 +379,39 @@ public class FlightsTab extends TabBase {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (!eastComps.get(0).getText().isBlank() && !eastComps.get(5).getText().isBlank()
-					&& !eastComps.get(6).getText().isBlank()) {
-				try {
-					//Save functionality
+
+			try {
+				if (!eastComps.get(0).getText().isBlank() && !eastComps.get(5).getText().isBlank()
+						&& !eastComps.get(6).getText().isBlank()) {
+					// Save functionality
+					
 					Reservation r = reservationManager.makeReservation(selectedFlight, eastComps.get(5).getText(),
 							eastComps.get(6).getText());
+					
+					//we still need to figure out seats
+					if(selectedFlight.getSeats() <= 0)
+						throw new NoMoreSeatsException();
+					
 					reservationManager = new ReservationManager(r);
 					reservationManager.persist();
 
-					JOptionPane.showMessageDialog(null,"Reservation Created. Your code is: " + r.getCode());
+					JOptionPane.showMessageDialog(null, "Reservation Created. Your code is: " + r.getCode());
 
 					clearFields();
 					flightsModel.clear();
-				} catch (InvalidNameException | InvalidCitizenshipException | InvalidFlightCodeException
-						| NoMoreSeatsException e1) {
-					e1.printStackTrace();
+				} else if (eastComps.get(5).getText().isBlank()) {
+					throw new InvalidNameException();
+				} else if (eastComps.get(6).getText().isBlank()) {
+					throw new InvalidCitizenshipException();
 				}
+			} catch (InvalidNameException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+			} catch (NoMoreSeatsException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+			} catch (InvalidFlightCodeException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+			} catch (InvalidCitizenshipException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
 			}
 
 		}

@@ -161,6 +161,7 @@ public class ReservationManager {
 	 * @return the number of available seats
 	 */
 	private int getAvailableSeats(Flight flight) {
+		
 		return flight.getSeats();
 	}
 
