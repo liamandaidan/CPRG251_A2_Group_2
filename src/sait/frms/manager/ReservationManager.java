@@ -7,12 +7,11 @@ import sait.frms.exception.*;
 import sait.frms.problemdomain.*;
 
 /**
- * This is the Reservation manager that manages the data from Reservation object
+ * This is the Reservation manager that manages the data from Reservation object.
  * 
  * @author Robyn Balanag, Liam McLaughlin
  * @version June, 25, 2021
  * 
- *          TODO Refer to GITHub online for issues to be completed.
  */
 
 public class ReservationManager {
@@ -21,14 +20,12 @@ public class ReservationManager {
 	private final String RESERVATIONS_FILEPATH = "res/reservations.dat";
 
 	/**
+	 * Default constructor used to create a reservation manager object.
 	 * @throws FileNotFoundException
 	 * 
 	 */
 	public ReservationManager() {
-		/*
-		 * try { populateFromBinary(); } catch (FileNotFoundException e) {
-		 * System.out.println("Cant find file"); e.printStackTrace(); }
-		 */
+
 	}
 
 	public ReservationManager(Reservation r) {
@@ -67,6 +64,11 @@ public class ReservationManager {
 	}
 
 	/**
+	 * This will find and return an araylist of reservations that contain search results that match reservations.
+	 * 
+	 * @param code the code to use
+	 * @param airline the airline code to use
+	 * @param name the name to use
 	 * @return the list of reservations
 	 * 
 	 */
@@ -98,6 +100,8 @@ public class ReservationManager {
 	}
 
 	/**
+	 * This method will find reservation by using a code. It returns a Reservations object.
+	 * @param code the code to use
 	 * @return the reservation using the code
 	 */
 	public Reservation findReservationByCode(String code) {
@@ -113,7 +117,7 @@ public class ReservationManager {
 	}
 
 	/**
-	 * This method will save Reservations to binary file(RESERVATIONS_FILEPATH).
+	 * This method will save Reservations to binary file(RESERVATIONS_FILEPATH) when called.
 	 */
 	public void persist() {
 
@@ -148,7 +152,9 @@ public class ReservationManager {
 	}
 
 	/**
+	 * This method will find return how many available seats are left.
 	 * 
+	 * @param flight the flight object 
 	 * @return the number of available seats
 	 */
 	private int getAvailableSeats(Flight flight) {
@@ -156,12 +162,11 @@ public class ReservationManager {
 	}
 
 	/**
-	 * The reservation code must use the format LDDDD, where L is either D for
-	 * Domestic or I for International and DDDD is a random number between 1000 and
-	 * 9999. Domestic Flights Start with Y AND from and to must both have Y.
+	 * This method will generate a reservation code and return a string.
 	 * 
-	 * 
+	 * @param flight the flight object
 	 * @return a generated confirmation code
+	 * @throws InvalidFlightCodeException
 	 */
 	private String generateReservationCode(Flight flight) throws InvalidFlightCodeException {
 		// Potentially Throws error of Having the wrong flight code.
@@ -184,9 +189,7 @@ public class ReservationManager {
 	}
 
 	/**
-	 * This method will bring in the reservations from txt file. In the format of:
-	 * this.code, this.flightCode, this.airline, this.name, this.citizenship,
-	 * this.cost, this.active);
+	 * This method will bring in the reservations from binary and add it to the arrayList.
 	 * 
 	 * @throws FileNotFoundException
 	 */
@@ -217,13 +220,12 @@ public class ReservationManager {
 			}
 		}
 		System.out.println("Done");
-		// System.out.println(reservations);
 	}
 
 	/**
 	 * This will return the populated Arraylist with all the items.
 	 * 
-	 * @return
+	 * @return reservations the reservations Arraylist.
 	 */
 	public ArrayList<Reservation> getPopulated() {
 
