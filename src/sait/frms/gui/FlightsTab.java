@@ -73,13 +73,15 @@ public class FlightsTab extends TabBase {
 		panel.add(centerPanel, BorderLayout.CENTER);
 
 		JPanel eastPanel = createEastPanel();
-		// eastPanel.setBackground(Color.blue);//this is just to identify the area taken
-		// up by this panel
 		panel.add(eastPanel, BorderLayout.EAST);
 
 		panel.setVisible(true);// should make everything visible
 	}
-
+/**
+ *  Creates the south panel  where the user will search for a flight.
+ *  
+ * @return Returns the south panel
+ */
 	private JPanel createSouthPanel() {
 
 		String[] flightLocations = { "YYC", "YEG", "YUL", "YOW", "YYZ", "YVR", "YWG", "ATL", "PEK", "DXB", "HKG", "LHR",
@@ -159,9 +161,8 @@ public class FlightsTab extends TabBase {
 
 		// Bottom button
 		panel.add(findReservationButton, BorderLayout.SOUTH);
-		// test
 		String chosenName = (String) fromComboBox.getSelectedItem();
-		// System.out.println("Chosen Name: " + chosenName);
+		
 
 		// add Button event listener
 		findReservationButton.addActionListener(new ActionListener() {
@@ -174,9 +175,10 @@ public class FlightsTab extends TabBase {
 				flightsModel.clear();// clear the previous search results
 
 				// print out flights
-				System.out.println(flightManager.findFlights(from, to, day));
+				/*System.out.println(flightManager.findFlights(from, to, day));*/
 				flightsModel.addAll(flightManager.findFlights(from, to, day));
-				System.out.println(flightsModel);
+//				System.out.println(flightsModel);
+				
 
 			}
 
@@ -223,12 +225,10 @@ public class FlightsTab extends TabBase {
 
 		JTextArea reserveTextArea = new JTextArea(15, 35);// height width
 		panel.add(new JScrollPane(reserveTextArea));
-		// reserveTextArea.add(flightsList);
 
 		flightsList.addListSelectionListener(new MyListSelectionListener());
 		panel.setBorder(BorderFactory.createEmptyBorder(5, 15, 30, 15));
 		panel.add(scrollPane);
-//		panel.setBackground(Color.CYAN);
 		return panel;
 	}
 

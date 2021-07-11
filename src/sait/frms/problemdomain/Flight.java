@@ -19,14 +19,15 @@ public class Flight {
 	}
 
 	/**
-	 * @param code
-	 * @param airlineName
-	 * @param from
-	 * @param to
-	 * @param weekday
-	 * @param time
-	 * @param seats
-	 * @param costPerSeat
+	 * Creates a flight object with all the properties from the csv file.
+	 * @param code The flight code
+	 * @param airlineName The name of the Airline
+	 * @param from Where the Flight is from
+	 * @param to Where the flight is going
+	 * @param weekday The day of the week the flight is
+	 * @param time the time of the flight
+	 * @param seats The number of seats available on the flight
+	 * @param costPerSeat The cost of the seat
 	 */
 	public Flight(String code, String airlineName, String from, String to, String weekday, String time, int seats,
 			double costPerSeat) {
