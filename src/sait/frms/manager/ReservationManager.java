@@ -19,7 +19,13 @@ import sait.frms.problemdomain.*;
 
 public class ReservationManager {
 
+	/**
+	 * Reservations ArrayList
+	 */
 	private ArrayList<Reservation> reservations = new ArrayList<>();
+	/**
+	 * 
+	 */
 	private final String RESERVATIONS_FILEPATH = "res/reservations.dat";
 
 	/**
