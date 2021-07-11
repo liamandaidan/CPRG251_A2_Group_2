@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import sait.frms.exception.*;
 import sait.frms.manager.*;
 import sait.frms.problemdomain.*;
 
@@ -241,39 +242,49 @@ public class ReservationsTab extends TabBase {
 				String airline = airlineField.getText();
 				double cost = Double.parseDouble(costField.getText().substring(1));
 				// find in the list the updated
-				Reservation temp = reservationManager.findReservationByCode(code);
-				updatedReservation = new Reservation(code, flight, updatedName, airline, updatedCitizenship, cost,
-						isActive);
-				ArrayList<Reservation> inventory = reservationManager.getPopulated();
+				try {
+					if(updatedName.equals(""))
+						throw new InvalidNameException();
+					if(updatedCitizenship.equals(""))
+						throw new InvalidCitizenshipException();
+					Reservation temp = reservationManager.findReservationByCode(code);
+					updatedReservation = new Reservation(code, flight, updatedName, airline, updatedCitizenship, cost,
+							isActive);
+					ArrayList<Reservation> inventory = reservationManager.getPopulated();
 
-				int i = 0;
-				for (i = 0; i < inventory.size(); i++) {
-					if (inventory.get(i).getCode() == temp.getCode()) {
-						if (!isActive) {
-							inActiveReservations.add(updatedReservation);
-							reservationModel.remove(i);
-							inventory.remove(i);
-						} else {
-							System.out.println("Success, this name will be updated: " + inventory.get(i).getName());
-							inventory.remove(i);
-							inventory.add(updatedReservation);
+					int i = 0;
+					for (i = 0; i < inventory.size(); i++) {
+						if (inventory.get(i).getCode() == temp.getCode()) {
+							if (!isActive) {
+								inActiveReservations.add(updatedReservation);
+								reservationModel.remove(i);
+								inventory.remove(i);
+							} else {
+								System.out.println("Success, this name will be updated: " + inventory.get(i).getName());
+								inventory.remove(i);
+								inventory.add(updatedReservation);
 
-							System.out.println("Updated Reservation is now saved as: " + inventory.get(i).getName());
+								System.out
+										.println("Updated Reservation is now saved as: " + inventory.get(i).getName());
+							}
 						}
+
 					}
-
+					
+					reservationManager.persist();
+					reservationModel.clear();
+					reserveTextArea.setText("");
+					codeField.setText("");
+					flightField.setText("");
+					airlineField.setText("");
+					costField.setText("");
+					nameField.setText("");
+					citizenshipField.setText("");
+				} catch (InvalidNameException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}catch(InvalidCitizenshipException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
 				}
-
-				reservationManager.persist();
-				reservationModel.clear();
-				reserveTextArea.setText("");
-				codeField.setText("");
-				flightField.setText("");
-				airlineField.setText("");
-				costField.setText("");
-				nameField.setText("");
-				citizenshipField.setText("");
-
 			}
 
 		});
