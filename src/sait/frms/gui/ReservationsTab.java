@@ -23,7 +23,8 @@ public class ReservationsTab extends TabBase {
 	 */
 	private ReservationManager reservationManager;
 	private ArrayList<Reservation> foundReservation = new ArrayList<>();
-	public ArrayList<Reservation> inActiveReservations = new ArrayList<>();
+	private ArrayList<Reservation> inActiveReservations = new ArrayList<>();
+	private ArrayList<Reservation> inventory; // contains ReservationManager reference to the arraylist
 	private JLabel reserveHeader, codeLabel, flightLabel, airlineLabel, costLabel, nameLabel, citizenshipLabel,
 			statusLabel;
 
@@ -98,7 +99,10 @@ public class ReservationsTab extends TabBase {
 
 			if (reservationList.getSelectedValue() != null) {
 				// not sure if the getCode will work but we will see.
+				System.out.println("ReservationList before: " + reservationList.getSelectedValue().getCode());
 				Reservation r = reservationManager.findReservationByCode(reservationList.getSelectedValue().getCode());
+
+				System.out.println("this is the r status" + r.isActive());
 
 				// codeField, flightField, airlineField, costField, nameField, citizenshipField;
 				codeField.setText(r.getCode());
@@ -231,11 +235,12 @@ public class ReservationsTab extends TabBase {
 				String updatedActive = (String) statusBox.getSelectedItem();
 				boolean isActive;
 
-				if (updatedActive == "Active")
+				if (updatedActive == "Active") {
 					isActive = true;
-				else
-					isActive = false;
 
+				} else {
+					isActive = false;
+				}
 				// these other fields are for the reservation object
 				String code = codeField.getText();
 				String flight = flightField.getText();
@@ -243,30 +248,23 @@ public class ReservationsTab extends TabBase {
 				double cost = Double.parseDouble(costField.getText().substring(1));
 				// find in the list the updated
 				try {
-					if(updatedName.equals(""))
+					if (updatedName.equals(""))
 						throw new InvalidNameException();
-					if(updatedCitizenship.equals(""))
+					if (updatedCitizenship.equals(""))
 						throw new InvalidCitizenshipException();
 					Reservation temp = reservationManager.findReservationByCode(code);
 					updatedReservation = new Reservation(code, flight, updatedName, airline, updatedCitizenship, cost,
 							isActive);
-					ArrayList<Reservation> inventory = reservationManager.getPopulated();
+					System.out.println("Is active value in update button is: " + isActive);
+					System.out.println("* UpdatedReservation is: " + updatedReservation.isActive());
 
 					int i = 0;
 					for (i = 0; i < inventory.size(); i++) {
 						if (inventory.get(i).getCode() == temp.getCode()) {
-							if (!isActive) {
-								inActiveReservations.add(updatedReservation);
-								reservationModel.remove(i);
-								inventory.remove(i);
-							} else {
-								System.out.println("Success, this name will be updated: " + inventory.get(i).getName());
-								inventory.remove(i);
-								inventory.add(updatedReservation);
-
-								System.out
-										.println("Updated Reservation is now saved as: " + inventory.get(i).getName());
-							}
+							System.out.println("Success, this name will be updated: " + inventory.get(i).getName());
+							inventory.remove(i);
+							inventory.add(updatedReservation);
+							System.out.println("Updated Reservation is now saved as: " + inventory.get(i).getName());
 						}
 
 					}
@@ -282,7 +280,7 @@ public class ReservationsTab extends TabBase {
 					citizenshipField.setText("");
 				} catch (InvalidNameException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
-				}catch(InvalidCitizenshipException e1) {
+				} catch (InvalidCitizenshipException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 				}
 			}
@@ -294,6 +292,10 @@ public class ReservationsTab extends TabBase {
 		panel.setPreferredSize(new Dimension(200, 100));
 		return panel;
 	}
+	
+
+	
+	
 
 	/**
 	 * Creates the south panel.
@@ -374,6 +376,10 @@ public class ReservationsTab extends TabBase {
 
 				// add found reservation to reservationModel
 				reservationModel.addAll(reservationManager.findReservations(code, airline, name));
+				inventory = reservationManager.getPopulated();
+				for (int i = 0; i < inventory.size(); i++) {
+					System.out.println(inventory.get(i).getName());
+				}
 				// create temp to add to list for each
 				for (int i = 0; i < reservationModel.size(); i++) {
 					Reservation r = reservationModel.get(0);

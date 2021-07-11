@@ -34,6 +34,9 @@ public class ReservationManager {
 
 	public ReservationManager(Reservation r) {
 		this.reservations.add(r);
+		for(int i = 0; i < reservations.size(); i ++) {
+			System.out.println("Rez LIST: "+reservations.get(i).getName());
+		}
 	}
 
 	/**
@@ -110,10 +113,9 @@ public class ReservationManager {
 		for (int i = 0; i < reservations.size(); i++) {
 			if (reservations.get(i).getCode().equals(code)) {
 				return reservations.get(i);
-			} else {
-				System.out.println("No reservation found.");
 			}
 		}
+		System.out.println("No code found");
 		return null;
 
 	}
@@ -130,7 +132,7 @@ public class ReservationManager {
 			DataOutputStream outputStream = new DataOutputStream(fstream);
 			System.out.println("Writing the words to a binary file");
 			Reservation r;
-			String name = "";
+
 			for (int i = 0; i < reservations.size(); i++) {
 				r = reservations.get(i);
 				outputStream.writeUTF(r.getCode());
@@ -140,10 +142,9 @@ public class ReservationManager {
 				outputStream.writeUTF(r.getCitizenship());
 				outputStream.writeDouble(r.getCost());
 				outputStream.writeBoolean(r.isActive());
-				name += r.getName() + " ";
+				System.out.println("Is active on line "+i+" is "+ r.isActive());
 			}
 
-			System.out.println("Done!, " + name + ". Has been added to save file.");
 			outputStream.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("The File cannot be found: " + RESERVATIONS_FILEPATH);
@@ -236,5 +237,15 @@ public class ReservationManager {
 
 		return reservations;
 	}
+	
+	
+	/**
+	 * 
+	 * @param r
+	 */
+	public void updateReservations(Reservation r) {
+		this.reservations.add(r);
+	}
+	
 
 }

@@ -57,6 +57,7 @@ public class FlightsTab extends TabBase {
 	 * @param reservationManager Instance of ReservationManager
 	 */
 	public FlightsTab(FlightManager flightManager, ReservationManager reservationManager) {
+		reservationManager = new ReservationManager();
 		this.flightManager = flightManager;
 		this.reservationManager = reservationManager;
 
@@ -384,6 +385,9 @@ public class FlightsTab extends TabBase {
 				if (!eastComps.get(0).getText().isBlank() && !eastComps.get(5).getText().isBlank()
 						&& !eastComps.get(6).getText().isBlank()) {
 					// Save functionality
+					//So maybe to get around our issue. We need to have an arrayList here that has all the values
+					//the save that whole thing.
+					selectedFlight.setSeat(selectedFlight.getSeats()-1);
 					
 					Reservation r = reservationManager.makeReservation(selectedFlight, eastComps.get(5).getText(),
 							eastComps.get(6).getText());
@@ -391,9 +395,9 @@ public class FlightsTab extends TabBase {
 					//we still need to figure out seats
 					if(selectedFlight.getSeats() <= 0)
 						throw new NoMoreSeatsException();
-					
-					reservationManager = new ReservationManager(r);
-					reservationManager.persist();
+
+					reservationManager.updateReservations(r);
+					reservationManager.persist();//save
 
 					JOptionPane.showMessageDialog(null, "Reservation Created. Your code is: " + r.getCode());
 

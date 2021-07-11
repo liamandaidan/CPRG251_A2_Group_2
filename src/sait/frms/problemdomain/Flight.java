@@ -96,6 +96,14 @@ public class Flight {
 	public double getCostPerSeat() {
 		return costPerSeat;
 	}
+	
+	/**
+	 * This will update the seats count.
+	 * @param seats the seats to set.
+	 */
+	public void setSeat(int seats){
+    	this.seats = seats;
+  }
 
 	/**
 	 * @return boolean true if flight is domestic, false if not
