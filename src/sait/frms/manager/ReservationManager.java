@@ -3,6 +3,8 @@ package sait.frms.manager;
 import java.io.*;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 import sait.frms.exception.*;
 import sait.frms.problemdomain.*;
 
@@ -81,7 +83,7 @@ public class ReservationManager {
 		try {
 			populateFromBinary();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
 
 		for (int i = 0; i < reservations.size(); i++) {
@@ -89,13 +91,8 @@ public class ReservationManager {
 					|| reservations.get(i).getName().toLowerCase().contains(name.toLowerCase())) {
 				foundReservation.add(reservations.get(i));
 			} else {
-				System.out.println("No reservation found.");
+				JOptionPane.showMessageDialog(null, "No Reservation Found.");
 			}
-		}
-
-		if (foundReservation.size() == 0) {
-			System.out.println("No reservation found.");// need to catch this error
-
 		}
 
 		return foundReservation;
@@ -239,10 +236,4 @@ public class ReservationManager {
 		return reservations;
 	}
 
-	/**
-	 * 
-	 */
-	public void addInactive(ArrayList<Reservation> r){
-		
-	}
 }
