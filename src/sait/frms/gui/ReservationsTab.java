@@ -7,9 +7,6 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 import sait.frms.exception.*;
 import sait.frms.manager.*;
 import sait.frms.problemdomain.*;
@@ -22,24 +19,109 @@ public class ReservationsTab extends TabBase {
 	 * Instance of reservation manager.
 	 */
 	private ReservationManager reservationManager;
+	/**
+	 * Contains Reservations found from the search function.
+	 */
 	private ArrayList<Reservation> foundReservation = new ArrayList<>();
-	private ArrayList<Reservation> inActiveReservations = new ArrayList<>();
-	private ArrayList<Reservation> inventory; // contains ReservationManager reference to the arraylist
-	private JLabel reserveHeader, codeLabel, flightLabel, airlineLabel, costLabel, nameLabel, citizenshipLabel,
-			statusLabel;
-
-	private JButton updateButton, findReservationButton;
+	/**
+	 * This arraylist is a direct reference to the main arraylist of
+	 * ReservationManager.
+	 */
+	private ArrayList<Reservation> inventory;
+	/**
+	 * The heading for reserve.
+	 */
+	private JLabel reserveHeader;
+	/**
+	 * The label for code.
+	 */
+	private JLabel codeLabel;
+	/**
+	 * The label for flights.
+	 */
+	private JLabel flightLabel;
+	/*
+	 * The label for airlines
+	 * 
+	 */
+	private JLabel airlineLabel;
+	/*
+	 * The label for cost.
+	 */
+	private JLabel costLabel;
+	/*
+	 * The label for name.
+	 */
+	private JLabel nameLabel;
+	/*
+	 * The label for citizenship.
+	 */
+	private JLabel citizenshipLabel;
+	/*
+	 * The label for status.
+	 */
+	private JLabel statusLabel;
+	/*
+	 * The button that contains update.
+	 */
+	private JButton updateButton;
+	/*
+	 * The button that contains find reservations.
+	 */
+	private JButton findReservationButton;
+	/*
+	 * The comboBox that contains the isActive.
+	 */
 	private JComboBox statusBox;
-	private JTextField codeField, flightField, airlineField, costField, nameField, citizenshipField;
+	/*
+	 * The textField for code.
+	 */
+	private JTextField codeField;
+	/*
+	 * The textField for flights.
+	 */
+	private JTextField flightField;
+	/*
+	 * The textField for airline.
+	 */
+	private JTextField airlineField;
+	/*
+	 * The textField for cost.
+	 */
+	private JTextField costField;
+	/*
+	 * The textField for name.
+	 */
+	private JTextField nameField;
+	/*
+	 * The textField for citizenship.
+	 */
+	private JTextField citizenshipField;
+	/*
+	 * The textArea for all reservations.
+	 */
 	private JTextArea reserveTextArea;
+	/*
+	 * This keeps track of the grid bag constraints.
+	 */
 	private GridBagConstraints gbc;
+	/*
+	 * This contains the final value for our textfield length.
+	 */
 	private final int TEXTFIELD_LENGTH = 11;
-
+	/*
+	 * This houses the reservationsList thats used in relation with reservationModel.
+	 */
 	private JList<Reservation> reservationList;
+	/*
+	 * The reservationModel object that is used to display to text Area
+	 */
 	private DefaultListModel<Reservation> reservationModel;
+
 
 	/**
 	 * Creates the components for reservations tab.
+	 * @param reservationManager
 	 */
 	public ReservationsTab(ReservationManager reservationManager) {
 		this.reservationManager = reservationManager;
@@ -89,12 +171,17 @@ public class ReservationsTab extends TabBase {
 
 	}
 
-	// when the textField is clicked
+	/**
+	 * When the text area is clicked will listen.
+	 *
+	 */
 	private class MyListSelectionListener implements ListSelectionListener {
+	
 		/**
-		 * Called when user selects an item in the JList.
+		 * This will populate the fields on the east panel.
+		 *@param ListSelectionEvent the ListSelectionEvent to select.
+		 *@Override
 		 */
-		@Override
 		public void valueChanged(ListSelectionEvent e) {
 
 			if (reservationList.getSelectedValue() != null) {
@@ -225,7 +312,12 @@ public class ReservationsTab extends TabBase {
 		formatPanel.add(updateButton, gbc);
 		updateButton.addActionListener(new ActionListener() {
 
-			@Override
+			/*
+			 * This method will update the fields and save to binary.
+			 * 
+			 * @param ActionEvent the ActionEvent used.
+			 * @Override
+			 */
 			public void actionPerformed(ActionEvent e) {
 				// Reservation makeReservation(Flight flight, String name, String citizenship)
 				Reservation updatedReservation;
@@ -268,7 +360,7 @@ public class ReservationsTab extends TabBase {
 						}
 
 					}
-					
+
 					reservationManager.persist();
 					reservationModel.clear();
 					reserveTextArea.setText("");
@@ -292,10 +384,6 @@ public class ReservationsTab extends TabBase {
 		panel.setPreferredSize(new Dimension(200, 100));
 		return panel;
 	}
-	
-
-	
-	
 
 	/**
 	 * Creates the south panel.
@@ -366,7 +454,12 @@ public class ReservationsTab extends TabBase {
 		panel.add(findReservationButton, BorderLayout.SOUTH);
 		findReservationButton.addActionListener(new ActionListener() {
 
-			@Override
+			/**
+			 * This method will find reservations and display them to textArea.
+			 *
+			 *@param ActionEvent the ActionEvent to use.
+			 *@Override
+			 */
 			public void actionPerformed(ActionEvent e) {
 				// reservationModel.clear();
 				String code = codeSearchField.getText();
