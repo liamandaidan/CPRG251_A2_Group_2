@@ -7,6 +7,9 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import sait.frms.manager.*;
 import sait.frms.problemdomain.*;
 
@@ -18,8 +21,8 @@ public class ReservationsTab extends TabBase {
 	 * Instance of reservation manager.
 	 */
 	private ReservationManager reservationManager;
-	ArrayList<Reservation> foundReservation = new ArrayList<>();
-	ArrayList<Reservation> inActiveReservations = new ArrayList<>();
+	private ArrayList<Reservation> foundReservation = new ArrayList<>();
+	public ArrayList<Reservation> inActiveReservations = new ArrayList<>();
 	private JLabel reserveHeader, codeLabel, flightLabel, airlineLabel, costLabel, nameLabel, citizenshipLabel,
 			statusLabel;
 
@@ -246,20 +249,21 @@ public class ReservationsTab extends TabBase {
 				int i = 0;
 				for (i = 0; i < inventory.size(); i++) {
 					if (inventory.get(i).getCode() == temp.getCode()) {
-						if(!isActive) {
+						if (!isActive) {
 							inActiveReservations.add(updatedReservation);
 							reservationModel.remove(i);
-						}else {
-						System.out.println("Success, this name will be updated: " + inventory.get(i).getName());
-						inventory.remove(i);
-						inventory.add(updatedReservation);
+							inventory.remove(i);
+						} else {
+							System.out.println("Success, this name will be updated: " + inventory.get(i).getName());
+							inventory.remove(i);
+							inventory.add(updatedReservation);
 
-						System.out.println("Updated Reservation is now saved as: " + inventory.get(i).getName());
+							System.out.println("Updated Reservation is now saved as: " + inventory.get(i).getName());
 						}
 					}
 
 				}
-				
+
 				reservationManager.persist();
 				reservationModel.clear();
 				reserveTextArea.setText("");

@@ -11,7 +11,7 @@ public class InvalidFlightCodeException extends Exception{
 		super("Error: Flight code is not correct.");
 	}
 	public InvalidFlightCodeException(String from, String to) {
-		super("Error: Flight code is not correct: From: "+ from+ ", To: "+to);
+		super("Error: Flight could not be generated From: "+ from+ ", To: "+to);
 	}
 	
 }

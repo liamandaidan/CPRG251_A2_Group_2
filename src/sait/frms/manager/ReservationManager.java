@@ -7,7 +7,8 @@ import sait.frms.exception.*;
 import sait.frms.problemdomain.*;
 
 /**
- * This is the Reservation manager that manages the data from Reservation object.
+ * This is the Reservation manager that manages the data from Reservation
+ * object.
  * 
  * @author Robyn Balanag, Liam McLaughlin
  * @version June, 25, 2021
@@ -21,6 +22,7 @@ public class ReservationManager {
 
 	/**
 	 * Default constructor used to create a reservation manager object.
+	 * 
 	 * @throws FileNotFoundException
 	 * 
 	 */
@@ -58,17 +60,18 @@ public class ReservationManager {
 		}
 		reservationsCode = generateReservationCode(flight);
 		Reservation newReservation = new Reservation(reservationsCode, flight.getCode(), name, flight.getAirlineName(),
-				citizenship,  flight.getCostPerSeat(), true);
+				citizenship, flight.getCostPerSeat(), true);
 		return newReservation;
 
 	}
 
 	/**
-	 * This will find and return an araylist of reservations that contain search results that match reservations.
+	 * This will find and return an araylist of reservations that contain search
+	 * results that match reservations.
 	 * 
-	 * @param code the code to use
+	 * @param code    the code to use
 	 * @param airline the airline code to use
-	 * @param name the name to use
+	 * @param name    the name to use
 	 * @return the list of reservations
 	 * 
 	 */
@@ -100,7 +103,9 @@ public class ReservationManager {
 	}
 
 	/**
-	 * This method will find reservation by using a code. It returns a Reservations object.
+	 * This method will find reservation by using a code. It returns a Reservations
+	 * object.
+	 * 
 	 * @param code the code to use
 	 * @return the reservation using the code
 	 */
@@ -117,7 +122,8 @@ public class ReservationManager {
 	}
 
 	/**
-	 * This method will save Reservations to binary file(RESERVATIONS_FILEPATH) when called.
+	 * This method will save Reservations to binary file(RESERVATIONS_FILEPATH) when
+	 * called.
 	 */
 	public void persist() {
 
@@ -154,7 +160,7 @@ public class ReservationManager {
 	/**
 	 * This method will find return how many available seats are left.
 	 * 
-	 * @param flight the flight object 
+	 * @param flight the flight object
 	 * @return the number of available seats
 	 */
 	private int getAvailableSeats(Flight flight) {
@@ -189,7 +195,8 @@ public class ReservationManager {
 	}
 
 	/**
-	 * This method will bring in the reservations from binary and add it to the arrayList.
+	 * This method will bring in the reservations from binary and add it to the
+	 * arrayList.
 	 * 
 	 * @throws FileNotFoundException
 	 */
@@ -232,4 +239,10 @@ public class ReservationManager {
 		return reservations;
 	}
 
+	/**
+	 * 
+	 */
+	public void addInactive(ArrayList<Reservation> r){
+		
+	}
 }
