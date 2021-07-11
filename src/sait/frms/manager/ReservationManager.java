@@ -20,29 +20,19 @@ import sait.frms.problemdomain.*;
 public class ReservationManager {
 
 	/**
-	 * Reservations ArrayList
+	 * Reservations ArrayList that contains all instances of reservation objects.
 	 */
 	private ArrayList<Reservation> reservations = new ArrayList<>();
 	/**
-	 * 
+	 * The file name and path used from binary.
 	 */
 	private final String RESERVATIONS_FILEPATH = "res/reservations.dat";
 
 	/**
 	 * Default constructor used to create a reservation manager object.
-	 * 
-	 * @throws FileNotFoundException
-	 * 
 	 */
 	public ReservationManager() {
 
-	}
-
-	public ReservationManager(Reservation r) {
-		this.reservations.add(r);
-		for(int i = 0; i < reservations.size(); i ++) {
-			System.out.println("Rez LIST: "+reservations.get(i).getName());
-		}
 	}
 
 	/**
@@ -246,8 +236,8 @@ public class ReservationManager {
 	
 	
 	/**
-	 * 
-	 * @param r
+	 * This will update reservations list.
+	 * @param r the reservation object to create.
 	 */
 	public void updateReservations(Reservation r) {
 		this.reservations.add(r);
