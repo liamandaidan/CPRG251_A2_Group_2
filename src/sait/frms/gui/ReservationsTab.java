@@ -186,10 +186,7 @@ public class ReservationsTab extends TabBase {
 
 			if (reservationList.getSelectedValue() != null) {
 				// not sure if the getCode will work but we will see.
-				System.out.println("ReservationList before: " + reservationList.getSelectedValue().getCode());
 				Reservation r = reservationManager.findReservationByCode(reservationList.getSelectedValue().getCode());
-
-				System.out.println("this is the r status" + r.isActive());
 
 				// codeField, flightField, airlineField, costField, nameField, citizenshipField;
 				codeField.setText(r.getCode());
@@ -347,8 +344,6 @@ public class ReservationsTab extends TabBase {
 					Reservation temp = reservationManager.findReservationByCode(code);
 					updatedReservation = new Reservation(code, flight, updatedName, airline, updatedCitizenship, cost,
 							isActive);
-					System.out.println("Is active value in update button is: " + isActive);
-					System.out.println("* UpdatedReservation is: " + updatedReservation.isActive());
 
 					int i = 0;
 					for (i = 0; i < inventory.size(); i++) {

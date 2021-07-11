@@ -169,9 +169,7 @@ public class FlightsTab extends TabBase {
 				flightsModel.clear();// clear the previous search results
 
 				// print out flights
-				/* System.out.println(flightManager.findFlights(from, to, day)); */
 				flightsModel.addAll(flightManager.findFlights(from, to, day));
-//				System.out.println(flightsModel);
 
 			}
 
@@ -347,11 +345,9 @@ public class FlightsTab extends TabBase {
 		 */
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
-			// System.out.println(e.getSource());
 			if (flightsList.getSelectedValue() != null) {
 				Flight theFlight = flightsList.getSelectedValue();// get the selected flight as a Flight object
 				selectedFlight = theFlight;
-				System.out.println(selectedFlight);
 				eastComps.get(0).setText(selectedFlight.getCode());
 				eastComps.get(1).setText(selectedFlight.getAirlineName());
 				eastComps.get(2).setText(selectedFlight.getWeekday());
