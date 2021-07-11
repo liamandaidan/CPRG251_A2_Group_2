@@ -2,9 +2,6 @@ package sait.frms.application;
 
 import sait.frms.gui.MainWindow;
 
-import java.io.FileNotFoundException;
-
-import sait.frms.gui.*;
 
 /**
  * Application driver.
