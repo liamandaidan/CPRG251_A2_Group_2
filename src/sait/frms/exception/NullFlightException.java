@@ -11,6 +11,9 @@ package sait.frms.exception;
  */
 public class NullFlightException extends Exception {
 
+	/**
+	 *The constructor for NullFlightException that sends the message to the super.
+	 */
 	public NullFlightException() {
 		super("There was an error with the flight. Data is missing.");
 	}

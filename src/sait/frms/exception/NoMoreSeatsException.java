@@ -8,6 +8,9 @@ package sait.frms.exception;
 
 public class NoMoreSeatsException extends Exception {
 
+	/**
+	 *The constructor for NoMoreSeatsException that sends the message to the super.
+	 */
 	public NoMoreSeatsException() {
 		super("The flight selected has no more seats available. ");
 	}
