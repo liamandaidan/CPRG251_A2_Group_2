@@ -1,22 +1,15 @@
 package sait.frms.gui;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.event.*;
 
-import sait.frms.exception.InvalidCitizenshipException;
-import sait.frms.exception.InvalidFlightCodeException;
-import sait.frms.exception.InvalidNameException;
-import sait.frms.exception.NoMoreSeatsException;
-import sait.frms.manager.FlightManager;
-import sait.frms.manager.ReservationManager;
-import sait.frms.problemdomain.Flight;
-import sait.frms.problemdomain.Reservation;
+import sait.frms.exception.*;
+import sait.frms.manager.*;
+import sait.frms.problemdomain.*;
 
 /**
  * Holds the components for the flights tab.
